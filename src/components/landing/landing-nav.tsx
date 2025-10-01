@@ -24,12 +24,17 @@ export default function LandingNav() {
                 About
                 </Link>
             </nav>
-            <Button
-                onClick={() => setWaitingListOpen(true)}
-                className="bg-blue-600 duration-500 px-3 py-2 text-sm sm:text-base w-auto"
-                >
-                Join the Waiting List
-            </Button>
+            <div className="flex items-center space-x-2">
+                <Button
+                    onClick={() => setWaitingListOpen(true)}
+                    className="bg-blue-600 duration-500 px-3 py-2 text-sm sm:text-base w-auto"
+                    >
+                    Join the Waiting List
+                </Button>
+                <Button size="lg" onClick={() => { window.location.href = "https://constr-data-innov-neon.vercel.app/login" }} className="text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500">
+                Early Access
+                </Button>
+            </div>
             </div>
         </header>
         <WaitingListModal open={waitingListOpen} onOpenChange={setWaitingListOpen} />

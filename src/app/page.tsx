@@ -27,6 +27,10 @@ export default function HomePage() {
             <Button size="lg" onClick={() => setWaitingListOpen(true)} className="text-lg px-8 py-3 bg-blue-600 duration-500">
               Join the Waiting List
             </Button>
+
+            <Button size="lg" onClick={() => { window.location.href = "https://constr-data-innov-neon.vercel.app/login" }} className="text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500">
+              Early Access
+            </Button>
             
           </div>
 
@@ -232,6 +236,9 @@ export default function HomePage() {
               onClick={() => setWaitingListOpen(true)}
             >
               Join the Waiting List
+            </Button>
+            <Button size="lg" onClick={() => { window.location.href = "https://constr-data-innov-neon.vercel.app/login" }} className="text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500">
+              Early Access
             </Button>
             
           </div>
