@@ -214,7 +214,7 @@ export default function SolutionsPage() {
                 >
                 Join the Waiting List
                 </Button>
-                <Button size="lg" onClick={() => { window.location.href = "https://constructwise-ai.vercel.app/login" }} className="text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500">
+                <Button size="lg" onClick={() => { window.location.href = "https://app.constructwise.ai" }} className="text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500">
                 Early Access
                 </Button>
                 
