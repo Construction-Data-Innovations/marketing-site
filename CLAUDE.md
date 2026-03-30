@@ -19,9 +19,9 @@ No test framework is configured.
 
 ## Architecture
 
-**Routing:** Next.js App Router with three pages — `/` (home), `/about`, `/solutions`. All pages are client components (`"use client"`).
+**Routing:** Next.js App Router with three pages — `/` (home), `/about`, `/solutions`. All page components are client components (`"use client"`); `layout.tsx` remains a server component. A `/conexpo` redirect to an external HubSpot page is configured in `next.config.ts`.
 
-**Styling:** Tailwind CSS v4 with CSS custom properties defined in `src/app/globals.css`. Uses OKLch color space with light/dark mode variables. The `cn()` utility in `src/lib/utils.ts` merges classes via `clsx` + `tailwind-merge`.
+**Styling:** Tailwind CSS v4 with CSS custom properties defined in `src/app/globals.css`. Uses OKLch color space with light/dark mode variables. Animation classes come from `tw-animate-css`. The `cn()` utility in `src/lib/utils.ts` merges classes via `clsx` + `tailwind-merge`.
 
 **Components:**
 
@@ -35,6 +35,7 @@ No test framework is configured.
 - `src/lib/supabase/server.ts` — server client (`createServerClient` with cookie handling). Always create a new client per request, never store globally.
 - `src/lib/supabase/middleware.ts` — session refresh and auth redirect logic
 - Database table: `waitlist` (name, email, company, phone)
+- Middleware (`src/lib/supabase/middleware.ts`) redirects unauthenticated users to `/auth/login` for all routes except `/`, `/login`, and `/auth`. This is currently the intended behavior but there is no `/auth/login` page — the middleware logic may be scaffolding for future auth.
 
 **Path aliases:** `@/*` maps to `src/*` (configured in tsconfig).
 
