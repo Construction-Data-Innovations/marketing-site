@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingNav from '../components/landing/LandingNav.astro';
+import LandingFooter from '../components/landing/LandingFooter.astro';
+import WaitlistIsland from '../components/WaitlistIsland.tsx';
+---
+<BaseLayout title="About - ConstructWise">
+  <div class="min-h-screen bg-white pt-16">
+    <LandingNav />
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-white">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+          The Construction Platform to Plan Smarter
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          At ConstructWise we're committed to building software for construction professionals. Estimators and schedulers spend dozens of hours a week analyzing files, building Excel models, and entering data one activity at a time &mdash; valuable yet manual and time-consuming work that limits your company's project win rates and profitability.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-20 text-center bg-gray-50">
+      <div class="mx-auto px-4">
+        <div class="order-2 md:order-1">
+          <h2 class="text-3xl font-semibold mb-8">Purpose built for the Construction Industry</h2>
+          <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div class="text-xl font-semibold my-2">General Contractors</div>
+                <p class="text-gray-600">Automatically generate multi-trade, comprehensive bids and then customize to your risk tolerance. Easily retrieve all the information that's living in file folders, document clouds, and emails so you submit proposals with confidence.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div class="text-xl font-semibold my-2">Developers</div>
+                <p class="text-gray-600">When you're developing conceptual budgets for a new development, or you're in the thick of construction, ConstructWise will help you manage your cost basis, track draws with confidence, and deliver projects the way you underwrote them.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div class="text-xl font-semibold my-2">Trade Contractors</div>
+                <p class="text-gray-600">If you generate repetitive bid estimates or have a detailed menu of items, use ConstructWise to review for accuracy, pesky Excel errors, or benchmarking against your own data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-white">
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-3xl font-semibold text-gray-600 max-w-3xl mx-auto mb-8">
+          We help make sense of all the unstructured numeric data in AEC firms, so that their teams can make sounder decisions and tackle uncertainties.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-blue-600">
+      <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Elevate Your Construction Planning Today</h2>
+        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          Join other innovative construction companies who are leveraging ConstructWise's vertical AI to generate better cost estimates and construction schedules.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WaitlistIsland
+            client:idle
+            buttonClassName="text-lg px-8 py-3 h-12"
+            variant="secondary"
+          />
+          <a
+            href="https://app.constructwise.ai"
+            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500 h-12 font-medium"
+          >
+            Early Access
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <LandingFooter />
+  </div>
+</BaseLayout>
