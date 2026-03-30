@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Mail, User, Building, CheckCircle, Phone } from 'lucide-react'
-import { createClient } from "@/lib/supabase/client"
+import { supabase } from "@/lib/supabase/client"
 
 interface WaitingListModalProps {
   open: boolean
@@ -28,7 +28,6 @@ export function WaitingListModal({ open, onOpenChange }: WaitingListModalProps) 
   //  Added ref for phone input to handle cursor positioning
   const phoneInputRef = useRef<HTMLInputElement>(null)
 
-  const supabase = createClient();
 
   //  Added phone number formatting function
   const formatPhoneNumber = (value: string) => {

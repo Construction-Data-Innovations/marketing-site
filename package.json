@@ -2,6 +2,9 @@
   "name": "constr-data-labs-marketing-site",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "astro dev --port 4000",
     "build": "astro build",
