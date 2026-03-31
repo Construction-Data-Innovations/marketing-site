@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingNav from '../components/landing/LandingNav.astro';
+import LandingFooter from '../components/landing/LandingFooter.astro';
+import WaitlistIsland from '../components/WaitlistIsland.tsx';
+---
+<BaseLayout title="Pricing - ConstructWise">
+  <div class="min-h-screen bg-white pt-16">
+    <LandingNav />
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-gradient-to-b from-slate-50 to-white">
+      <div class="container mx-auto px-4 text-center max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+          Intelligent Bid Estimation.
+        </h1>
+        <h2 class="text-4xl md:text-5xl font-bold text-blue-600 mb-6">
+          Priced to build with you.
+        </h2>
+        <p class="text-lg text-gray-600 mb-4">
+          Every plan includes a monthly token allotment that covers your AI usage &mdash; bid generation, scheduling, document analysis, and chat. Use what you need, and only pay more if you go beyond.
+        </p>
+        <p class="text-sm text-gray-500 mb-8">
+          All plans billed per user &middot; Tokens included every month &middot; Pay-as-you-go above your allotment
+        </p>
+
+        <!-- Billing Toggle -->
+        <div class="inline-flex items-center bg-gray-100 rounded-full p-1">
+          <button id="monthlyBtn" class="px-5 py-2 rounded-full text-sm font-medium text-gray-600 transition-colors">
+            Monthly
+          </button>
+          <button id="annualBtn" class="relative px-5 py-2 rounded-full text-sm font-medium bg-gray-900 text-white transition-colors">
+            <span class="absolute -top-3 -right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">SAVE 17%</span>
+            Annual
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="pb-20 px-4">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- Foundation -->
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 flex flex-col shadow-sm">
+            <div class="min-h-[110px]">
+              <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
+                Starter
+              </div>
+              <p class="text-sm text-gray-500 mb-2">For smaller GCs and trade contractors</p>
+              <h3 class="text-3xl font-bold text-gray-900">Foundation</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
+              Everything you need to start shipping bids faster &mdash; with AI doing the heavy lifting.
+            </p>
+            <div class="mb-6 min-h-[120px]">
+              <div class="flex items-baseline">
+                <span class="text-sm text-gray-500 align-top">$</span>
+                <span class="text-5xl font-bold text-gray-900 pricing-amount" data-monthly="189" data-annual="157">189</span>
+                <span class="text-gray-500 ml-1">/user/mo</span>
+              </div>
+              <p class="text-xs text-gray-500 mt-1 pricing-billing" data-monthly="billed monthly" data-annual="billed annually at $1,884/user">billed annually at $2,268/user</p>
+              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
+                229,000 tokens/mo included
+              </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-6 mb-6">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">What's included</p>
+              <ul class="space-y-3 text-sm text-gray-700">
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>AI bid generation</strong> from SOW + takeoff quantity uploads</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Up to <strong>3 users</strong> per company</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Reusable blocks</strong> & custom CSI codes</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Company cost history</strong> &mdash; AI learns your pricing</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Schedule generation</strong> with Gantt export</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>2 GB</strong> document storage</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Excel & PDF bid export</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Email & chat support</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto">
+              <a href="https://app.constructwise.ai" class="flex items-center justify-center w-full rounded-lg border border-gray-300 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+                Start building &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Podium (Most Popular) -->
+          <div class="rounded-2xl border-2 border-blue-600 bg-white p-8 flex flex-col shadow-lg relative">
+            <div class="min-h-[110px]">
+              <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">
+                <svg class="h-4 w-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                Most Popular
+              </div>
+              <p class="text-sm text-gray-500 mb-2">For growing estimating teams that run volume</p>
+              <h3 class="text-3xl font-bold text-gray-900">Podium</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
+              For estimating teams that run volume &mdash; with AI insights, risk modeling, and integrations.
+            </p>
+            <div class="mb-6 min-h-[120px]">
+              <div class="flex items-baseline">
+                <span class="text-sm text-gray-500 align-top">$</span>
+                <span class="text-5xl font-bold text-gray-900 pricing-amount" data-monthly="649" data-annual="539">539</span>
+                <span class="text-gray-500 ml-1">/user/mo</span>
+              </div>
+              <p class="text-xs text-gray-500 mt-1 pricing-billing" data-monthly="billed monthly" data-annual="billed annually at $6,468/user">billed annually at $6,468/user</p>
+              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
+                650,000 tokens/mo included
+              </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-6 mb-6">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Everything in Foundation, plus</p>
+              <ul class="space-y-3 text-sm text-gray-700">
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Up to <strong>15 users</strong> per company</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Chance of anything</strong> risk modeling (SIPmath)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Live market pricing</strong> &mdash; benchmark against your region</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>AI Insights audit</strong> &mdash; flags inconsistencies in bids</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Master schedule</strong> &mdash; company-wide project view</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>25 GB</strong> storage + Procore, P6, Egnyte integrations</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>P6 & MS Project</strong> schedule export</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Priority support + onboarding call</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Summit (Enterprise) -->
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 flex flex-col shadow-sm">
+            <div class="min-h-[110px]">
+              <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" /></svg>
+                Enterprise
+              </div>
+              <p class="text-sm text-gray-500 mb-2">$200M+ annual volume</p>
+              <h3 class="text-3xl font-bold text-gray-900">Summit</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
+              White-glove deployment for enterprise GCs and program managers with custom workflows.
+            </p>
+            <div class="mb-6 min-h-[120px]">
+              <div class="text-5xl font-bold text-gray-900">Let's talk.</div>
+              <p class="text-sm text-gray-500 mt-2">Custom pricing based on volume & users</p>
+              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
+                Custom token allotment
+              </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-6 mb-6">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Everything in Podium, plus</p>
+              <ul class="space-y-3 text-sm text-gray-700">
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Unlimited users</strong></span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Custom AI model training</strong> on your historical data</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Risk dashboard</strong> with probability curves & exceedance charts</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>SSO + role-based access</strong> controls</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>API access</strong> for custom integrations & BI tools</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Unlimited storage</strong> + all 40+ connectors</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span><strong>Dedicated success manager</strong> + SLA</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  <span>Custom onboarding & data migration</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-auto">
+              <a href="mailto:sales@constructwise.ai" class="flex items-center justify-center w-full rounded-lg border border-gray-300 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+                Contact sales &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-900 text-white text-center">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to bid smarter?</h2>
+        <p class="text-gray-300 mb-8">Join the waitlist for early access or start your free trial today.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WaitlistIsland
+            client:idle
+            buttonClassName="text-lg px-8 py-3 h-12"
+            variant="primary"
+          />
+          <a
+            href="https://app.constructwise.ai"
+            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500 h-12 font-medium"
+          >
+            Early Access
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <LandingFooter />
+  </div>
+
+  <script>
+    const monthlyBtn = document.getElementById('monthlyBtn');
+    const annualBtn = document.getElementById('annualBtn');
+    const amounts = document.querySelectorAll('.pricing-amount');
+    const billings = document.querySelectorAll('.pricing-billing');
+
+    function setAnnual() {
+      annualBtn?.classList.add('bg-gray-900', 'text-white');
+      annualBtn?.classList.remove('text-gray-600');
+      monthlyBtn?.classList.remove('bg-gray-900', 'text-white');
+      monthlyBtn?.classList.add('text-gray-600');
+      amounts.forEach(el => { el.textContent = el.getAttribute('data-annual'); });
+      billings.forEach(el => { el.textContent = el.getAttribute('data-annual'); });
+    }
+
+    function setMonthly() {
+      monthlyBtn?.classList.add('bg-gray-900', 'text-white');
+      monthlyBtn?.classList.remove('text-gray-600');
+      annualBtn?.classList.remove('bg-gray-900', 'text-white');
+      annualBtn?.classList.add('text-gray-600');
+      amounts.forEach(el => { el.textContent = el.getAttribute('data-monthly'); });
+      billings.forEach(el => { el.textContent = el.getAttribute('data-monthly'); });
+    }
+
+    monthlyBtn?.addEventListener('click', setMonthly);
+    annualBtn?.addEventListener('click', setAnnual);
+  </script>
+</BaseLayout>

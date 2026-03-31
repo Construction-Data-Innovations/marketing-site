@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Mail, User, Building, CheckCircle, Phone } from 'lucide-react'
-import { supabase } from "@/lib/supabase/client"
+import { getSupabase } from "@/lib/supabase/client"
 
 interface WaitingListModalProps {
   open: boolean
@@ -51,16 +51,19 @@ export function WaitingListModal({ open, onOpenChange }: WaitingListModalProps) 
     e.preventDefault()
     // Handle form submission here
     console.log("Waiting list submission:", formData)
-    const { error } = await supabase.from("waitlist").insert([{
-      name: formData.name,
-      email: formData.email,
-      company: formData.company,
-      phone: formData.phone 
-    }])
+    const supabase = getSupabase()
+    if (supabase) {
+      const { error } = await supabase.from("waitlist").insert([{
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        phone: formData.phone
+      }])
 
-    if (error) {
-      console.error("Error inserting to waitlist: ", error);
-      return;
+      if (error) {
+        console.error("Error inserting to waitlist: ", error);
+        return;
+      }
     }
     setIsSubmitted(true)
 
