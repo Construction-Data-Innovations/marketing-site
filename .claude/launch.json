@@ -3,13 +3,13 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "source ~/.nvm/nvm.sh && nvm use 22 && npm run dev"],
       "port": 4000
     },
     {
       "name": "preview",
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "/Users/jchavez/.nvm/versions/node/v22.22.2/bin/npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4001"],
       "port": 4001
     }

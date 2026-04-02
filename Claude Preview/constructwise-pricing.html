@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConstructWise — Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #3B5BDB;
+    --blue-light: #EDF2FF;
+    --blue-mid: #BAC8FF;
+    --blue-dark: #2B44A8;
+    --text: #1a1a2e;
+    --text-secondary: #5c5c7a;
+    --text-tertiary: #8e8ea0;
+    --bg: #ffffff;
+    --bg-page: #f8f9fc;
+    --bg-card: #ffffff;
+    --border: #e8e8ee;
+    --border-hover: #d0d0dc;
+    --green: #12b76a;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-blue: 0 8px 32px rgba(59,91,219,0.12), 0 2px 8px rgba(59,91,219,0.08);
+    --radius: 12px;
+    --radius-lg: 16px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-page);
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--blue); font-weight: 600; }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 20px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-dark);
+    box-shadow: 0 2px 8px rgba(59,91,219,0.25);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 20px;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-page);
+  }
+
+  .hero {
+    text-align: center;
+    padding: 72px 24px 24px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-page) 100%);
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.2px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--blue); }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 10px;
+    line-height: 1.65;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+
+  .toggle-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 28px 24px 44px;
+  }
+
+  .toggle-container {
+    display: flex;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .toggle-btn {
+    padding: 9px 22px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .toggle-btn.active {
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(59,91,219,0.3);
+  }
+
+  .toggle-btn .save-badge {
+    position: absolute;
+    top: -9px;
+    right: -12px;
+    background: var(--green);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px 72px;
+    align-items: start;
+  }
+
+  @media (max-width: 920px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px 28px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-hover);
+  }
+
+  .card.featured {
+    border-color: var(--blue);
+    border-width: 2px;
+    box-shadow: var(--shadow-blue);
+  }
+
+  .card.featured:hover {
+    box-shadow: 0 12px 40px rgba(59,91,219,0.16), 0 4px 12px rgba(59,91,219,0.1);
+  }
+
+  .card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--text-tertiary);
+  }
+
+  .card.featured .card-badge { color: var(--blue); }
+  .card-badge svg { width: 14px; height: 14px; }
+
+  .card-persona {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .card-tier {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .card.featured .card-tier { color: var(--blue); }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 22px;
+    height: 44px;
+  }
+
+  .price-block {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+
+  .price-dollar {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+
+  .price-amount {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .card.featured .price-amount { color: var(--blue); }
+
+  .price-period {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    font-weight: 400;
+    margin-left: 2px;
+  }
+
+  .price-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  .price-enterprise {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+
+  .price-tokens {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 12px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+
+  .features-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 14px;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+
+  .feature-list li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--blue);
+  }
+
+  .feature-list li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .card-cta {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .card-cta:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-page);
+  }
+
+  .card.featured .card-cta {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  .card.featured .card-cta:hover {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    box-shadow: 0 2px 8px rgba(59,91,219,0.3);
+  }
+
+  /* Overage callout */
+  .overage-section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px 72px;
+  }
+
+  .overage-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .overage-bar p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .overage-bar p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .overage-bar .overage-price {
+    font-size: 14px;
+    color: var(--blue);
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  /* What tokens buy you */
+  .comparison-section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px 72px;
+  }
+
+  .comp-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    text-align: center;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 700px) {
+    .comp-grid { grid-template-columns: 1fr; }
+  }
+
+  .comp-card {
+    text-align: center;
+    padding: 28px 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .comp-num {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .comp-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  /* FAQ */
+  .faq-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  .faq-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    text-align: center;
+    margin-bottom: 36px;
+    color: var(--text);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+
+  .faq-q {
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+
+  .faq-q:hover { color: var(--blue); }
+
+  .faq-q::after {
+    content: '+';
+    font-size: 20px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .faq-item.open .faq-q::after { content: '−'; }
+  .faq-item.open .faq-q { color: var(--blue); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-top: 12px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeUp 0.5s ease both; }
+  .card:nth-child(1) { animation-delay: 0.08s; }
+  .card:nth-child(2) { animation-delay: 0.16s; }
+  .card:nth-child(3) { animation-delay: 0.24s; }
+
+  @media (max-width: 600px) {
+    .nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 48px 20px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="2" y="14" width="6" height="12" rx="1.5" fill="#3B5BDB"/>
+      <rect x="11" y="8" width="6" height="18" rx="1.5" fill="#3B5BDB"/>
+      <rect x="20" y="2" width="6" height="24" rx="1.5" fill="#3B5BDB"/>
+    </svg>
+    ConstructWise
+  </a>
+  <div class="nav-links">
+    <a href="#">Solutions</a>
+    <a href="#">About</a>
+    <a href="#" class="active">Pricing</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn-primary">Join the Waiting List</a>
+    <a href="#" class="btn-outline">Early Access</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Intelligent Bid Estimation.<br><span>Priced to build with you.</span></h1>
+  <p>Every plan includes a monthly token allotment that covers your AI usage — bid generation, scheduling, document analysis, and chat. Use what you need, and only pay more if you go beyond.</p>
+  <p class="hero-sub">All plans billed per user · Tokens included every month · Pay-as-you-go above your allotment</p>
+</section>
+
+<div class="toggle-wrap">
+  <div class="toggle-container">
+    <button class="toggle-btn" id="btn-monthly" onclick="toggleBilling('monthly')">Monthly</button>
+    <button class="toggle-btn active" id="btn-annual" onclick="toggleBilling('annual')">
+      Annual
+      <span class="save-badge">SAVE 17%</span>
+    </button>
+  </div>
+</div>
+
+<div class="pricing-grid">
+
+  <!-- Foundation -->
+  <div class="card">
+    <div class="card-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      STARTER
+    </div>
+    <div class="card-persona">For smaller GCs and trade contractors</div>
+    <div class="card-tier">Foundation</div>
+    <div class="card-desc">Everything you need to start shipping bids faster — with AI doing the heavy lifting.</div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-dollar">$</span>
+        <span class="price-amount" data-monthly="229" data-annual="189">189</span>
+        <span class="price-period">/user/mo</span>
+      </div>
+      <div class="price-note" data-monthly-text="billed monthly" data-annual-text="billed annually at $2,268/user">billed annually at $2,268/user</div>
+      <div class="price-tokens">229,000 tokens/mo included</div>
+    </div>
+    <div class="features-label">What's included</div>
+    <ul class="feature-list">
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>AI bid generation</strong> from SOW + takeoff quantity uploads</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Up to 3 users</strong> per company</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Reusable blocks</strong> &amp; custom CSI codes</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Company cost history</strong> — AI learns your pricing</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Schedule generation</strong> with Gantt export</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>2 GB</strong> document storage</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Excel &amp; PDF bid export</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Email &amp; chat support</span></li>
+    </ul>
+    <a href="#" class="card-cta">Start building →</a>
+  </div>
+
+  <!-- Podium -->
+  <div class="card featured">
+    <div class="card-badge">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3l2.26 6.34L22 10.5l-5 4.37L18.18 22 13 18.27 7.82 22 9 14.87l-5-4.37 6.74-1.16z"/></svg>
+      MOST POPULAR
+    </div>
+    <div class="card-persona">For growing estimating teams that run volume</div>
+    <div class="card-tier">Podium</div>
+    <div class="card-desc">For estimating teams that run volume — with AI insights, risk modeling, and integrations.</div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-dollar">$</span>
+        <span class="price-amount" data-monthly="649" data-annual="539">539</span>
+        <span class="price-period">/user/mo</span>
+      </div>
+      <div class="price-note" data-monthly-text="billed monthly" data-annual-text="billed annually at $6,468/user">billed annually at $6,468/user</div>
+      <div class="price-tokens">650,000 tokens/mo included</div>
+    </div>
+
+    <div class="features-label">Everything in Foundation, plus</div>
+    <ul class="feature-list">
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Up to 15 users</strong> per company</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Chance of anything</strong> risk modeling (SIPmath)</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Live market pricing</strong> — benchmark against your region</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>AI Insights audit</strong> — flags inconsistencies in bids</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Master schedule</strong> — company-wide project view</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>25 GB</strong> storage + Procore, P6, Egnyte integrations</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>P6 &amp; MS Project</strong> schedule export</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support + onboarding call</span></li>
+    </ul>
+    <a href="#" class="card-cta">Start 14-day trial →</a>
+  </div>
+
+  <!-- Summit -->
+  <div class="card">
+    <div class="card-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+      ENTERPRISE
+    </div>
+    <div class="card-persona">$200M+ annual volume</div>
+    <div class="card-tier">Summit</div>
+    <div class="card-desc">White-glove deployment for enterprise GCs and program managers with custom workflows.</div>
+    <div class="price-block">
+      <div class="price-enterprise">Let's talk.</div>
+      <div class="price-note">Custom pricing based on volume &amp; users</div>
+      <div class="price-tokens">Custom token allotment</div>
+    </div>
+
+    <div class="features-label">Everything in Podium, plus</div>
+    <ul class="feature-list">
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Unlimited users</strong></span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Custom AI model training</strong> on your historical data</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Risk dashboard</strong> with probability curves &amp; exceedance charts</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>SSO + role-based access</strong> controls</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>API access</strong> for custom integrations &amp; BI tools</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Unlimited storage</strong> + all 40+ connectors</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Dedicated success manager</strong> + SLA</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom onboarding &amp; data migration</span></li>
+    </ul>
+    <a href="#" class="card-cta">Contact sales →</a>
+  </div>
+
+</div>
+
+<!-- Overage -->
+<div class="overage-section">
+  <div class="overage-bar">
+    <p><strong>Simple pay-as-you-go pricing above your allotment.</strong> If you exceed your monthly tokens, additional usage is billed at a flat rate. You'll get alerts at 80% and 100% — no surprises on your invoice.</p>
+    <span class="overage-price">$0.10 / 1,000 tokens</span>
+  </div>
+</div>
+
+<!-- Value props -->
+<div class="comparison-section">
+  <h2 class="comp-title">What your tokens get you</h2>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-num">3–4 hrs</div>
+      <div class="comp-label">of manual estimating work replaced<br>per AI-generated bid</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-num">~$0.45</div>
+      <div class="comp-label">to generate a full bid estimate<br>vs. $200+ for a human estimator</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-num">90 sec</div>
+      <div class="comp-label">to generate a detailed bid estimate<br>from SOW + takeoff upload</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2 class="faq-title">Common questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">What are tokens?</div>
+    <div class="faq-a">Tokens are the unit of AI processing that powers every feature in ConstructWise. Think of them like fuel — every time the AI generates a bid, builds a schedule, analyzes a document, or answers a chat question, it consumes tokens. Simple tasks like a quick chat question use fewer tokens (~500–2K). Complex tasks like generating a full multi-trade bid estimate use more (~15K–30K). Your monthly allotment is designed to comfortably cover normal usage.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Why token-based pricing instead of a flat fee?</div>
+    <div class="faq-a">Every AI request costs us real compute — the more complex the task, the more it costs. Token-based pricing means you're never subsidizing another company's heavy usage, and we never have to throttle your access or cap your features. Your subscription includes a generous monthly allotment that covers most users. You only pay extra if you go significantly beyond that — and at that point, the value you're getting far exceeds the cost.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Will I run out of tokens?</div>
+    <div class="faq-a">Most users won't. On Foundation, 229,000 tokens covers roughly 8–15 full bid estimates plus daily chat usage and document analysis per month. On Podium, 650,000 tokens is built for high-volume shops running 25–40+ bids monthly. You'll get usage alerts at 80% and 100% so there are never any surprises.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Can I see my token usage in real time?</div>
+    <div class="faq-a">Yes. Every plan includes a usage dashboard that shows your current token consumption, a breakdown by feature (bids, schedules, chat, document analysis), and projected usage for the month. You'll also receive automated alerts at 80% and 100% of your allotment.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Do unused tokens roll over?</div>
+    <div class="faq-a">Tokens reset monthly and do not roll over. We intentionally sized each allotment with a comfortable buffer so you're not counting every query. If you consistently have leftover tokens, that means you're on the right plan.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Can I add more users later?</div>
+    <div class="faq-a">Yes. You can add users at any time and each user gets their own token allotment. On Foundation you can have up to 3 users, Podium supports up to 15, and Summit is unlimited. Read-only collaborators (e.g., project owners reviewing bids) are free and unlimited on every plan.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What integrations are available?</div>
+    <div class="faq-a">Foundation includes Excel and PDF export. Podium adds direct integrations with Procore, Primavera P6, Egnyte, QuickBooks, Sage, and more. Summit unlocks all 40+ connectors including HCSS, BIM 360, Viewpoint Vista, Smartsheet, and custom API access for your BI tools.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Is there a free trial?</div>
+    <div class="faq-a">Podium plan includes a 14-day free trial with full access. For Foundation, we offer a live demo where we'll build a real bid using your project data so you can see the value before committing. Summit customers get a custom pilot program.</div>
+  </div>
+
+</section>
+
+<script>
+  function toggleBilling(type) {
+    const monthly = document.getElementById('btn-monthly');
+    const annual = document.getElementById('btn-annual');
+    const amounts = document.querySelectorAll('.price-amount');
+    const notes = document.querySelectorAll('.price-note');
+    if (type === 'monthly') {
+      monthly.classList.add('active');
+      annual.classList.remove('active');
+      amounts.forEach(el => { if (el.dataset.monthly) el.textContent = el.dataset.monthly; });
+      notes.forEach(el => { if (el.dataset.monthlyText) el.textContent = el.dataset.monthlyText; });
+    } else {
+      annual.classList.add('active');
+      monthly.classList.remove('active');
+      amounts.forEach(el => { if (el.dataset.annual) el.textContent = el.dataset.annual; });
+      notes.forEach(el => { if (el.dataset.annualText) el.textContent = el.dataset.annualText; });
+    }
+  }
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      document.querySelectorAll('.faq-item').forEach(i => { if (i !== item) i.classList.remove('open'); });
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
