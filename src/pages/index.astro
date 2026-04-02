@@ -96,16 +96,66 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
           </div>
           <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
             <div class="aspect-video bg-white rounded-lg shadow-lg overflow-hidden">
-              <div class="p-4">
-                <div class="p-4">
-                  <div class="h-8 bg-blue-100 rounded-md w-1/3 mb-4"></div>
-                  <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div class="h-32 bg-red-50 rounded-md"></div>
-                    <div class="h-32 bg-yellow-50 rounded-md"></div>
-                  </div>
-                  <div class="h-24 bg-blue-50 rounded-md w-full"></div>
-                </div>
-              </div>
+              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <!-- App chrome -->
+                <rect width="560" height="315" fill="white"/>
+                <!-- Header bar -->
+                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
+                <rect x="32" y="26" width="80" height="16" rx="4" fill="#2563eb"/>
+                <rect x="130" y="26" width="50" height="16" rx="4" fill="#e2e8f0"/>
+                <rect x="196" y="26" width="50" height="16" rx="4" fill="#e2e8f0"/>
+                <!-- Spreadsheet: cost estimate rows -->
+                <rect x="20" y="64" width="520" height="28" rx="4" fill="#eff6ff"/>
+                <text x="32" y="83" font-family="system-ui" font-size="11" font-weight="600" fill="#1e40af">CSI Division</text>
+                <text x="180" y="83" font-family="system-ui" font-size="11" font-weight="600" fill="#1e40af">Description</text>
+                <text x="340" y="83" font-family="system-ui" font-size="11" font-weight="600" fill="#1e40af">Qty</text>
+                <text x="400" y="83" font-family="system-ui" font-size="11" font-weight="600" fill="#1e40af">Unit Cost</text>
+                <text x="480" y="83" font-family="system-ui" font-size="11" font-weight="600" fill="#1e40af">Total</text>
+                <!-- Row 1 -->
+                <rect x="20" y="96" width="520" height="26" rx="0" fill="white"/>
+                <line x1="20" y1="122" x2="540" y2="122" stroke="#f1f5f9" stroke-width="1"/>
+                <text x="32" y="113" font-family="system-ui" font-size="10" fill="#475569">03 30 00</text>
+                <text x="180" y="113" font-family="system-ui" font-size="10" fill="#475569">Cast-in-Place Concrete</text>
+                <text x="340" y="113" font-family="system-ui" font-size="10" fill="#475569">2,450 CY</text>
+                <text x="400" y="113" font-family="system-ui" font-size="10" fill="#475569">$185.00</text>
+                <text x="480" y="113" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">$453,250</text>
+                <!-- Row 2 -->
+                <rect x="20" y="122" width="520" height="26" rx="0" fill="#fafbfd"/>
+                <line x1="20" y1="148" x2="540" y2="148" stroke="#f1f5f9" stroke-width="1"/>
+                <text x="32" y="139" font-family="system-ui" font-size="10" fill="#475569">05 12 00</text>
+                <text x="180" y="139" font-family="system-ui" font-size="10" fill="#475569">Structural Steel Framing</text>
+                <text x="340" y="139" font-family="system-ui" font-size="10" fill="#475569">186 TON</text>
+                <text x="400" y="139" font-family="system-ui" font-size="10" fill="#475569">$4,200.00</text>
+                <text x="480" y="139" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">$781,200</text>
+                <!-- Row 3 -->
+                <rect x="20" y="148" width="520" height="26" rx="0" fill="white"/>
+                <line x1="20" y1="174" x2="540" y2="174" stroke="#f1f5f9" stroke-width="1"/>
+                <text x="32" y="165" font-family="system-ui" font-size="10" fill="#475569">26 00 00</text>
+                <text x="180" y="165" font-family="system-ui" font-size="10" fill="#475569">Electrical</text>
+                <text x="340" y="165" font-family="system-ui" font-size="10" fill="#475569">1 LS</text>
+                <text x="400" y="165" font-family="system-ui" font-size="10" fill="#475569">$920,000</text>
+                <text x="480" y="165" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">$920,000</text>
+                <!-- Row 4 -->
+                <rect x="20" y="174" width="520" height="26" rx="0" fill="#fafbfd"/>
+                <line x1="20" y1="200" x2="540" y2="200" stroke="#f1f5f9" stroke-width="1"/>
+                <text x="32" y="191" font-family="system-ui" font-size="10" fill="#475569">09 90 00</text>
+                <text x="180" y="191" font-family="system-ui" font-size="10" fill="#475569">Painting &amp; Coating</text>
+                <text x="340" y="191" font-family="system-ui" font-size="10" fill="#475569">48,000 SF</text>
+                <text x="400" y="191" font-family="system-ui" font-size="10" fill="#475569">$3.75</text>
+                <text x="480" y="191" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">$180,000</text>
+                <!-- AI confidence badge -->
+                <rect x="20" y="216" width="520" height="44" rx="8" fill="#f0fdf4"/>
+                <rect x="32" y="226" width="10" height="10" rx="5" fill="#22c55e"/>
+                <text x="50" y="235" font-family="system-ui" font-size="11" font-weight="600" fill="#166534">AI Confidence: 94%</text>
+                <text x="200" y="235" font-family="system-ui" font-size="10" fill="#475569">Based on 12 similar past projects</text>
+                <!-- Cost summary bar -->
+                <rect x="32" y="244" width="200" height="6" rx="3" fill="#bbf7d0"/>
+                <rect x="32" y="244" width="188" height="6" rx="3" fill="#22c55e"/>
+                <!-- Total -->
+                <rect x="20" y="272" width="520" height="30" rx="6" fill="#1e40af"/>
+                <text x="32" y="291" font-family="system-ui" font-size="12" font-weight="700" fill="white">Project Total</text>
+                <text x="440" y="291" font-family="system-ui" font-size="13" font-weight="700" fill="white">$2,334,450</text>
+              </svg>
             </div>
           </div>
         </div>
@@ -117,14 +167,61 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div class="bg-white rounded-xl p-6 shadow-lg">
             <div class="aspect-video bg-white rounded-lg overflow-hidden">
-              <div class="p-4">
-                <div class="h-8 bg-blue-100 rounded-md w-1/3 mb-4"></div>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                  <div class="h-32 bg-blue-50 rounded-md"></div>
-                  <div class="h-32 bg-green-50 rounded-md"></div>
-                </div>
-                <div class="h-24 bg-gray-100 rounded-md w-full"></div>
-              </div>
+              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <rect width="560" height="315" fill="white"/>
+                <!-- Header -->
+                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
+                <rect x="32" y="26" width="100" height="16" rx="4" fill="#2563eb"/>
+                <rect x="148" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
+                <!-- Gantt chart header -->
+                <rect x="20" y="64" width="140" height="24" rx="4" fill="#eff6ff"/>
+                <text x="32" y="80" font-family="system-ui" font-size="10" font-weight="600" fill="#1e40af">Activity</text>
+                <!-- Timeline months -->
+                <text x="180" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Jan</text>
+                <text x="228" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Feb</text>
+                <text x="276" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Mar</text>
+                <text x="324" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Apr</text>
+                <text x="372" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">May</text>
+                <text x="420" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Jun</text>
+                <text x="468" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Jul</text>
+                <text x="516" y="80" font-family="system-ui" font-size="9" fill="#94a3b8">Aug</text>
+                <!-- Grid lines -->
+                <line x1="170" y1="64" x2="170" y2="270" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="218" y1="88" x2="218" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="266" y1="88" x2="266" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="314" y1="88" x2="314" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="362" y1="88" x2="362" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="410" y1="88" x2="410" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="458" y1="88" x2="458" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="506" y1="88" x2="506" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+                <!-- Row 1: Site Preparation -->
+                <text x="32" y="108" font-family="system-ui" font-size="10" fill="#475569">Site Preparation</text>
+                <rect x="180" y="96" width="72" height="18" rx="4" fill="#2563eb"/>
+                <!-- Row 2: Foundation -->
+                <text x="32" y="136" font-family="system-ui" font-size="10" fill="#475569">Foundation</text>
+                <rect x="240" y="124" width="96" height="18" rx="4" fill="#3b82f6"/>
+                <!-- Row 3: Structural Steel -->
+                <text x="32" y="164" font-family="system-ui" font-size="10" fill="#475569">Structural Steel</text>
+                <rect x="314" y="152" width="120" height="18" rx="4" fill="#60a5fa"/>
+                <!-- Row 4: MEP Rough-in -->
+                <text x="32" y="192" font-family="system-ui" font-size="10" fill="#475569">MEP Rough-in</text>
+                <rect x="362" y="180" width="96" height="18" rx="4" fill="#93c5fd"/>
+                <!-- Row 5: Exterior Envelope -->
+                <text x="32" y="220" font-family="system-ui" font-size="10" fill="#475569">Exterior Envelope</text>
+                <rect x="410" y="208" width="96" height="18" rx="4" fill="#818cf8"/>
+                <!-- Row 6: Interior Finishes -->
+                <text x="32" y="248" font-family="system-ui" font-size="10" fill="#475569">Interior Finishes</text>
+                <rect x="458" y="236" width="72" height="18" rx="4" fill="#a78bfa"/>
+                <!-- Dependency arrows -->
+                <path d="M252 114 L252 120 L248 124" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+                <path d="M336 142 L336 148 L322 152" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                <path d="M434 170 L434 176 L370 180" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+                <!-- Critical path indicator -->
+                <rect x="20" y="272" width="520" height="30" rx="6" fill="#fef3c7"/>
+                <rect x="32" y="282" width="8" height="8" rx="4" fill="#f59e0b"/>
+                <text x="48" y="290" font-family="system-ui" font-size="10" font-weight="600" fill="#92400e">Critical Path: 214 days</text>
+                <text x="240" y="290" font-family="system-ui" font-size="10" fill="#78716c">Float available on 3 activities</text>
+              </svg>
             </div>
           </div>
           <div>
@@ -168,14 +265,50 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
           </div>
           <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
             <div class="aspect-video bg-white rounded-lg shadow-lg overflow-hidden">
-              <div class="p-4">
-                <div class="h-8 bg-blue-100 rounded-md w-1/3 mb-4"></div>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                  <div class="h-32 bg-blue-50 rounded-md"></div>
-                  <div class="h-32 bg-green-50 rounded-md"></div>
-                </div>
-                <div class="h-24 bg-gray-100 rounded-md w-full"></div>
-              </div>
+              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <rect width="560" height="315" fill="white"/>
+                <!-- Chat interface header -->
+                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
+                <rect x="32" y="26" width="12" height="12" rx="6" fill="#22c55e"/>
+                <text x="50" y="35" font-family="system-ui" font-size="11" font-weight="600" fill="#1e3a5f">ConstructWise AI</text>
+                <!-- Connected apps badges -->
+                <rect x="320" y="22" width="56" height="22" rx="11" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                <text x="332" y="37" font-family="system-ui" font-size="8" font-weight="500" fill="#2563eb">Procore</text>
+                <rect x="384" y="22" width="36" height="22" rx="11" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                <text x="393" y="37" font-family="system-ui" font-size="8" font-weight="500" fill="#2563eb">P6</text>
+                <rect x="428" y="22" width="50" height="22" rx="11" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                <text x="437" y="37" font-family="system-ui" font-size="8" font-weight="500" fill="#2563eb">Egnyte</text>
+                <rect x="486" y="22" width="44" height="22" rx="11" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+                <text x="494" y="37" font-family="system-ui" font-size="8" font-weight="500" fill="#16a34a">+40</text>
+                <!-- User message -->
+                <rect x="200" y="68" width="340" height="36" rx="12" fill="#2563eb"/>
+                <text x="216" y="90" font-family="system-ui" font-size="10" fill="white">How does our concrete cost compare to last 5 bids?</text>
+                <!-- AI response -->
+                <rect x="20" y="116" width="400" height="120" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="36" y="136" font-family="system-ui" font-size="10" fill="#475569">Your concrete costs are trending 12% above your</text>
+                <text x="36" y="150" font-family="system-ui" font-size="10" fill="#475569">5-bid average. Here's the breakdown:</text>
+                <!-- Mini bar chart inside response -->
+                <rect x="36" y="162" width="16" height="52" rx="3" fill="#bfdbfe"/>
+                <rect x="58" y="172" width="16" height="42" rx="3" fill="#bfdbfe"/>
+                <rect x="80" y="168" width="16" height="46" rx="3" fill="#bfdbfe"/>
+                <rect x="102" y="178" width="16" height="36" rx="3" fill="#bfdbfe"/>
+                <rect x="124" y="158" width="16" height="56" rx="3" fill="#f87171"/>
+                <text x="36" y="226" font-family="system-ui" font-size="8" fill="#94a3b8">Bid 1</text>
+                <text x="58" y="226" font-family="system-ui" font-size="8" fill="#94a3b8">Bid 2</text>
+                <text x="80" y="226" font-family="system-ui" font-size="8" fill="#94a3b8">Bid 3</text>
+                <text x="102" y="226" font-family="system-ui" font-size="8" fill="#94a3b8">Bid 4</text>
+                <text x="120" y="226" font-family="system-ui" font-size="8" font-weight="600" fill="#ef4444">Current</text>
+                <!-- Insight callout -->
+                <rect x="180" y="162" width="224" height="52" rx="8" fill="#fefce8" stroke="#fde68a" stroke-width="1"/>
+                <text x="196" y="182" font-family="system-ui" font-size="9" font-weight="600" fill="#92400e">Recommendation</text>
+                <text x="196" y="196" font-family="system-ui" font-size="9" fill="#78716c">Consider rebidding concrete sub</text>
+                <text x="196" y="208" font-family="system-ui" font-size="9" fill="#78716c">based on regional pricing data</text>
+                <!-- Input bar -->
+                <rect x="20" y="252" width="520" height="40" rx="20" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="44" y="276" font-family="system-ui" font-size="10" fill="#94a3b8">Ask about your project data...</text>
+                <rect x="490" y="260" width="40" height="24" rx="12" fill="#2563eb"/>
+                <text x="502" y="276" font-family="system-ui" font-size="10" fill="white">Ask</text>
+              </svg>
             </div>
           </div>
         </div>
