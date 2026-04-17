@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingNav from '../components/landing/LandingNav.astro';
+import LandingFooter from '../components/landing/LandingFooter.astro';
+---
+<BaseLayout title="Checkout - ConstructWise">
+  <div class="min-h-screen bg-gray-50 pt-16">
+    <LandingNav />
+
+    <section class="py-16 px-4">
+      <div class="container mx-auto max-w-5xl">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+          <!-- Order Summary (right on desktop, top on mobile) -->
+          <div class="lg:col-span-2 lg:order-2">
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm sticky top-24">
+              <h2 class="text-lg font-bold text-gray-900 mb-4">Order Summary</h2>
+
+              <div id="planSummary" class="space-y-4">
+                <!-- Populated by JS -->
+              </div>
+
+              <div class="border-t border-gray-100 mt-6 pt-4 space-y-2">
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span>Subtotal</span>
+                  <span id="subtotal" class="font-medium">--</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span>Tax</span>
+                  <span class="text-gray-400">Calculated at payment</span>
+                </div>
+                <div class="border-t border-gray-100 pt-3 flex justify-between text-base font-bold text-gray-900">
+                  <span>Due today</span>
+                  <span id="total">--</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Checkout Form -->
+          <div class="lg:col-span-3 lg:order-1">
+            <div class="mb-6">
+              <a href="/pricing" class="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                Back to Pricing
+              </a>
+            </div>
+
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">Complete your signup</h1>
+
+            <form id="checkoutForm" class="space-y-8">
+              <!-- Account Information -->
+              <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold">1</span>
+                  Account Information
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+                    <input type="email" id="email" name="email" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input type="text" id="company" name="company" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" id="phone" name="phone"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="users" class="block text-sm font-medium text-gray-700 mb-1">Number of Users</label>
+                    <select id="users" name="users"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors bg-white">
+                      <option value="1">1 user</option>
+                      <option value="2">2 users</option>
+                      <option value="3">3 users</option>
+                      <option value="5">5 users</option>
+                      <option value="10">10 users</option>
+                      <option value="15">15 users</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Information -->
+              <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold">2</span>
+                  Payment Information
+                </h3>
+
+                <!-- Payment processor mount point -->
+                <div id="paymentElement" class="min-h-[200px] rounded-lg border border-dashed border-gray-300 flex items-center justify-center bg-gray-50">
+                  <div class="text-center p-8">
+                    <svg class="h-10 w-10 text-gray-300 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                    <p class="text-sm text-gray-500 font-medium">Payment form will load here</p>
+                    <p class="text-xs text-gray-400 mt-1">Powered by Stripe or Finix &mdash; connected at integration time</p>
+                  </div>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-3 flex items-center gap-1">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                  Your payment information is encrypted and secure
+                </p>
+              </div>
+
+              <!-- Billing Address -->
+              <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold">3</span>
+                  Billing Address
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="sm:col-span-2">
+                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
+                    <input type="text" id="address" name="address" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                    <input type="text" id="city" name="city" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                    <input type="text" id="state" name="state" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="zip" class="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
+                    <input type="text" id="zip" name="zip" required
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
+                  <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                    <select id="country" name="country"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors bg-white">
+                      <option value="US">United States</option>
+                      <option value="CA">Canada</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" id="submitBtn"
+                class="w-full rounded-lg bg-blue-600 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                <span id="submitText">Subscribe &mdash; Pay Now</span>
+              </button>
+
+              <p class="text-xs text-center text-gray-400">
+                By subscribing, you agree to our Terms of Service and Privacy Policy.
+                <br />You can cancel anytime from your account settings.
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <LandingFooter />
+  </div>
+
+  <script>
+    const plans = {
+      foundation: {
+        name: 'Foundation',
+        monthly: 349,
+        annual: 314,
+        annualTotal: 3768,
+        tokens: '229,000',
+        maxUsers: 3,
+      },
+      podium: {
+        name: 'Podium',
+        monthly: 649,
+        annual: 584,
+        annualTotal: 7008,
+        tokens: '650,000',
+        maxUsers: 15,
+      },
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const planKey = params.get('plan') || 'foundation';
+    const billing = params.get('billing') || 'annual';
+    const plan = plans[planKey] || plans.foundation;
+
+    const isAnnual = billing === 'annual';
+    const pricePerUser = isAnnual ? plan.annual : plan.monthly;
+    const billingLabel = isAnnual ? 'yr' : 'mo';
+
+    // Populate order summary
+    const summaryEl = document.getElementById('planSummary');
+    if (summaryEl) {
+      summaryEl.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-gray-900">${plan.name} Plan</p>
+            <p class="text-sm text-gray-500">${isAnnual ? 'Annual' : 'Monthly'} billing</p>
+          </div>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+            ${plan.tokens} tokens/mo
+          </span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-600">$${pricePerUser}/user/${isAnnual ? 'mo' : 'mo'}</span>
+          <span class="text-gray-600">&times; <span id="userCountDisplay">1</span> user(s)</span>
+        </div>
+      `;
+    }
+
+    // Update totals based on user count
+    const usersSelect = document.getElementById('users');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const submitTextEl = document.getElementById('submitText');
+    const userCountDisplayEl = document.getElementById('userCountDisplay');
+
+    function updateTotals() {
+      const userCount = parseInt(usersSelect?.value || '1');
+      if (userCountDisplayEl) userCountDisplayEl.textContent = userCount.toString();
+
+      if (isAnnual) {
+        const annualAmount = pricePerUser * 12 * userCount;
+        if (subtotalEl) subtotalEl.textContent = `$${annualAmount.toLocaleString()}/yr`;
+        if (totalEl) totalEl.textContent = `$${annualAmount.toLocaleString()}`;
+        if (submitTextEl) submitTextEl.innerHTML = `Subscribe &mdash; $${annualAmount.toLocaleString()}/yr`;
+      } else {
+        const monthlyAmount = pricePerUser * userCount;
+        if (subtotalEl) subtotalEl.textContent = `$${monthlyAmount.toLocaleString()}/mo`;
+        if (totalEl) totalEl.textContent = `$${monthlyAmount.toLocaleString()}`;
+        if (submitTextEl) submitTextEl.innerHTML = `Subscribe &mdash; $${monthlyAmount.toLocaleString()}/mo`;
+      }
+    }
+
+    // Limit user select options based on plan
+    if (usersSelect) {
+      Array.from(usersSelect.options).forEach(opt => {
+        if (parseInt(opt.value) > plan.maxUsers) {
+          opt.disabled = true;
+          opt.textContent += ' (upgrade required)';
+        }
+      });
+    }
+
+    usersSelect?.addEventListener('change', updateTotals);
+    updateTotals();
+
+    // Form submission placeholder
+    const form = document.getElementById('checkoutForm');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // TODO: integrate Stripe or Finix payment processing here
+      alert('Payment integration coming soon! Your selection: ' + plan.name + ' (' + billing + ')');
+    });
+  </script>
+</BaseLayout>
