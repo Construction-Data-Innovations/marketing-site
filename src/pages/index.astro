@@ -17,18 +17,12 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
           Upload your historical documents, connect to your existing apps, and access AI-powered construction solutions &ndash; all in one platform
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div class="flex justify-center mb-12">
           <WaitlistIsland
             client:idle
             buttonClassName="text-lg px-8 py-3 h-12"
             variant="primary"
           />
-          <a
-            href="https://app.constructwise.ai"
-            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500 h-12 font-medium"
-          >
-            Early Access
-          </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
@@ -50,26 +44,26 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
 
     <section class="py-20 px-4 bg-gray-100">
       <div class="flex flex-col sm:flex-row gap-4 justify-center m-12 text-3xl md:text-4xl font-semibold">Complete Construction Intelligence Platform</div>
-      <p class="text-2xl text-center text-gray-600 mb-8 max-w-3xl mx-auto">From initial planning to project completion, ConstructWise provides AI-powered solutions for your numeric bid &amp; schedule data</p>
+      <p class="text-2xl text-center text-gray-600 mb-8 max-w-3xl mx-auto">From initial planning to project completion, ConstructWise provides differentiated AI-powered solutions for your numeric bid &amp; schedule data</p>
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-            <!-- ChartColumn icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column h-12 w-12 text-blue-600" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+            <!-- Table / spreadsheet icon (lucide table) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table h-12 w-12 text-blue-600" aria-hidden="true"><path d="M12 3v18"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M3 15h18"></path></svg>
             <div class="text-xl font-semibold my-2">Cost Estimates</div>
-            <p class="text-gray-600">AI-powered cost breakdowns with risk analysis and optimization suggestions</p>
+            <p class="text-gray-600">The entire bid preparation process, distilled into one, easy platform that adapts to how your company actually performs. Add context. Get the estimate. Refine with confidence.</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
             <!-- CalendarCheck2 icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-600"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg>
             <div class="text-xl font-semibold my-2">Schedules</div>
-            <p class="text-gray-600">No more manually typing schedule activities in P6 or MS Project with complicated WBS, dependencies, and resources. Streamline critical path scheduling and then query your schedule.</p>
+            <p class="text-gray-600">Scheduling used to require a separate tool. ConstructWise generates the CPM schedule from the same context that built the bid &mdash; and acts as your planning teammate to manage and optimize.</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
             <!-- User icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <div class="text-xl font-semibold my-2">Forecasting</div>
-            <p class="text-gray-600">Predictive analytics in a whole new light</p>
+            <p class="text-gray-600">Every bid and schedule, run against thousands of possible futures before you submit. See the risk. Know your chances.</p>
           </div>
         </div>
       </div>
@@ -80,19 +74,23 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 class="text-4xl font-bold text-gray-900 mb-6">Generate High Quality Cost Estimates</h2>
-            <p class="text-lg text-gray-600 mb-8">
-              Transform your proposal process with ConstructWise's advanced AI engine. Generate comprehensive, tailored proposals in minutes instead of days.
+            <p class="text-lg text-gray-600 mb-6">
+              Transform your proposal process with ConstructWise's advanced AI engine. Generate comprehensive, tailored proposals in a fraction of the time, so you can:
             </p>
-            <div class="space-y-4 mb-8">
-              <div class="flex items-center space-x-3">
-                <div class="text-2xl font-bold text-blue-600 mb-2">10x faster</div>
-                <span class="text-gray-700">Than traditional methods</span>
-              </div>
-              <div class="flex items-center space-x-3">
-                <div class="text-2xl font-bold text-blue-600 mb-2">30% higher</div>
-                <span class="text-gray-700">Win rate for clients</span>
-              </div>
-            </div>
+            <ul class="space-y-3 mb-8 text-lg text-gray-700">
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-blue-600 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                <span>Spend more time focusing on the client</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-blue-600 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                <span>Check the project details in a way only a human could</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-blue-600 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                <span>Think on a deeper level about the project strategy, risks, and action plans</span>
+              </li>
+            </ul>
           </div>
           <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
             <div class="aspect-video bg-white rounded-lg shadow-lg overflow-hidden">
@@ -359,19 +357,6 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           Join other innovative construction companies who are leveraging ConstructWise's vertical AI to generate better cost estimates and construction schedules.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <WaitlistIsland
-            client:idle
-            buttonClassName="text-lg px-8 py-3 h-12"
-            variant="secondary"
-          />
-          <a
-            href="https://app.constructwise.ai"
-            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500 h-12 font-medium"
-          >
-            Early Access
-          </a>
-        </div>
       </div>
     </section>
 

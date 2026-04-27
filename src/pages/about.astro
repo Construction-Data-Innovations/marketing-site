@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
-import WaitlistIsland from '../components/WaitlistIsland.tsx';
 ---
 <BaseLayout title="About - ConstructWise">
   <div class="min-h-screen bg-white pt-16">
@@ -59,19 +58,6 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           Join other innovative construction companies who are leveraging ConstructWise's vertical AI to generate better cost estimates and construction schedules.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <WaitlistIsland
-            client:idle
-            buttonClassName="text-lg px-8 py-3 h-12"
-            variant="secondary"
-          />
-          <a
-            href="https://app.constructwise.ai"
-            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 bg-white border border-gray-400 text-black hover:bg-blue-300 duration-500 h-12 font-medium"
-          >
-            Early Access
-          </a>
-        </div>
       </div>
     </section>
 
