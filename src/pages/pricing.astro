@@ -4,271 +4,347 @@ import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
 ---
 <BaseLayout title="Pricing - ConstructWise">
-  <div class="min-h-screen bg-white pt-16">
+  <div class="min-h-screen bg-gray-50 pt-16">
     <LandingNav />
 
-    <!-- Hero Section -->
-    <section class="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div class="container mx-auto px-4 text-center max-w-3xl">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-          Intelligent Bid Estimation.
+    <!-- Hero -->
+    <section class="text-center px-6 pt-16 pb-6 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-[1.15] mb-4">
+          Intelligent Bid Estimation.<br />
+          <span class="text-blue-600">Priced to build with you.</span>
         </h1>
-        <h2 class="text-4xl md:text-5xl font-bold text-blue-600 mb-6">
-          Priced to build with you.
-        </h2>
-        <p class="text-lg text-gray-600 mb-4">
-          Every plan includes a monthly token allotment that covers your AI usage &mdash; bid generation, scheduling, document analysis, and chat. Use what you need, and only pay more if you go beyond.
+        <p class="text-base text-gray-600 leading-relaxed mb-2 max-w-xl mx-auto">
+          Every plan includes a monthly token allotment that powers your AI usage &mdash; bid generation, scheduling, document analysis, and chat. Use what you need, and only pay more if you go beyond.
         </p>
-        <p class="text-sm text-gray-500 mb-8">
-          All plans billed per user &middot; Tokens included every month &middot; Pay-as-you-go above your allotment
-        </p>
-
-        <!-- Billing Toggle -->
-        <div class="inline-flex items-center bg-gray-100 rounded-full p-1">
-          <button id="monthlyBtn" class="px-5 py-2 rounded-full text-sm font-medium text-gray-600 transition-colors">
-            Monthly
-          </button>
-          <button id="annualBtn" class="relative px-5 py-2 rounded-full text-sm font-medium bg-gray-900 text-white transition-colors">
-            <span class="absolute -top-3 -right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">SAVE 10%</span>
-            Annual
-          </button>
-        </div>
+        <p class="text-xs text-gray-500">All plans billed per user &middot; Tokens included every month &middot; Pay-as-you-go above your allotment</p>
       </div>
     </section>
+
+    <!-- Billing Toggle -->
+    <div class="flex justify-center px-6 pt-7 pb-11">
+      <div class="inline-flex bg-white border border-gray-200 rounded-xl p-[3px] gap-0.5 shadow-sm">
+        <button id="monthlyBtn" class="px-5 py-2 rounded-lg text-gray-600 text-sm font-medium transition-colors">
+          Monthly
+        </button>
+        <button id="annualBtn" class="relative px-5 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold transition-colors shadow-sm">
+          Annual
+          <span class="absolute -top-[9px] -right-3 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">SAVE</span>
+        </button>
+      </div>
+    </div>
 
     <!-- Pricing Cards -->
-    <section class="pb-20 px-4">
-      <div class="container mx-auto max-w-6xl">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="max-w-[1120px] mx-auto px-6 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
 
-          <!-- Foundation -->
-          <div class="rounded-2xl border border-gray-200 bg-white p-8 flex flex-col shadow-sm">
-            <div class="min-h-[110px]">
-              <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
-                Starter
-              </div>
-              <p class="text-sm text-gray-500 mb-2">For GCs and Large Trades</p>
-              <h3 class="text-3xl font-bold text-gray-900">Foundation</h3>
-            </div>
-            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
-              Everything you need to start shipping bids faster &mdash; with more confidence.
-            </p>
-            <div class="mb-6 min-h-[120px]">
-              <div class="flex items-baseline">
-                <span class="text-sm text-gray-500 align-top">$</span>
-                <span class="text-5xl font-bold text-gray-900 pricing-amount" data-monthly="349" data-annual="314">314</span>
-                <span class="text-gray-500 ml-1">/user/mo</span>
-              </div>
-              <p class="text-xs text-gray-500 mt-1 pricing-billing" data-monthly="billed monthly" data-annual="billed annually at $3,768/user">billed annually at $3,768/user</p>
-              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
-                229,000 tokens/mo included
-              </div>
-            </div>
+        <!-- Foundation -->
+        <div class="border border-gray-200 rounded-2xl p-9 pt-9 pb-7 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-gray-300 transition-all">
+          <div class="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 mb-4">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            STARTER
+          </div>
+          <p class="text-[13px] text-gray-500 mb-2 min-h-[40px]">For GCs and Large Trades</p>
+          <h3 class="text-[28px] font-bold tracking-tight text-gray-900 mb-3">Foundation</h3>
+          <p class="text-sm text-gray-600 leading-relaxed mb-7 h-[66px]">Everything you need to start shipping bids faster &mdash; with more confidence.</p>
 
-            <div class="border-t border-gray-100 pt-6 mb-6">
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">What's included</p>
-              <ul class="space-y-3 text-sm text-gray-700">
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>AI bid generation</strong> from SOW + takeoff quantity uploads</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Up to <strong>3 users</strong> per company</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Reusable blocks</strong> & custom CSI codes</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Company cost history</strong> &mdash; AI learns your pricing</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Schedule generation</strong> with Gantt export</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>2 GB</strong> document storage</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Excel & PDF bid export</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Email & chat support</span>
-                </li>
-              </ul>
+          <div class="mb-6 pb-6 border-b border-gray-200">
+            <div class="flex items-baseline gap-[3px] mb-[3px]">
+              <span class="text-base font-semibold text-gray-600 self-start mt-1.5">$</span>
+              <span class="text-[44px] font-extrabold tracking-[-2px] leading-none text-gray-900 pricing-amount" data-monthly="349" data-annual="300">300</span>
+              <span class="text-sm text-gray-500 ml-0.5 font-normal">/user/mo</span>
             </div>
-
-            <div class="mt-auto">
-              <a href="/checkout?plan=foundation" class="flex items-center justify-center w-full rounded-lg border border-gray-300 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
-                Select Plan &rarr;
-              </a>
-            </div>
+            <p class="text-xs text-gray-500 pricing-billing" data-monthly-text="billed monthly" data-annual-text="billed annually at $3,600/user — save">billed annually at $3,600/user &mdash; save</p>
+            <div class="inline-block mt-2.5 px-3 py-1 bg-blue-50 text-blue-700 text-[13px] font-semibold rounded-md">1,000,000 tokens/mo included</div>
           </div>
 
-          <!-- Podium (Most Popular) -->
-          <div class="rounded-2xl border-2 border-blue-600 bg-white p-8 flex flex-col shadow-lg relative">
-            <div class="min-h-[110px]">
-              <div class="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">
-                <svg class="h-4 w-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                Most Popular
-              </div>
-              <p class="text-sm text-gray-500 mb-2">For growing estimating teams that run volume</p>
-              <h3 class="text-3xl font-bold text-gray-900">Podium</h3>
-            </div>
-            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
-              For estimating teams that run volume &mdash; with AI insights, risk modeling, and integrations.
-            </p>
-            <div class="mb-6 min-h-[120px]">
-              <div class="flex items-baseline">
-                <span class="text-sm text-gray-500 align-top">$</span>
-                <span class="text-5xl font-bold text-gray-900 pricing-amount" data-monthly="649" data-annual="584">584</span>
-                <span class="text-gray-500 ml-1">/user/mo</span>
-              </div>
-              <p class="text-xs text-gray-500 mt-1 pricing-billing" data-monthly="billed monthly" data-annual="billed annually at $7,008/user">billed annually at $7,008/user</p>
-              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
-                650,000 tokens/mo included
-              </div>
-            </div>
+          <div class="text-[10px] font-bold tracking-[1px] uppercase text-gray-500 mb-3.5">What's included</div>
+          <ul class="space-y-2.5 text-[13.5px] text-gray-600 mb-6 flex-grow">
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">AI bid generation</strong> from SOW + takeoff quantity uploads</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Up to 3 users</strong> per company</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">AI Chat</strong> &mdash; ask questions about your bids and docs</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">AI Edit</strong> &mdash; modify bids via natural language</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Company cost history</strong> &mdash; AI learns your pricing</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Reusable Blocks</strong> for line items &amp; assemblies</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Schedule generation</strong> with Gantt export</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">5 GB</strong> document storage</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Excel &amp; PDF bid export</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Email &amp; chat support</span></li>
+          </ul>
 
-            <div class="border-t border-gray-100 pt-6 mb-6">
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Everything in Foundation, plus</p>
-              <ul class="space-y-3 text-sm text-gray-700">
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Up to <strong>15 users</strong> per company</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Chance of anything</strong> risk modeling (SIPmath)</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Live market pricing</strong> &mdash; benchmark against your region</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>AI Insights audit</strong> &mdash; flags inconsistencies in bids</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Master schedule</strong> &mdash; company-wide project view</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>25 GB</strong> storage + Procore, P6, Egnyte integrations</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>CPM schedules</strong> + AI-powered schedule risk modeling</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Priority support + onboarding call</span>
-                </li>
-              </ul>
-            </div>
+          <a href="/checkout?plan=foundation" class="block w-full text-center py-3 px-6 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all">
+            Select Plan &rarr;
+          </a>
+        </div>
 
-            <div class="mt-auto">
-              <a href="/checkout?plan=podium" class="flex items-center justify-center w-full rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
-                Select Plan &rarr;
-              </a>
+        <!-- Podium (featured) -->
+        <div class="border-2 border-blue-600 rounded-2xl p-9 pt-9 pb-7 bg-white shadow-lg shadow-blue-600/10 flex flex-col hover:shadow-xl hover:shadow-blue-600/15 transition-all">
+          <div class="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.8px] uppercase text-blue-600 mb-4">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3l2.26 6.34L22 10.5l-5 4.37L18.18 22 13 18.27 7.82 22 9 14.87l-5-4.37 6.74-1.16z"/></svg>
+            MOST POPULAR
+          </div>
+          <p class="text-[13px] text-gray-500 mb-2 min-h-[40px]">For growing estimating teams that run volume</p>
+          <h3 class="text-[28px] font-bold tracking-tight text-blue-600 mb-3">Podium</h3>
+          <p class="text-sm text-gray-600 leading-relaxed mb-7 h-[66px]">For estimating teams that run volume &mdash; with AI insights, risk modeling, and integrations.</p>
+
+          <div class="mb-6 pb-6 border-b border-gray-200">
+            <div class="flex items-baseline gap-[3px] mb-[3px]">
+              <span class="text-base font-semibold text-gray-600 self-start mt-1.5">$</span>
+              <span class="text-[44px] font-extrabold tracking-[-2px] leading-none text-blue-600 pricing-amount" data-monthly="649" data-annual="600">600</span>
+              <span class="text-sm text-gray-500 ml-0.5 font-normal">/user/mo</span>
             </div>
+            <p class="text-xs text-gray-500 pricing-billing" data-monthly-text="billed monthly" data-annual-text="billed annually at $7,200/user — save">billed annually at $7,200/user &mdash; save</p>
+            <div class="inline-block mt-2.5 px-3 py-1 bg-blue-50 text-blue-700 text-[13px] font-semibold rounded-md">3,000,000 tokens/mo included</div>
           </div>
 
-          <!-- Summit (Enterprise) -->
-          <div class="rounded-2xl border border-gray-200 bg-white p-8 flex flex-col shadow-sm">
-            <div class="min-h-[110px]">
-              <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" /></svg>
-                Enterprise
-              </div>
-              <p class="text-sm text-gray-500 mb-2">$200M+ annual volume</p>
-              <h3 class="text-3xl font-bold text-gray-900">Summit</h3>
-            </div>
-            <p class="text-sm text-gray-600 mb-6 min-h-[60px]">
-              White-glove deployment for enterprise GCs and program managers with custom workflows.
-            </p>
-            <div class="mb-6 min-h-[120px]">
-              <div class="text-5xl font-bold text-gray-900">Let's talk.</div>
-              <p class="text-sm text-gray-500 mt-2">Custom pricing based on volume & users</p>
-              <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
-                Custom token allotment
-              </div>
-            </div>
+          <div class="text-[10px] font-bold tracking-[1px] uppercase text-gray-500 mb-3.5">Everything in Foundation, plus</div>
+          <ul class="space-y-2.5 text-[13.5px] text-gray-600 mb-6 flex-grow">
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Up to 15 users</strong> per company</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Chance of anything</strong> risk modeling</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Live market pricing</strong> &mdash; benchmark against your region</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">AI Insights audit</strong> &mdash; flags inconsistencies in bids</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">CPM schedules</strong> + AI-powered schedule risk modeling</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">25 GB</strong> storage + Procore, P6, Egnyte integrations</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Cost history</strong> &mdash; view &amp; compare line-item pricing trends</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support + onboarding call</span></li>
+          </ul>
 
-            <div class="border-t border-gray-100 pt-6 mb-6">
-              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Everything in Podium, plus</p>
-              <ul class="space-y-3 text-sm text-gray-700">
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Unlimited users</strong></span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Custom AI model training</strong> on your historical data</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Risk dashboard</strong> with probability curves & exceedance charts</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>SSO + role-based access</strong> controls</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>API access</strong> for custom integrations & BI tools</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Unlimited storage</strong> + all 40+ connectors</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span><strong>Dedicated success manager</strong> + SLA</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <svg class="h-4 w-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                  <span>Custom onboarding & data migration</span>
-                </li>
-              </ul>
-            </div>
+          <a href="/checkout?plan=podium" class="block w-full text-center py-3 px-6 rounded-lg bg-blue-600 border border-blue-600 text-white text-sm font-semibold hover:bg-blue-700 hover:border-blue-700 transition-all shadow-sm">
+            Select Plan &rarr;
+          </a>
+        </div>
 
-            <div class="mt-auto">
-              <a href="mailto:sales@constructwise.ai" class="flex items-center justify-center w-full rounded-lg border border-gray-300 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
-                Contact sales &rarr;
-              </a>
-            </div>
+        <!-- Summit -->
+        <div class="border border-gray-200 rounded-2xl p-9 pt-9 pb-7 bg-white shadow-sm flex flex-col hover:shadow-md hover:border-gray-300 transition-all">
+          <div class="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 mb-4">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            ENTERPRISE
+          </div>
+          <p class="text-[13px] text-gray-500 mb-2 min-h-[40px]">$200M+ annual volume</p>
+          <h3 class="text-[28px] font-bold tracking-tight text-gray-900 mb-3">Summit</h3>
+          <p class="text-sm text-gray-600 leading-relaxed mb-7 h-[66px]">White-glove deployment for enterprise GCs and program managers with custom workflows.</p>
+
+          <div class="mb-6 pb-6 border-b border-gray-200">
+            <div class="text-[44px] font-bold tracking-[-1.5px] leading-none text-gray-900 mb-1">Let's talk.</div>
+            <p class="text-xs text-gray-500">Custom pricing based on volume &amp; users</p>
+            <div class="inline-block mt-2.5 px-3 py-1 bg-blue-50 text-blue-700 text-[13px] font-semibold rounded-md">7,000,000+ tokens/mo</div>
           </div>
 
+          <div class="text-[10px] font-bold tracking-[1px] uppercase text-gray-500 mb-3.5">Everything in Podium, plus</div>
+          <ul class="space-y-2.5 text-[13.5px] text-gray-600 mb-6 flex-grow">
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Unlimited users</strong></span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Master schedule</strong> &mdash; company-wide project view</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Unlimited storage</strong> + all 40+ connectors</span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="text-gray-900 font-semibold">Dedicated success manager</strong></span></li>
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom onboarding &amp; data migration</span></li>
+          </ul>
+
+          <a href="mailto:sales@constructwise.ai" class="block w-full text-center py-3 px-6 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all">
+            Contact sales &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Top-up label -->
+    <div class="max-w-[1120px] mx-auto px-6 pb-4">
+      <h3 class="text-center text-[15px] font-semibold tracking-tight text-gray-600">
+        Need extra tokens? Buy a top-up pack anytime.
+      </h3>
+    </div>
+
+    <!-- Overage bar -->
+    <div class="max-w-[1120px] mx-auto px-6 pb-12">
+      <div class="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-6 py-5 gap-5 flex-wrap shadow-sm">
+        <p class="text-sm text-gray-600 leading-relaxed flex-1 min-w-[280px]">
+          <strong class="text-gray-900 font-semibold">Simple pay-as-you-go pricing above your allotment.</strong>
+          If you exceed your monthly tokens, additional usage is billed at a flat rate. You'll get alerts at 80% and 100% &mdash; no surprises on your invoice.
+        </p>
+        <span class="text-sm font-bold text-blue-600 whitespace-nowrap">$0.10 / 1,000 tokens</span>
+      </div>
+    </div>
+
+    <!-- Compare Plans Matrix -->
+    <section class="max-w-[1120px] mx-auto px-6 pb-16">
+      <h2 class="text-center text-2xl font-bold tracking-tight text-gray-900 mb-8">Compare plans</h2>
+      <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-sm">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="px-5 py-4 text-left text-[13px] font-bold tracking-tight text-gray-900 bg-gray-50 border-b-2 border-gray-200 w-[45%]">Feature</th>
+              <th class="px-5 py-4 text-center text-[13px] font-bold tracking-tight text-gray-900 bg-gray-50 border-b-2 border-gray-200 w-[18.33%]">Foundation</th>
+              <th class="px-5 py-4 text-center text-[13px] font-bold tracking-tight text-blue-600 bg-blue-50 border-b-2 border-gray-200 w-[18.33%]">Podium</th>
+              <th class="px-5 py-4 text-center text-[13px] font-bold tracking-tight text-gray-900 bg-gray-50 border-b-2 border-gray-200 w-[18.33%]">Summit</th>
+            </tr>
+          </thead>
+          <tbody class="text-[13.5px] text-gray-600">
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">Pricing &amp; Usage</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Monthly token allotment</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">1M</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px] bg-blue-50/40">3M</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">7M+</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Pay-as-you-go overage</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">$0.10/1K</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px] bg-blue-50/40">$0.10/1K</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">$0.10/1K</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Users per company</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">Up to 3</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px] bg-blue-50/40">Up to 15</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">Unlimited</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Free read-only collaborators</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">AI-Powered Estimating</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">AI bid generation from SOW + quantities</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Conceptual &amp; detailed bid types</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Company cost history &mdash; AI learns your pricing</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Reusable Blocks for line items &amp; assemblies</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Map custom company codes to CSI / Uniformat</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">AI Insights audit &mdash; flags bid inconsistencies</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Live market pricing benchmarks</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Cost history trends &mdash; line-item price tracking</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">AI Chat &amp; Editing</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">AI Chat &mdash; ask questions about bids &amp; docs</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">AI Edit &mdash; modify bids via natural language</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">Scheduling</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Schedule generation from cost estimate</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Gantt chart export</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">CPM schedules + AI risk modeling</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">P6 &amp; MS Project export</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Master schedule &mdash; company-wide view</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-gray-300 text-base bg-blue-50/40">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">Risk &amp; Analytics</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">"Chance of anything" risk simulations</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Estimate range &amp; confidence scoring</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">Storage &amp; Integrations</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Document storage</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">5 GB</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px] bg-blue-50/40">25 GB</td><td class="px-5 py-3 text-center text-gray-900 font-semibold text-[13px]">Unlimited</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Excel &amp; PDF bid export</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Procore, P6, Egnyte integrations</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">All 40+ connectors (HCSS, BIM 360, Sage, etc.)</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-gray-300 text-base bg-blue-50/40">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+            <tr><td colspan="4" class="px-5 py-2.5 text-[11px] font-bold tracking-[0.8px] uppercase text-gray-500 bg-gray-50">Admin &amp; Support</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Role-based access controls (Admin / Editor / Viewer)</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Usage dashboard &amp; token alerts</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Email &amp; in-app chat</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Onboarding call</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr class="border-b border-gray-200"><td class="px-5 py-3">Priority support</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold bg-blue-50/40">&#10003;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+            <tr><td class="px-5 py-3">Dedicated success manager</td><td class="px-5 py-3 text-center text-gray-300 text-base">&mdash;</td><td class="px-5 py-3 text-center text-gray-300 text-base bg-blue-50/40">&mdash;</td><td class="px-5 py-3 text-center text-blue-600 font-bold">&#10003;</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Value Props -->
+    <section class="max-w-[1120px] mx-auto px-6 pb-16">
+      <h2 class="text-center text-[22px] font-bold tracking-tight text-gray-900 mb-7">What your tokens get you</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="text-center p-7 px-5 border border-gray-200 rounded-xl bg-white shadow-sm">
+          <div class="text-[34px] font-extrabold text-blue-600 tracking-tight mb-1.5">3&ndash;4 hrs</div>
+          <div class="text-[13px] text-gray-600 leading-relaxed">of manual estimating work replaced<br />per AI-generated bid</div>
+        </div>
+        <div class="text-center p-7 px-5 border border-gray-200 rounded-xl bg-white shadow-sm">
+          <div class="text-[34px] font-extrabold text-blue-600 tracking-tight mb-1.5">90 sec</div>
+          <div class="text-[13px] text-gray-600 leading-relaxed">to generate a detailed bid estimate<br />from SOW + takeoff upload</div>
+        </div>
+        <div class="text-center p-7 px-5 border border-gray-200 rounded-xl bg-white shadow-sm">
+          <div class="text-[34px] font-extrabold text-blue-600 tracking-tight mb-1.5">2&ndash;3x</div>
+          <div class="text-[13px] text-gray-600 leading-relaxed">more bids per month<br />with the same team size</div>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gray-900 text-white text-center">
-      <div class="container mx-auto px-4 max-w-3xl">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to bid smarter?</h2>
-        <p class="text-gray-300">Choose a plan above and start building today.</p>
+    <!-- FAQ -->
+    <section class="max-w-2xl mx-auto px-6 pb-24">
+      <h2 class="text-center text-2xl font-bold tracking-tight text-gray-900 mb-9">Common questions</h2>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>What are tokens?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Tokens are the unit of AI processing that powers every feature in ConstructWise. Think of them like fuel &mdash; every time the AI generates a bid, builds a schedule, analyzes a document, or answers a chat question, it consumes tokens. Simple tasks like a quick chat question use fewer tokens. Complex tasks like generating a full multi-trade bid estimate use more. Your monthly allotment is designed to comfortably cover normal usage.
+        </div>
       </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Why token-based pricing instead of a flat fee?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Every AI request costs us real compute &mdash; the more complex the task, the more it costs. Token-based pricing means you're never subsidizing another company's heavy usage, and we never have to throttle your access or cap your features. Your subscription includes a generous monthly allotment that covers most users. You only pay extra if you go significantly beyond that &mdash; and at that point, the value you're getting far exceeds the cost.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Will I run out of tokens?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Most users won't. Foundation includes 1 million tokens per month &mdash; enough for dozens of AI-generated bids plus daily chat and document analysis. Podium includes 3 million tokens, built for high-volume estimating shops. You'll get usage alerts at 80% and 100%, and you can purchase top-up packs anytime if you need more.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Can I see my token usage in real time?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Yes. Every plan includes a usage dashboard that shows your current token consumption, a breakdown by feature (bids, schedules, chat, document analysis), and projected usage for the month. You'll also receive automated alerts at 80% and 100% of your allotment.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Do unused tokens roll over?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Tokens reset monthly and do not roll over. We intentionally sized each allotment with a comfortable buffer so you're not counting every query. If you consistently have leftover tokens, that means you're on the right plan.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Can I add more users later?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Yes. You can add users at any time and each user gets their own token allotment. On Foundation you can have up to 3 users, Podium supports up to 15, and Summit is unlimited. Read-only collaborators (e.g., project owners reviewing bids) are free and unlimited on every plan.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>What integrations are available?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Foundation includes Excel and PDF export. Podium adds direct integrations with Procore, Primavera P6, Egnyte, QuickBooks, Sage, and more. Summit unlocks all 40+ connectors including HCSS, BIM 360, Viewpoint Vista, Smartsheet, and custom API access for your BI tools.
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-gray-200 py-4">
+        <button class="faq-q text-[15px] font-semibold cursor-pointer flex justify-between items-center gap-4 text-gray-900 hover:text-blue-600 transition-colors w-full text-left">
+          <span>Is there a free trial?</span>
+          <span class="faq-icon text-xl text-gray-500 flex-shrink-0 leading-none">+</span>
+        </button>
+        <div class="faq-a max-h-0 overflow-hidden text-sm text-gray-600 leading-relaxed transition-[max-height,padding] duration-300">
+          Yes &mdash; every plan starts with a 7-day free trial with full access. We'll also offer a live demo where we'll build a real bid using your project data so you can see the value before committing. Summit customers get a custom pilot program.
+        </div>
+      </div>
+
     </section>
 
     <LandingFooter />
   </div>
 
   <script>
+    // Billing toggle
+    let billingPeriod = 'annual';
     const monthlyBtn = document.getElementById('monthlyBtn');
     const annualBtn = document.getElementById('annualBtn');
     const amounts = document.querySelectorAll('.pricing-amount');
     const billings = document.querySelectorAll('.pricing-billing');
-
-    let billingPeriod = 'annual';
     const planLinks = document.querySelectorAll('a[href^="/checkout"]');
 
     function updateLinks() {
@@ -281,28 +357,73 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
 
     function setAnnual() {
       billingPeriod = 'annual';
-      annualBtn?.classList.add('bg-gray-900', 'text-white');
-      annualBtn?.classList.remove('text-gray-600');
-      monthlyBtn?.classList.remove('bg-gray-900', 'text-white');
-      monthlyBtn?.classList.add('text-gray-600');
+      annualBtn?.classList.add('bg-blue-600', 'text-white', 'font-semibold', 'shadow-sm');
+      annualBtn?.classList.remove('text-gray-600', 'font-medium');
+      monthlyBtn?.classList.remove('bg-blue-600', 'text-white', 'font-semibold', 'shadow-sm');
+      monthlyBtn?.classList.add('text-gray-600', 'font-medium');
       amounts.forEach(el => { el.textContent = el.getAttribute('data-annual'); });
-      billings.forEach(el => { el.textContent = el.getAttribute('data-annual'); });
+      billings.forEach(el => { el.textContent = el.getAttribute('data-annual-text'); });
       updateLinks();
     }
 
     function setMonthly() {
       billingPeriod = 'monthly';
-      monthlyBtn?.classList.add('bg-gray-900', 'text-white');
-      monthlyBtn?.classList.remove('text-gray-600');
-      annualBtn?.classList.remove('bg-gray-900', 'text-white');
-      annualBtn?.classList.add('text-gray-600');
+      monthlyBtn?.classList.add('bg-blue-600', 'text-white', 'font-semibold', 'shadow-sm');
+      monthlyBtn?.classList.remove('text-gray-600', 'font-medium');
+      annualBtn?.classList.remove('bg-blue-600', 'text-white', 'font-semibold', 'shadow-sm');
+      annualBtn?.classList.add('text-gray-600', 'font-medium');
       amounts.forEach(el => { el.textContent = el.getAttribute('data-monthly'); });
-      billings.forEach(el => { el.textContent = el.getAttribute('data-monthly'); });
+      billings.forEach(el => { el.textContent = el.getAttribute('data-monthly-text'); });
       updateLinks();
     }
 
     monthlyBtn?.addEventListener('click', setMonthly);
     annualBtn?.addEventListener('click', setAnnual);
     updateLinks();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        if (!item) return;
+        const answer = item.querySelector('.faq-a');
+        const icon = item.querySelector('.faq-icon');
+        const isOpen = item.classList.contains('open');
+
+        // Close any other open items
+        document.querySelectorAll('.faq-item.open').forEach(other => {
+          if (other !== item) {
+            other.classList.remove('open');
+            const otherAnswer = other.querySelector('.faq-a');
+            const otherIcon = other.querySelector('.faq-icon');
+            const otherQ = other.querySelector('.faq-q');
+            if (otherAnswer) {
+              otherAnswer.style.maxHeight = '0';
+              otherAnswer.style.paddingTop = '0';
+            }
+            if (otherIcon) otherIcon.textContent = '+';
+            if (otherQ) otherQ.classList.remove('text-blue-600');
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          if (answer) {
+            answer.style.maxHeight = '0';
+            answer.style.paddingTop = '0';
+          }
+          if (icon) icon.textContent = '+';
+          q.classList.remove('text-blue-600');
+        } else {
+          item.classList.add('open');
+          if (answer) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.paddingTop = '12px';
+          }
+          if (icon) icon.textContent = '−';
+          q.classList.add('text-blue-600');
+        }
+      });
+    });
   </script>
 </BaseLayout>
