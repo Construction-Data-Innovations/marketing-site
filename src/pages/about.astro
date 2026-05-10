@@ -13,9 +13,9 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
         <h1 class="text-4xl md:text-5xl font-bold mb-20 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
           The Construction Platform to Plan Smarter
         </h1>
-        <div class="text-xl text-gray-600 max-w-3xl mx-auto space-y-5 text-center">
+        <div class="text-[22px] text-gray-600 max-w-4xl mx-auto space-y-5 text-center leading-relaxed">
           <p>
-            ConstructWise is software for construction professionals &mdash; built by people who've actually run jobs. Estimators, PMs, and project execs burn dozens of hours a week analyzing files, building Excel models, and keying in activities one at a time.
+            ConstructWise is software for construction professionals &mdash; built by people who have estimated thousands of competitive bids and been responsible for project P&amp;L. Estimators, PMs, and project execs burn dozens of hours a week analyzing files, building Excel models, and keying in activities one at a time.
           </p>
           <p class="font-bold text-gray-900">
             We know &mdash; because we're builders ourselves. Three generations of them.
@@ -38,16 +38,217 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
                 <p class="text-gray-600">Automatically generate multi-trade, comprehensive bids and then customize to your risk tolerance. Easily retrieve all the information that's living in file folders, document clouds, and emails so you submit proposals with confidence.</p>
               </div>
               <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <div class="text-xl font-semibold my-2">Developers</div>
-                <p class="text-gray-600">When you're developing conceptual budgets for a new development, or you're in the thick of construction, ConstructWise will help you manage your cost basis, track draws with confidence, and deliver projects the way you underwrote them.</p>
-              </div>
-              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                 <div class="text-xl font-semibold my-2">Trade Contractors</div>
                 <p class="text-gray-600">If you generate repetitive bid estimates or have a detailed menu of items, use ConstructWise to review for accuracy, pesky Excel errors, or benchmarking against your own data.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div class="text-xl font-semibold my-2">Developers</div>
+                <p class="text-gray-600">When you're developing conceptual budgets for a new development, or you're in the thick of construction, ConstructWise will help you manage your cost basis, track draws with confidence, and deliver projects the way you underwrote them.</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Visual storytelling: what the platform actually does -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4 max-w-6xl">
+
+        <!-- Story 1: Plans → Quantities -->
+        <div class="grid lg:grid-cols-5 gap-10 lg:gap-14 items-center mb-24">
+          <div class="lg:col-span-2">
+            <p class="text-xs font-bold text-blue-600 uppercase tracking-[1.5px] mb-3">Plans &rarr; Quantities</p>
+            <h3 class="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight mb-4">Drawings go in. Quantities come out.</h3>
+            <p class="text-base text-gray-600 leading-relaxed">Upload a schematic. ConstructWise reads it, generates takeoff quantities, and hands you a structured table you can drop straight into your bid spreadsheet.</p>
+          </div>
+          <div class="lg:col-span-3">
+            <div class="bg-gray-100 rounded-xl p-4 shadow-inner">
+              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <svg viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full block">
+                  <rect width="600" height="360" fill="white"/>
+                  <!-- Window chrome -->
+                  <rect x="20" y="16" width="560" height="36" rx="6" fill="#f8fafc"/>
+                  <rect x="32" y="26" width="100" height="16" rx="4" fill="#2563eb"/>
+                  <rect x="148" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
+                  <rect x="220" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
+
+                  <!-- LEFT: stylized floor plan -->
+                  <rect x="20" y="68" width="260" height="240" rx="8" fill="#fafbfd" stroke="#e2e8f0" stroke-width="1"/>
+                  <!-- Grid markers -->
+                  <text x="30" y="84" font-family="system-ui" font-size="8" fill="#cbd5e1">A</text>
+                  <text x="30" y="142" font-family="system-ui" font-size="8" fill="#cbd5e1">B</text>
+                  <text x="30" y="200" font-family="system-ui" font-size="8" fill="#cbd5e1">C</text>
+                  <text x="30" y="258" font-family="system-ui" font-size="8" fill="#cbd5e1">D</text>
+                  <text x="100" y="80" font-family="system-ui" font-size="8" fill="#cbd5e1">1</text>
+                  <text x="160" y="80" font-family="system-ui" font-size="8" fill="#cbd5e1">2</text>
+                  <text x="220" y="80" font-family="system-ui" font-size="8" fill="#cbd5e1">3</text>
+                  <!-- Building outer wall -->
+                  <rect x="50" y="92" width="220" height="190" fill="white" stroke="#1e3a5f" stroke-width="2"/>
+                  <!-- Internal partitions -->
+                  <line x1="50" y1="158" x2="270" y2="158" stroke="#1e3a5f" stroke-width="1.5"/>
+                  <line x1="160" y1="92" x2="160" y2="158" stroke="#1e3a5f" stroke-width="1.5"/>
+                  <line x1="125" y1="158" x2="125" y2="220" stroke="#1e3a5f" stroke-width="1.5"/>
+                  <line x1="50" y1="220" x2="270" y2="220" stroke="#1e3a5f" stroke-width="1.5"/>
+                  <line x1="200" y1="220" x2="200" y2="282" stroke="#1e3a5f" stroke-width="1.5"/>
+                  <!-- Door swings -->
+                  <path d="M 110 158 A 12 12 0 0 1 122 170" stroke="#94a3b8" stroke-width="1" fill="none"/>
+                  <path d="M 200 220 A 12 12 0 0 0 188 232" stroke="#94a3b8" stroke-width="1" fill="none"/>
+                  <!-- Room labels -->
+                  <text x="86" y="130" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">BR-1</text>
+                  <text x="200" y="130" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">BR-2</text>
+                  <text x="76" y="194" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">KITCHEN</text>
+                  <text x="200" y="194" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">LIVING</text>
+                  <text x="148" y="256" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">DINING</text>
+                  <text x="226" y="256" font-family="system-ui" font-size="8" font-weight="600" fill="#64748b">BATH</text>
+                  <!-- Dimension line -->
+                  <line x1="50" y1="294" x2="270" y2="294" stroke="#94a3b8" stroke-width="1"/>
+                  <line x1="50" y1="290" x2="50" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                  <line x1="270" y1="290" x2="270" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                  <text x="160" y="290" font-family="system-ui" font-size="8" fill="#94a3b8" text-anchor="middle">68'-0"</text>
+                  <!-- Title block at top of plan -->
+                  <text x="148" y="84" font-family="system-ui" font-size="9" font-weight="700" fill="#475569" text-anchor="middle">SCHEMATIC PLAN</text>
+
+                  <!-- Arrow -->
+                  <path d="M 290 188 L 312 188" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M 305 182 L 312 188 L 305 194" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                  <!-- RIGHT: quantities table -->
+                  <rect x="320" y="68" width="260" height="240" rx="8" fill="white" stroke="#bfdbfe" stroke-width="1"/>
+                  <rect x="320" y="68" width="260" height="32" rx="8" fill="#eff6ff"/>
+                  <text x="332" y="88" font-family="system-ui" font-size="10" font-weight="700" fill="#1e40af">Generated Quantities</text>
+                  <rect x="528" y="76" width="40" height="16" rx="8" fill="#22c55e"/>
+                  <text x="548" y="87" font-family="system-ui" font-size="8" font-weight="700" fill="white" text-anchor="middle">AUTO</text>
+                  <!-- Table header -->
+                  <text x="332" y="116" font-family="system-ui" font-size="8" font-weight="700" fill="#94a3b8" letter-spacing="0.5">ITEM</text>
+                  <text x="486" y="116" font-family="system-ui" font-size="8" font-weight="700" fill="#94a3b8" letter-spacing="0.5">QTY</text>
+                  <text x="540" y="116" font-family="system-ui" font-size="8" font-weight="700" fill="#94a3b8" letter-spacing="0.5">UNIT</text>
+                  <line x1="332" y1="120" x2="568" y2="120" stroke="#e2e8f0" stroke-width="1"/>
+                  <!-- Rows -->
+                  <text x="332" y="138" font-family="system-ui" font-size="10" fill="#475569">Concrete slab</text>
+                  <text x="486" y="138" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">3,250</text>
+                  <text x="540" y="138" font-family="system-ui" font-size="10" fill="#94a3b8">SF</text>
+                  <text x="332" y="158" font-family="system-ui" font-size="10" fill="#475569">Drywall partitions</text>
+                  <text x="486" y="158" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">2,840</text>
+                  <text x="540" y="158" font-family="system-ui" font-size="10" fill="#94a3b8">SF</text>
+                  <text x="332" y="178" font-family="system-ui" font-size="10" fill="#475569">Interior doors</text>
+                  <text x="486" y="178" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">14</text>
+                  <text x="540" y="178" font-family="system-ui" font-size="10" fill="#94a3b8">EA</text>
+                  <text x="332" y="198" font-family="system-ui" font-size="10" fill="#475569">Windows</text>
+                  <text x="486" y="198" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">22</text>
+                  <text x="540" y="198" font-family="system-ui" font-size="10" fill="#94a3b8">EA</text>
+                  <text x="332" y="218" font-family="system-ui" font-size="10" fill="#475569">Tile flooring</text>
+                  <text x="486" y="218" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">340</text>
+                  <text x="540" y="218" font-family="system-ui" font-size="10" fill="#94a3b8">SF</text>
+                  <text x="332" y="238" font-family="system-ui" font-size="10" fill="#475569">Cabinetry</text>
+                  <text x="486" y="238" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">28</text>
+                  <text x="540" y="238" font-family="system-ui" font-size="10" fill="#94a3b8">LF</text>
+                  <text x="332" y="258" font-family="system-ui" font-size="10" fill="#475569">Roofing</text>
+                  <text x="486" y="258" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">3,420</text>
+                  <text x="540" y="258" font-family="system-ui" font-size="10" fill="#94a3b8">SF</text>
+                  <!-- Excel export indicator -->
+                  <rect x="332" y="276" width="236" height="22" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+                  <rect x="340" y="282" width="10" height="10" rx="1" fill="#22c55e"/>
+                  <text x="356" y="291" font-family="system-ui" font-size="9" font-weight="600" fill="#166534">Ready to export &mdash; .xlsx, .csv, or PDF</text>
+
+                  <!-- Bottom success bar -->
+                  <rect x="20" y="324" width="560" height="22" rx="6" fill="#eff6ff"/>
+                  <circle cx="36" cy="335" r="4" fill="#2563eb"/>
+                  <text x="48" y="339" font-family="system-ui" font-size="10" fill="#1e40af" font-weight="500">Schematic analyzed in seconds &mdash; line items mapped to your CSI codes</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 2: Slice & Dice -->
+        <div class="grid lg:grid-cols-5 gap-10 lg:gap-14 items-center">
+          <div class="lg:col-span-3 lg:order-1">
+            <div class="bg-gray-100 rounded-xl p-4 shadow-inner">
+              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <svg viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full block">
+                  <rect width="600" height="360" fill="white"/>
+                  <!-- Window chrome -->
+                  <rect x="20" y="16" width="560" height="36" rx="6" fill="#f8fafc"/>
+                  <rect x="32" y="26" width="100" height="16" rx="4" fill="#2563eb"/>
+                  <rect x="148" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
+                  <rect x="220" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
+
+                  <!-- View tabs -->
+                  <rect x="32" y="68" width="100" height="28" rx="14" fill="#2563eb"/>
+                  <text x="82" y="86" font-family="system-ui" font-size="10" font-weight="600" fill="white" text-anchor="middle">By Building</text>
+                  <rect x="140" y="68" width="80" height="28" rx="14" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="180" y="86" font-family="system-ui" font-size="10" fill="#475569" text-anchor="middle">By Floor</text>
+                  <rect x="228" y="68" width="80" height="28" rx="14" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="268" y="86" font-family="system-ui" font-size="10" fill="#475569" text-anchor="middle">By Phase</text>
+                  <rect x="316" y="68" width="80" height="28" rx="14" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="356" y="86" font-family="system-ui" font-size="10" fill="#475569" text-anchor="middle">By Trade</text>
+                  <rect x="404" y="68" width="80" height="28" rx="14" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="444" y="86" font-family="system-ui" font-size="10" fill="#475569" text-anchor="middle">By Room</text>
+
+                  <!-- Project total at top -->
+                  <rect x="200" y="112" width="200" height="56" rx="10" fill="#1e40af"/>
+                  <text x="300" y="132" font-family="system-ui" font-size="9" fill="#bfdbfe" text-anchor="middle" letter-spacing="1.5" font-weight="600">PROJECT TOTAL</text>
+                  <text x="300" y="156" font-family="system-ui" font-size="20" font-weight="700" fill="white" text-anchor="middle">$4,250,000</text>
+
+                  <!-- Connecting lines down to children -->
+                  <path d="M 300 168 L 300 184" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <path d="M 130 184 L 470 184" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <path d="M 130 184 L 130 200" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <path d="M 300 184 L 300 200" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <path d="M 470 184 L 470 200" stroke="#cbd5e1" stroke-width="1.5"/>
+
+                  <!-- Three Block children -->
+                  <rect x="50" y="200" width="160" height="62" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                  <text x="62" y="218" font-family="system-ui" font-size="9" font-weight="700" fill="#1e40af" letter-spacing="0.5">BLOCK</text>
+                  <text x="62" y="232" font-family="system-ui" font-size="11" font-weight="600" fill="#1e3a5f">Building A</text>
+                  <text x="62" y="252" font-family="system-ui" font-size="13" font-weight="700" fill="#1e3a5f">$1,820,000</text>
+                  <text x="160" y="252" font-family="system-ui" font-size="9" fill="#64748b" text-anchor="end">43%</text>
+
+                  <rect x="220" y="200" width="160" height="62" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                  <text x="232" y="218" font-family="system-ui" font-size="9" font-weight="700" fill="#1e40af" letter-spacing="0.5">BLOCK</text>
+                  <text x="232" y="232" font-family="system-ui" font-size="11" font-weight="600" fill="#1e3a5f">Building B</text>
+                  <text x="232" y="252" font-family="system-ui" font-size="13" font-weight="700" fill="#1e3a5f">$1,540,000</text>
+                  <text x="330" y="252" font-family="system-ui" font-size="9" fill="#64748b" text-anchor="end">36%</text>
+
+                  <rect x="390" y="200" width="160" height="62" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+                  <text x="402" y="218" font-family="system-ui" font-size="9" font-weight="700" fill="#1e40af" letter-spacing="0.5">BLOCK</text>
+                  <text x="402" y="232" font-family="system-ui" font-size="11" font-weight="600" fill="#1e3a5f">Site &amp; Garage</text>
+                  <text x="402" y="252" font-family="system-ui" font-size="13" font-weight="700" fill="#1e3a5f">$890,000</text>
+                  <text x="500" y="252" font-family="system-ui" font-size="9" fill="#64748b" text-anchor="end">21%</text>
+
+                  <!-- Drill-down indicator under Building A -->
+                  <line x1="130" y1="262" x2="130" y2="278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="50" y1="278" x2="210" y2="278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="80" y1="278" x2="80" y2="290" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="130" y1="278" x2="130" y2="290" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                  <line x1="180" y1="278" x2="180" y2="290" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+
+                  <text x="50" y="295" font-family="system-ui" font-size="8" font-weight="700" fill="#94a3b8" letter-spacing="0.8">FLOORS &mdash; BUILDING A</text>
+
+                  <rect x="50" y="302" width="50" height="22" rx="6" fill="#fafbfd" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="75" y="316" font-family="system-ui" font-size="9" font-weight="600" fill="#475569" text-anchor="middle">L1</text>
+                  <rect x="105" y="302" width="50" height="22" rx="6" fill="#fafbfd" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="130" y="316" font-family="system-ui" font-size="9" font-weight="600" fill="#475569" text-anchor="middle">L2-5</text>
+                  <rect x="160" y="302" width="50" height="22" rx="6" fill="#fafbfd" stroke="#e2e8f0" stroke-width="1"/>
+                  <text x="185" y="316" font-family="system-ui" font-size="9" font-weight="600" fill="#475569" text-anchor="middle">L6-8</text>
+
+                  <!-- Bottom flexibility caption -->
+                  <rect x="240" y="294" width="320" height="50" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+                  <text x="256" y="312" font-family="system-ui" font-size="10" font-weight="700" fill="#166534">Same line items. Different views.</text>
+                  <text x="256" y="328" font-family="system-ui" font-size="9" fill="#166534">Owner wants it by phase? Toggle. By trade? Toggle.</text>
+                  <text x="256" y="340" font-family="system-ui" font-size="9" fill="#166534">No rebuilding the bid.</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-2 lg:order-2">
+            <p class="text-xs font-bold text-blue-600 uppercase tracking-[1.5px] mb-3">Slice &amp; Dice</p>
+            <h3 class="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight mb-4">Same bid. Whatever view the owner asks for.</h3>
+            <p class="text-base text-gray-600 leading-relaxed">Group by building, floor, phase, room, or trade. Reusable Blocks let you nimbly restructure a bid without rebuilding it line by line.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
