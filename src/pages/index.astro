@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
-import WaitlistIsland from '../components/WaitlistIsland.tsx';
 ---
 <BaseLayout>
   <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-20">
@@ -17,12 +16,19 @@ import WaitlistIsland from '../components/WaitlistIsland.tsx';
         <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
           Upload your historical documents, connect to your existing apps, and access AI-powered construction solutions &ndash; all in one platform
         </p>
-        <div class="flex justify-center mb-12">
-          <WaitlistIsland
-            client:idle
-            buttonClassName="text-lg px-8 py-3 h-12"
-            variant="primary"
-          />
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a
+            href="/pricing"
+            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 h-12 bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 font-semibold shadow-sm"
+          >
+            Get started &rarr;
+          </a>
+          <a
+            href="/solutions"
+            class="inline-flex items-center justify-center rounded-md text-lg px-8 py-3 h-12 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 transition-colors duration-300 font-semibold"
+          >
+            See what's included
+          </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
