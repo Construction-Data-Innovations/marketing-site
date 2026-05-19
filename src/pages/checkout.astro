@@ -264,6 +264,15 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           paymentMethods: ['card'],
           showAddress: false,
           showLabels: true,
+          // `showAddress: false` hides the broader address block, but the
+          // Finix card form still renders `address_country` and
+          // `address_postal_code` for AVS by default. We collect both in the
+          // Billing Address section below and forward them to Finix when we
+          // create the Identity, so AVS still runs — explicit hide here just
+          // avoids the duplicate UI (and dodges a global `.o select` rule
+          // from finix.js that breaks the country dropdown's vertical
+          // alignment).
+          hideFields: ['address_country', 'address_postal_code'],
           styles: {
             default: {
               input: {
