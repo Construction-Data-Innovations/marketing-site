@@ -9,8 +9,8 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY;
 const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.constructwise.ai';
 ---
 <BaseLayout title="Checkout - ConstructWise">
-  <!-- Finix Hosted Fields tokenizer + hCaptcha (both browser-side) -->
-  <script is:inline src="https://js.finix.com/v/1/finix.js"></script>
+  <!-- Finix Hosted Fields tokenizer (v2 PaymentForm API) + hCaptcha -->
+  <script is:inline src="https://js.finix.com/v/2/finix.js"></script>
   <script is:inline src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
 
   <div class="min-h-screen bg-gray-50 pt-16">
@@ -125,12 +125,9 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
                   Payment Information
                 </h3>
 
-                <!-- Finix Hosted Fields mount points (iframe-isolated; PCI-safe) -->
-                <div id="finix-card-number" class="mb-3 rounded-lg border border-gray-300 px-4 py-2.5"></div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div id="finix-card-expiration" class="rounded-lg border border-gray-300 px-4 py-2.5"></div>
-                  <div id="finix-card-cvc" class="rounded-lg border border-gray-300 px-4 py-2.5"></div>
-                </div>
+                <!-- Single mount point — Finix v2 PaymentForm renders all card
+                     fields inside this div as iframes (PCI-safe). -->
+                <div id="finix-form-mount"></div>
 
                 <p class="text-xs text-gray-500 mt-3 flex items-center gap-1">
                   <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
@@ -248,21 +245,43 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
     }
 
     // ---- Finix Hosted Fields --------------------------------------
+    // v2 API: `Finix.PaymentForm(mountId, environment, applicationId, options)`.
+    // The form is rendered as iframes inside `#finix-form-mount`. We pass NO
+    // `onSubmit` so Finix doesn't auto-render its own submit button — we drive
+    // tokenization manually from our existing Subscribe button via
+    // `finixForm.submit(callback)` (see custom-submit pattern in Finix docs).
     let finixForm = null;
     function initFinix() {
       if (typeof Finix === 'undefined') {
         setTimeout(initFinix, 100);
         return;
       }
-      // The browser SDK exposes `Finix.CardTokenForm(applicationId, options)`.
-      finixForm = Finix.CardTokenForm('finix-form-mount', {
-        showAddress: false,
-        applicationId: FINIX_APPLICATION_ID,
-        environment: FINIX_ENVIRONMENT,
-        styles: {
-          default: { color: '#0f172a', fontSize: '14px', fontFamily: 'system-ui, sans-serif' },
+      finixForm = Finix.PaymentForm(
+        'finix-form-mount',
+        FINIX_ENVIRONMENT,
+        FINIX_APPLICATION_ID,
+        {
+          paymentMethods: ['card'],
+          showAddress: false,
+          showLabels: true,
+          styles: {
+            default: {
+              input: {
+                default: {
+                  color: '#0f172a',
+                  fontSize: '14px',
+                  fontFamily: 'system-ui, sans-serif',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '8px',
+                  padding: '8px 12px',
+                },
+                focused: { border: '1px solid #2563eb' },
+                error: { border: '1px solid #ef4444' },
+              },
+            },
+          },
         },
-      });
+      );
     }
     initFinix();
 
