@@ -180,6 +180,14 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
                     <input type="text" id="address" name="address" required
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
+                  <div class="sm:col-span-2">
+                    <label for="address2" class="block text-sm font-medium text-gray-700 mb-1">
+                      Apt, Suite, Unit, etc.
+                      <span class="text-gray-400 font-normal">(optional)</span>
+                    </label>
+                    <input type="text" id="address2" name="address2"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
                   <div>
                     <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
                     <input type="text" id="city" name="city" required
@@ -500,6 +508,7 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           },
           address: {
             line1: document.getElementById('address').value.trim(),
+            line2: document.getElementById('address2').value.trim() || undefined,
             city: document.getElementById('city').value.trim(),
             state: document.getElementById('state').value.trim().toUpperCase(),
             zip: document.getElementById('zip').value.trim(),
