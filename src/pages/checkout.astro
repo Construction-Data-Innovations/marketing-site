@@ -131,13 +131,40 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
                   Payment Information
                 </h3>
 
+                <!-- Payment method picker — ACH (default) vs Credit card.
+                     Buttons swap which Finix PaymentForm is mounted below. -->
+                <div role="tablist" aria-label="Payment method" class="grid grid-cols-2 gap-2 mb-4">
+                  <button type="button" role="tab" data-method="bank" id="payTab-bank"
+                    aria-selected="true"
+                    class="payment-method-tab group flex items-start gap-3 rounded-lg border-2 border-blue-600 bg-blue-50 px-4 py-3 text-left transition-colors">
+                    <svg class="h-5 w-5 mt-0.5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-sm font-semibold text-gray-900">Bank account</span>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 uppercase tracking-wide">Recommended</span>
+                      </div>
+                      <p class="text-xs text-gray-600 mt-0.5">ACH direct debit — lower processing fees.</p>
+                    </div>
+                  </button>
+                  <button type="button" role="tab" data-method="card" id="payTab-card"
+                    aria-selected="false"
+                    class="payment-method-tab group flex items-start gap-3 rounded-lg border-2 border-gray-200 bg-white px-4 py-3 text-left hover:border-gray-300 transition-colors">
+                    <svg class="h-5 w-5 mt-0.5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                    <div class="flex-1 min-w-0">
+                      <span class="text-sm font-semibold text-gray-900">Credit card</span>
+                      <p class="text-xs text-gray-600 mt-0.5">Visa, Mastercard, Amex, Discover.</p>
+                    </div>
+                  </button>
+                </div>
+
                 <!-- Single mount point — Finix v2 PaymentForm renders all card
-                     fields inside this div as iframes (PCI-safe). -->
+                     or bank fields inside this div as iframes (PCI-safe). The
+                     form is re-instantiated when the user switches methods. -->
                 <div id="finix-form-mount"></div>
 
                 <p class="text-xs text-gray-500 mt-3 flex items-center gap-1">
                   <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                  Powered by Finix — your card data is encrypted in transit and never touches our servers
+                  <span id="paymentSecurityNote">Powered by Finix — your bank details are encrypted in transit and never touch our servers</span>
                 </p>
               </div>
 
@@ -195,7 +222,8 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
 
               <p class="text-xs text-center text-gray-500 leading-relaxed">
                 By subscribing, you agree to our <a href="/terms-of-service" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="/privacy-policy" class="text-blue-600 hover:underline">Privacy Policy</a>.
-                Your card will be charged <span id="finePrintAmount" class="font-semibold text-gray-700">--</span> today, and the same amount on each renewal until you cancel.
+                <span id="finePrintCharge">Your bank account will be debited <span id="finePrintAmount" class="font-semibold text-gray-700">--</span> today, and the same amount on each renewal until you cancel.</span>
+                <span id="achAuthorization">You authorize ConstructWise (Construction Data Innovations) to electronically debit the bank account provided for recurring subscription charges. You may revoke this authorization by canceling your subscription.</span>
                 Cancel anytime from <strong>Account Settings &rsaquo; Subscription</strong> or by emailing <a href="mailto:support@constructiondatalabs.com" class="text-blue-600 hover:underline">support@constructiondatalabs.com</a>.
               </p>
             </form>
@@ -253,7 +281,12 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
     }
 
     // Fine-print amount mirrors the subtotal.
-    setText('finePrintAmount', isAnnual ? `$${plan.annualTotal.toLocaleString()}/yr` : `$${plan.monthly.toLocaleString()}/mo`);
+    const finePrintAmount = isAnnual ? `$${plan.annualTotal.toLocaleString()}/yr` : `$${plan.monthly.toLocaleString()}/mo`;
+    setText('finePrintAmount', finePrintAmount);
+
+    // ---- Payment method state -------------------------------------
+    // Default to ACH (`bank`) — lower fees, our preferred channel.
+    let paymentMethod = 'bank';
 
     // ---- Finix Hosted Fields --------------------------------------
     // v2 API: `Finix.PaymentForm(mountId, environment, applicationId, options)`.
@@ -261,52 +294,139 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
     // `onSubmit` so Finix doesn't auto-render its own submit button — we drive
     // tokenization manually from our existing Subscribe button via
     // `finixForm.submit(callback)` (see custom-submit pattern in Finix docs).
+    //
+    // Both card and bank flows share the same mount point: when the user
+    // toggles between them we tear down the existing instance, clear the
+    // mount, and create a new one with the appropriate `paymentMethods`.
     let finixForm = null;
-    function initFinix() {
+
+    const finixSharedStyles = {
+      default: {
+        // Zero out the form's default 4px padding so the rendered
+        // form is flush with our card's content box.
+        form: { default: { padding: '0', margin: '0' } },
+        input: {
+          default: {
+            color: '#0f172a',
+            fontSize: '14px',
+            fontFamily: 'system-ui, sans-serif',
+            border: '1px solid #d1d5db',
+            borderRadius: '8px',
+            // Use explicit height + zero vertical padding so the browser
+            // vertically centers text in both <input> and <select> via the
+            // element's natural baseline. With `padding: 8px 12px` Finix's
+            // internal `.o select` rule was clipping the bottom of the
+            // text in the ACH `account_type` dropdown.
+            height: '40px',
+            padding: '0 12px',
+            boxSizing: 'border-box',
+          },
+          focused: { border: '1px solid #2563eb' },
+          error: { border: '1px solid #ef4444' },
+        },
+      },
+    };
+
+    function buildFinixOptions(method) {
+      const base = {
+        paymentMethods: [method],
+        showAddress: false,
+        showLabels: true,
+        styles: finixSharedStyles,
+      };
+      // `showAddress: false` hides the broader address block, but the Finix
+      // form still renders `address_country` (and `address_postal_code` for
+      // card AVS) by default. We collect both in the Billing Address section
+      // below and forward them to Finix when we create the Identity, so AVS
+      // still runs — explicit hide here just avoids the duplicate UI (and
+      // dodges a global `.o select` rule from finix.js that breaks the
+      // country dropdown's vertical alignment).
+      if (method === 'card') {
+        base.hideFields = ['address_country', 'address_postal_code'];
+      } else if (method === 'bank') {
+        base.hideFields = ['address_country'];
+      }
+      return base;
+    }
+
+    function mountFinix(method) {
       if (typeof Finix === 'undefined') {
-        setTimeout(initFinix, 100);
+        setTimeout(() => mountFinix(method), 100);
         return;
       }
+      // Clear any prior instance — Finix doesn't expose a destroy() in v2,
+      // so we remove the rendered iframes by emptying the mount.
+      const mount = document.getElementById('finix-form-mount');
+      if (mount) mount.innerHTML = '';
       finixForm = Finix.PaymentForm(
         'finix-form-mount',
         FINIX_ENVIRONMENT,
         FINIX_APPLICATION_ID,
-        {
-          paymentMethods: ['card'],
-          showAddress: false,
-          showLabels: true,
-          // `showAddress: false` hides the broader address block, but the
-          // Finix card form still renders `address_country` and
-          // `address_postal_code` for AVS by default. We collect both in the
-          // Billing Address section below and forward them to Finix when we
-          // create the Identity, so AVS still runs — explicit hide here just
-          // avoids the duplicate UI (and dodges a global `.o select` rule
-          // from finix.js that breaks the country dropdown's vertical
-          // alignment).
-          hideFields: ['address_country', 'address_postal_code'],
-          styles: {
-            default: {
-              // Zero out the form's default 4px padding so the rendered
-              // form is flush with our card's content box.
-              form: { default: { padding: '0', margin: '0' } },
-              input: {
-                default: {
-                  color: '#0f172a',
-                  fontSize: '14px',
-                  fontFamily: 'system-ui, sans-serif',
-                  border: '1px solid #d1d5db',
-                  borderRadius: '8px',
-                  padding: '8px 12px',
-                },
-                focused: { border: '1px solid #2563eb' },
-                error: { border: '1px solid #ef4444' },
-              },
-            },
-          },
-        },
+        buildFinixOptions(method),
       );
     }
-    initFinix();
+    mountFinix(paymentMethod);
+
+    // ---- Payment method tab switcher ------------------------------
+    function applyPaymentMethodUi(method) {
+      paymentMethod = method;
+      const tabBank = document.getElementById('payTab-bank');
+      const tabCard = document.getElementById('payTab-card');
+      const activeClasses = ['border-blue-600', 'bg-blue-50'];
+      const inactiveClasses = ['border-gray-200', 'bg-white', 'hover:border-gray-300'];
+
+      function setTab(tabEl, active) {
+        if (!tabEl) return;
+        tabEl.setAttribute('aria-selected', active ? 'true' : 'false');
+        const icon = tabEl.querySelector('svg');
+        if (active) {
+          tabEl.classList.add(...activeClasses);
+          tabEl.classList.remove(...inactiveClasses);
+          icon?.classList.add('text-blue-600');
+          icon?.classList.remove('text-gray-500');
+        } else {
+          tabEl.classList.remove(...activeClasses);
+          tabEl.classList.add(...inactiveClasses);
+          icon?.classList.remove('text-blue-600');
+          icon?.classList.add('text-gray-500');
+        }
+      }
+      setTab(tabBank, method === 'bank');
+      setTab(tabCard, method === 'card');
+
+      // Security note + fine print copy.
+      setText(
+        'paymentSecurityNote',
+        method === 'card'
+          ? 'Powered by Finix — your card data is encrypted in transit and never touches our servers'
+          : 'Powered by Finix — your bank details are encrypted in transit and never touch our servers',
+      );
+
+      const finePrintChargeEl = document.getElementById('finePrintCharge');
+      if (finePrintChargeEl) {
+        finePrintChargeEl.innerHTML =
+          method === 'card'
+            ? `Your card will be charged <span id="finePrintAmount" class="font-semibold text-gray-700">${finePrintAmount}</span> today, and the same amount on each renewal until you cancel.`
+            : `Your bank account will be debited <span id="finePrintAmount" class="font-semibold text-gray-700">${finePrintAmount}</span> today, and the same amount on each renewal until you cancel.`;
+      }
+
+      // ACH-only authorization disclosure.
+      const achAuthEl = document.getElementById('achAuthorization');
+      if (achAuthEl) achAuthEl.classList.toggle('hidden', method !== 'bank');
+    }
+
+    document.querySelectorAll('.payment-method-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const method = tab.getAttribute('data-method');
+        if (!method || method === paymentMethod) return;
+        applyPaymentMethodUi(method);
+        mountFinix(method);
+      });
+    });
+
+    // Initialise the UI to match the default (`bank`) so the security note
+    // and authorization disclosure are correct on first paint.
+    applyPaymentMethodUi(paymentMethod);
 
     // ---- hCaptcha helper ------------------------------------------
     function getHCaptchaToken() {
@@ -350,7 +470,9 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           throw new Error("Passwords don't match");
         }
 
-        // 1. Tokenize the card via Finix Hosted Fields.
+        // 1. Tokenize the payment method (card or bank account) via Finix
+        //    Hosted Fields. The token shape is the same either way — the
+        //    backend uses `payment_method` to decide how to apply it.
         if (!finixForm) throw new Error('Payment form not ready yet — please wait a moment');
         const tokenResp = await new Promise((resolve, reject) => {
           finixForm.submit((err, response) => {
@@ -359,7 +481,9 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           });
         });
         const finixPaymentToken = tokenResp?.data?.id;
-        if (!finixPaymentToken) throw new Error('Could not tokenize card');
+        if (!finixPaymentToken) {
+          throw new Error(paymentMethod === 'card' ? 'Could not tokenize card' : 'Could not tokenize bank account');
+        }
 
         // 2. hCaptcha.
         const hcaptchaToken = await getHCaptchaToken();
@@ -382,6 +506,7 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
             country: 'US',
           },
           plan: { tier: planKey, cadence: isAnnual ? 'annual' : 'monthly' },
+          payment_method: paymentMethod,
           finix_payment_token: finixPaymentToken,
           hcaptcha_token: hcaptchaToken,
         };
