@@ -5,13 +5,16 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
 
 const FINIX_APPLICATION_ID = import.meta.env.PUBLIC_FINIX_APPLICATION_ID;
 const FINIX_ENVIRONMENT = import.meta.env.PUBLIC_FINIX_ENVIRONMENT || 'sandbox';
+// Finix Merchant ID — used to initialize Finix.Auth fraud detection; its session
+// key is sent to the backend as `fraud_session_id` at checkout.
+const FINIX_MERCHANT_ID = import.meta.env.PUBLIC_FINIX_MERCHANT_ID;
 const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY;
 const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.constructwise.ai';
 ---
 <BaseLayout title="Checkout - ConstructWise">
   <!-- Finix Hosted Fields tokenizer (v2 PaymentForm API) + hCaptcha -->
   <script is:inline src="https://js.finix.com/v/2/finix.js"></script>
-  <script is:inline src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
+  <script is:inline src="https://js.hcaptcha.com/1/api.js?render=explicit&onload=__onHCaptchaLoad" async defer></script>
 
   <div class="min-h-screen bg-gray-50 pt-16">
     <LandingNav />
@@ -102,8 +105,7 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
                     <input type="tel" id="phone" name="phone"
                       autocomplete="tel"
                       inputmode="tel"
-                      pattern="[0-9 +()\-]*"
-                      title="Digits, spaces, and + ( ) - only"
+                      maxlength="14"
                       placeholder="(555) 123-4567"
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
@@ -223,7 +225,7 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
 
               <!-- Submit -->
               <button type="submit" id="submitBtn"
-                class="w-full rounded-lg bg-blue-600 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                class="w-full rounded-lg bg-blue-600 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
                 <span id="submitText">Subscribe</span>
               </button>
@@ -246,7 +248,7 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
 
   <script
     is:inline
-    define:vars={{ FINIX_APPLICATION_ID, FINIX_ENVIRONMENT, HCAPTCHA_SITE_KEY, BACKEND_URL }}
+    define:vars={{ FINIX_APPLICATION_ID, FINIX_ENVIRONMENT, FINIX_MERCHANT_ID, HCAPTCHA_SITE_KEY, BACKEND_URL }}
   >
     // ---------------------------------------------------------------
     // Pricing — MUST match backend/src/config/billingPricing.ts in the
@@ -307,6 +309,9 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
     // toggles between them we tear down the existing instance, clear the
     // mount, and create a new one with the appropriate `paymentMethods`.
     let finixForm = null;
+    // Finix.Auth fraud-detection instance (initialized once in mountFinix). Its
+    // getSessionKey() is read at submit time and sent as `fraud_session_id`.
+    let finixAuth = null;
 
     const finixSharedStyles = {
       default: {
@@ -361,6 +366,17 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
       if (typeof Finix === 'undefined') {
         setTimeout(() => mountFinix(method), 100);
         return;
+      }
+      // Initialize Finix.Auth fraud detection once, before the PaymentForm, so
+      // the session has time to establish before the buyer submits. Skipped if
+      // the merchant id isn't configured (logs a warning rather than breaking
+      // checkout).
+      if (!finixAuth) {
+        if (FINIX_MERCHANT_ID) {
+          finixAuth = Finix.Auth(FINIX_ENVIRONMENT, FINIX_MERCHANT_ID);
+        } else {
+          console.warn('[checkout] PUBLIC_FINIX_MERCHANT_ID not set — fraud_session_id will be omitted');
+        }
       }
       // Clear any prior instance — Finix doesn't expose a destroy() in v2,
       // so we remove the rendered iframes by emptying the mount.
@@ -432,11 +448,48 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
       });
     });
 
+    // ---- Phone number formatter ----------------------------------
+    // Formats a US-style 10-digit number as "(123) 456-7890" while typing.
+    function formatPhone(digits) {
+      const d = digits.slice(0, 10);
+      if (d.length === 0) return '';
+      if (d.length < 4) return '(' + d;
+      if (d.length < 7) return '(' + d.slice(0, 3) + ') ' + d.slice(3);
+      return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
+    }
+    const phoneInput = document.getElementById('phone');
+    phoneInput?.addEventListener('input', (e) => {
+      const target = e.target;
+      const digits = target.value.replace(/\D/g, '');
+      target.value = formatPhone(digits);
+    });
+
     // Initialise the UI to match the default (`bank`) so the security note
     // and authorization disclosure are correct on first paint.
     applyPaymentMethodUi(paymentMethod);
 
     // ---- hCaptcha helper ------------------------------------------
+    // With `?render=explicit`, hCaptcha will not auto-render the widget.
+    // We render it on script load and stash the returned widget ID — that's
+    // what `execute()` expects, NOT the DOM element id.
+    let hcaptchaWidgetId = null;
+    window.__onHCaptchaLoad = function () {
+      if (!HCAPTCHA_SITE_KEY) return;
+      try {
+        hcaptchaWidgetId = hcaptcha.render('hcaptcha-widget', {
+          sitekey: HCAPTCHA_SITE_KEY,
+          size: 'invisible',
+        });
+      } catch (e) {
+        console.error('[checkout] hCaptcha render failed:', e);
+      }
+    };
+    // Cover the race where the script finished loading before this inline
+    // script registered the callback.
+    if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId === null) {
+      window.__onHCaptchaLoad();
+    }
+
     function getHCaptchaToken() {
       return new Promise((resolve, reject) => {
         if (typeof hcaptcha === 'undefined' || !HCAPTCHA_SITE_KEY) {
@@ -444,8 +497,12 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           resolve('dev-no-captcha');
           return;
         }
+        if (hcaptchaWidgetId === null) {
+          reject(new Error('hCaptcha widget not initialised yet'));
+          return;
+        }
         try {
-          hcaptcha.execute('hcaptcha-widget', { async: true })
+          hcaptcha.execute(hcaptchaWidgetId, { async: true })
             .then((r) => resolve(r.response))
             .catch(reject);
         } catch (e) { reject(e); }
@@ -484,11 +541,17 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
         if (!finixForm) throw new Error('Payment form not ready yet — please wait a moment');
         const tokenResp = await new Promise((resolve, reject) => {
           finixForm.submit((err, response) => {
-            if (err) reject(err);
-            else resolve(response);
+            if (err) {
+              console.error('[checkout] Finix tokenization error:', err);
+              const msg = err?.message || err?._embedded?.errors?.[0]?.message || 'Tokenization failed';
+              reject(new Error(msg));
+            } else {
+              resolve(response);
+            }
           });
         });
-        const finixPaymentToken = tokenResp?.data?.id;
+        console.log('[checkout] Finix tokenization response:', tokenResp);
+        const finixPaymentToken = tokenResp?.data?.id || tokenResp?.id;
         if (!finixPaymentToken) {
           throw new Error(paymentMethod === 'card' ? 'Could not tokenize card' : 'Could not tokenize bank account');
         }
@@ -518,15 +581,33 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           payment_method: paymentMethod,
           finix_payment_token: finixPaymentToken,
           hcaptcha_token: hcaptchaToken,
+          // Finix fraud-detection session key (omitted if Finix.Auth didn't init).
+          fraud_session_id: finixAuth ? finixAuth.getSessionKey() : undefined,
         };
 
-        const res = await fetch(`${BACKEND_URL}/api/auth/signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const json = await res.json();
-        if (json.error) throw new Error(json.error.message || 'Signup failed');
+        let res;
+        try {
+          res = await fetch(`${BACKEND_URL}/api/auth/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        } catch (netErr) {
+          console.error('[checkout] Network error contacting signup endpoint:', netErr);
+          throw new Error(`Could not reach signup endpoint (${BACKEND_URL}). Check that the backend is running and BACKEND_URL is correct.`);
+        }
+
+        let json;
+        try {
+          json = await res.json();
+        } catch (parseErr) {
+          console.error('[checkout] Failed to parse signup response as JSON. status:', res.status, parseErr);
+          throw new Error(`Signup endpoint returned a non-JSON response (status ${res.status}).`);
+        }
+        console.log('[checkout] Signup response:', { status: res.status, json });
+        if (!res.ok || json.error) {
+          throw new Error(json?.error?.message || `Signup failed (status ${res.status}).`);
+        }
 
         if (json.data?.magic_link_url) {
           window.location.href = json.data.magic_link_url;
@@ -534,7 +615,16 @@ const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.construct
           window.location.href = 'https://app.constructwise.ai/login?signup=1';
         }
       } catch (err) {
-        showError(err instanceof Error ? err.message : 'Unexpected error');
+        console.error('[checkout] Submit failed:', err);
+        let msg;
+        if (err instanceof Error) {
+          msg = err.message;
+        } else if (typeof err === 'string') {
+          msg = err;
+        } else {
+          try { msg = JSON.stringify(err); } catch { msg = String(err); }
+        }
+        showError(msg || 'Unexpected error');
         submitBtn?.removeAttribute('disabled');
       }
     });
