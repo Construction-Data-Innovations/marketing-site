@@ -2,8 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
+
+const FINIX_APPLICATION_ID = import.meta.env.PUBLIC_FINIX_APPLICATION_ID;
+const FINIX_ENVIRONMENT = import.meta.env.PUBLIC_FINIX_ENVIRONMENT || 'sandbox';
+// Finix Merchant ID — used to initialize Finix.Auth fraud detection; its session
+// key is sent to the backend as `fraud_session_id` at checkout.
+const FINIX_MERCHANT_ID = import.meta.env.PUBLIC_FINIX_MERCHANT_ID;
+const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY;
+const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://api.constructwise.ai';
 ---
 <BaseLayout title="Checkout - ConstructWise">
+  <!-- Finix Hosted Fields tokenizer (v2 PaymentForm API) + hCaptcha -->
+  <script is:inline src="https://js.finix.com/v/2/finix.js"></script>
+  <script is:inline src="https://js.hcaptcha.com/1/api.js?render=explicit&onload=__onHCaptchaLoad" async defer></script>
+
   <div class="min-h-screen bg-gray-50 pt-16">
     <LandingNav />
 
@@ -16,47 +28,35 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm sticky top-24">
               <h2 class="text-lg font-bold text-gray-900 mb-4">Order Summary</h2>
 
-              <!-- 7-day trial banner -->
-              <div class="mb-5 p-3 rounded-lg bg-blue-50 border border-blue-100">
-                <div class="flex items-center gap-2 mb-1">
-                  <svg class="h-4 w-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <p class="text-sm font-semibold text-blue-900">7-day free trial</p>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p id="summaryPlanName" class="font-semibold text-gray-900">--</p>
+                    <p id="summaryCadence" class="text-sm text-gray-500">--</p>
+                  </div>
+                  <span id="summaryTokens" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">--</span>
                 </div>
-                <p class="text-xs text-blue-800 leading-relaxed">
-                  No charge today. Your card will be charged on <strong id="trialEndDate">--</strong> unless you cancel before then.
-                </p>
-              </div>
-
-              <div id="planSummary" class="space-y-4">
-                <!-- Populated by JS -->
+                <div class="flex justify-between text-sm text-gray-500">
+                  <span>1 seat to start</span>
+                  <span id="summaryPerSeat">--</span>
+                </div>
               </div>
 
               <div class="border-t border-gray-100 mt-6 pt-4 space-y-2">
                 <div class="flex justify-between text-sm text-gray-600">
-                  <span>Subtotal after trial</span>
+                  <span>Subtotal</span>
                   <span id="subtotal" class="font-medium">--</span>
-                </div>
-                <div class="flex justify-between text-sm text-gray-600">
-                  <span>Tax</span>
-                  <span class="text-gray-400">Calculated at payment</span>
                 </div>
                 <div class="border-t border-gray-100 pt-3 flex justify-between text-base font-bold text-gray-900">
                   <span>Due today</span>
-                  <span class="text-green-600">$0.00</span>
-                </div>
-                <div class="flex justify-between text-xs text-gray-500 pt-1">
-                  <span>Charged after trial</span>
-                  <span id="total">--</span>
+                  <span id="total" class="text-gray-900">--</span>
                 </div>
               </div>
 
-              <!-- How the trial works -->
-              <div class="mt-5 pt-5 border-t border-gray-100">
-                <p class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">How to cancel</p>
-                <p class="text-xs text-gray-600 leading-relaxed">
-                  Cancel anytime before your trial ends from <strong>Account Settings &rsaquo; Subscription</strong>, or email <a href="mailto:support@constructiondatalabs.com" class="text-blue-600 hover:underline">support@constructiondatalabs.com</a> and we'll handle it. You won't be charged.
-                </p>
-              </div>
+              <p class="text-xs text-gray-500 mt-4">
+                Add more seats anytime from your account settings — you'll be charged a
+                prorated amount per added seat.
+              </p>
 
             </div>
           </div>
@@ -103,19 +103,25 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
                   <div>
                     <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                     <input type="tel" id="phone" name="phone"
+                      autocomplete="tel"
+                      inputmode="tel"
+                      maxlength="14"
+                      placeholder="(555) 123-4567"
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
+                  <div></div>
                   <div>
-                    <label for="users" class="block text-sm font-medium text-gray-700 mb-1">Number of Users</label>
-                    <select id="users" name="users"
-                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors bg-white">
-                      <option value="1">1 user</option>
-                      <option value="2">2 users</option>
-                      <option value="3">3 users</option>
-                      <option value="5">5 users</option>
-                      <option value="10">10 users</option>
-                      <option value="15">15 users</option>
-                    </select>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" required minlength="8" maxlength="72"
+                      autocomplete="new-password"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                    <p class="mt-1 text-xs text-gray-500">8 characters or more</p>
+                  </div>
+                  <div>
+                    <label for="passwordConfirm" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                    <input type="password" id="passwordConfirm" name="passwordConfirm" required
+                      autocomplete="new-password"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
                 </div>
               </div>
@@ -127,18 +133,40 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
                   Payment Information
                 </h3>
 
-                <!-- Payment processor mount point -->
-                <div id="paymentElement" class="min-h-[200px] rounded-lg border border-dashed border-gray-300 flex items-center justify-center bg-gray-50">
-                  <div class="text-center p-8">
-                    <svg class="h-10 w-10 text-gray-300 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
-                    <p class="text-sm text-gray-500 font-medium">Payment form will load here</p>
-                    <p class="text-xs text-gray-400 mt-1">Powered by Stripe or Finix &mdash; connected at integration time</p>
-                  </div>
+                <!-- Payment method picker — ACH (default) vs Credit card.
+                     Buttons swap which Finix PaymentForm is mounted below. -->
+                <div role="tablist" aria-label="Payment method" class="grid grid-cols-2 gap-2 mb-4">
+                  <button type="button" role="tab" data-method="bank" id="payTab-bank"
+                    aria-selected="true"
+                    class="payment-method-tab group flex items-start gap-3 rounded-lg border-2 border-blue-600 bg-blue-50 px-4 py-3 text-left transition-colors">
+                    <svg class="h-5 w-5 mt-0.5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-sm font-semibold text-gray-900">Bank account</span>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 uppercase tracking-wide">Recommended</span>
+                      </div>
+                      <p class="text-xs text-gray-600 mt-0.5">ACH direct debit — lower processing fees.</p>
+                    </div>
+                  </button>
+                  <button type="button" role="tab" data-method="card" id="payTab-card"
+                    aria-selected="false"
+                    class="payment-method-tab group flex items-start gap-3 rounded-lg border-2 border-gray-200 bg-white px-4 py-3 text-left hover:border-gray-300 transition-colors">
+                    <svg class="h-5 w-5 mt-0.5 text-gray-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                    <div class="flex-1 min-w-0">
+                      <span class="text-sm font-semibold text-gray-900">Credit card</span>
+                      <p class="text-xs text-gray-600 mt-0.5">Visa, Mastercard, Amex, Discover.</p>
+                    </div>
+                  </button>
                 </div>
 
-                <p class="text-xs text-gray-400 mt-3 flex items-center gap-1">
+                <!-- Single mount point — Finix v2 PaymentForm renders all card
+                     or bank fields inside this div as iframes (PCI-safe). The
+                     form is re-instantiated when the user switches methods. -->
+                <div id="finix-form-mount"></div>
+
+                <p class="text-xs text-gray-500 mt-3 flex items-center gap-1">
                   <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                  Your payment information is encrypted and secure
+                  <span id="paymentSecurityNote">Powered by Finix — your bank details are encrypted in transit and never touch our servers</span>
                 </p>
               </div>
 
@@ -154,6 +182,14 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
                     <input type="text" id="address" name="address" required
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
+                  <div class="sm:col-span-2">
+                    <label for="address2" class="block text-sm font-medium text-gray-700 mb-1">
+                      Apt, Suite, Unit, etc.
+                      <span class="text-gray-400 font-normal">(optional)</span>
+                    </label>
+                    <input type="text" id="address2" name="address2"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                  </div>
                   <div>
                     <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
                     <input type="text" id="city" name="city" required
@@ -161,35 +197,43 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
                   </div>
                   <div>
                     <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State</label>
-                    <input type="text" id="state" name="state" required
-                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
+                    <input type="text" id="state" name="state" required maxlength="2"
+                      placeholder="NY"
+                      class="w-full uppercase rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
                   <div>
                     <label for="zip" class="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
-                    <input type="text" id="zip" name="zip" required
+                    <input type="text" id="zip" name="zip" required pattern="[0-9]{5}"
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors" />
                   </div>
                   <div>
                     <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
                     <select id="country" name="country"
-                      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors bg-white">
+                      class="appearance-none w-full rounded-lg border border-gray-300 pl-4 pr-10 py-2.5 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors bg-white bg-no-repeat bg-[right_0.75rem_center] bg-[length:1rem_1rem]"
+                      style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 20 20%22 stroke=%22%236b7280%22 stroke-width=%221.5%22><path stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M6 8l4 4 4-4%22/></svg>');">
                       <option value="US">United States</option>
-                      <option value="CA">Canada</option>
                     </select>
                   </div>
                 </div>
               </div>
 
+              <!-- hCaptcha widget (invisible) -->
+              <div id="hcaptcha-widget" class="h-captcha" data-sitekey={HCAPTCHA_SITE_KEY} data-size="invisible"></div>
+
+              <!-- Inline error display -->
+              <div id="formError" class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"></div>
+
               <!-- Submit -->
               <button type="submit" id="submitBtn"
-                class="w-full rounded-lg bg-blue-600 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                class="w-full rounded-lg bg-blue-600 py-4 text-base font-semibold text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                <span id="submitText">Start 7-day free trial</span>
+                <span id="submitText">Subscribe</span>
               </button>
 
               <p class="text-xs text-center text-gray-500 leading-relaxed">
-                By starting your free trial, you agree to our <a href="/terms-of-service" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="/privacy-policy" class="text-blue-600 hover:underline">Privacy Policy</a>.
-                Your card will be charged <span id="finePrintAmount" class="font-semibold text-gray-700">--</span> on <span id="finePrintDate" class="font-semibold text-gray-700">--</span> when your 7-day free trial ends, unless you cancel beforehand.
+                By subscribing, you agree to our <a href="/terms-of-service" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="/privacy-policy" class="text-blue-600 hover:underline">Privacy Policy</a>.
+                <span id="finePrintCharge">Your bank account will be debited <span id="finePrintAmount" class="font-semibold text-gray-700">--</span> today, and the same amount on each renewal until you cancel.</span>
+                <span id="achAuthorization">You authorize ConstructWise (Construction Data Innovations) to electronically debit the bank account provided for recurring subscription charges. You may revoke this authorization by canceling your subscription.</span>
                 Cancel anytime from <strong>Account Settings &rsaquo; Subscription</strong> or by emailing <a href="mailto:support@constructiondatalabs.com" class="text-blue-600 hover:underline">support@constructiondatalabs.com</a>.
               </p>
             </form>
@@ -202,109 +246,387 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
     <LandingFooter />
   </div>
 
-  <script>
+  <script
+    is:inline
+    define:vars={{ FINIX_APPLICATION_ID, FINIX_ENVIRONMENT, FINIX_MERCHANT_ID, HCAPTCHA_SITE_KEY, BACKEND_URL }}
+  >
+    // ---------------------------------------------------------------
+    // Pricing — MUST match backend/src/config/billingPricing.ts in the
+    // constructwise-ai repo. Any change here also belongs there.
+    // ---------------------------------------------------------------
     const plans = {
-      foundation: {
-        name: 'Foundation',
-        monthly: 349,
-        annual: 300,
-        annualTotal: 3600,
-        tokens: '1,000,000',
-        maxUsers: 3,
-      },
-      podium: {
-        name: 'Podium',
-        monthly: 649,
-        annual: 600,
-        annualTotal: 7200,
-        tokens: '3,000,000',
-        maxUsers: 15,
-      },
+      foundation: { name: 'Foundation', monthly: 349, annual: 300, annualTotal: 3600, tokens: '1,000,000' },
+      podium:     { name: 'Podium',     monthly: 649, annual: 600, annualTotal: 7200, tokens: '3,000,000' },
     };
 
     const params = new URLSearchParams(window.location.search);
     const planKey = params.get('plan') || 'foundation';
     const billing = params.get('billing') || 'annual';
     const plan = plans[planKey] || plans.foundation;
-
     const isAnnual = billing === 'annual';
     const pricePerUser = isAnnual ? plan.annual : plan.monthly;
-    const billingLabel = isAnnual ? 'yr' : 'mo';
 
-    // Populate order summary
-    const summaryEl = document.getElementById('planSummary');
-    if (summaryEl) {
-      summaryEl.innerHTML = `
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="font-semibold text-gray-900">${plan.name} Plan</p>
-            <p class="text-sm text-gray-500">${isAnnual ? 'Annual' : 'Monthly'} billing</p>
-          </div>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
-            ${plan.tokens} tokens/mo
-          </span>
-        </div>
-        <div class="flex justify-between text-sm">
-          <span class="text-gray-600">$${pricePerUser}/user/${isAnnual ? 'mo' : 'mo'}</span>
-          <span class="text-gray-600">&times; <span id="userCountDisplay">1</span> user(s)</span>
-        </div>
-      `;
+    // ---- Order summary --------------------------------------------
+    // Use textContent (not innerHTML) — these values come from a static plans
+    // map but textContent is XSS-safe by construction.
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+    setText('summaryPlanName', `${plan.name} Plan`);
+    setText('summaryCadence', `${isAnnual ? 'Annual' : 'Monthly'} billing`);
+    setText('summaryTokens', `${plan.tokens} tokens/mo`);
+    setText('summaryPerSeat', `$${pricePerUser}/${isAnnual ? 'mo (billed annually)' : 'mo'}`);
+
+    if (isAnnual) {
+      const yr = plan.annualTotal;
+      setText('subtotal', `$${yr.toLocaleString()}/yr`);
+      setText('total', `$${yr.toLocaleString()}`);
+      setText('submitText', `Subscribe — $${yr.toLocaleString()}/yr`);
+    } else {
+      const m = plan.monthly;
+      setText('subtotal', `$${m.toLocaleString()}/mo`);
+      setText('total', `$${m.toLocaleString()}`);
+      setText('submitText', `Subscribe — $${m.toLocaleString()}/mo`);
     }
 
-    // Compute trial end date (7 days from today)
-    const trialEnd = new Date();
-    trialEnd.setDate(trialEnd.getDate() + 7);
-    const trialEndFormatted = trialEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    const trialEndDateEl = document.getElementById('trialEndDate');
-    const finePrintDateEl = document.getElementById('finePrintDate');
-    if (trialEndDateEl) trialEndDateEl.textContent = trialEndFormatted;
-    if (finePrintDateEl) finePrintDateEl.textContent = trialEndFormatted;
+    // Fine-print amount mirrors the subtotal.
+    const finePrintAmount = isAnnual ? `$${plan.annualTotal.toLocaleString()}/yr` : `$${plan.monthly.toLocaleString()}/mo`;
+    setText('finePrintAmount', finePrintAmount);
 
-    // Update totals based on user count
-    const usersSelect = document.getElementById('users');
-    const subtotalEl = document.getElementById('subtotal');
-    const totalEl = document.getElementById('total');
-    const userCountDisplayEl = document.getElementById('userCountDisplay');
-    const finePrintAmountEl = document.getElementById('finePrintAmount');
+    // ---- Payment method state -------------------------------------
+    // Default to ACH (`bank`) — lower fees, our preferred channel.
+    let paymentMethod = 'bank';
 
-    function updateTotals() {
-      const userCount = parseInt(usersSelect?.value || '1');
-      if (userCountDisplayEl) userCountDisplayEl.textContent = userCount.toString();
+    // ---- Finix Hosted Fields --------------------------------------
+    // v2 API: `Finix.PaymentForm(mountId, environment, applicationId, options)`.
+    // The form is rendered as iframes inside `#finix-form-mount`. We pass NO
+    // `onSubmit` so Finix doesn't auto-render its own submit button — we drive
+    // tokenization manually from our existing Subscribe button via
+    // `finixForm.submit(callback)` (see custom-submit pattern in Finix docs).
+    //
+    // Both card and bank flows share the same mount point: when the user
+    // toggles between them we tear down the existing instance, clear the
+    // mount, and create a new one with the appropriate `paymentMethods`.
+    let finixForm = null;
+    // Finix.Auth fraud-detection instance (initialized once in mountFinix). Its
+    // getSessionKey() is read at submit time and sent as `fraud_session_id`.
+    let finixAuth = null;
 
-      if (isAnnual) {
-        const annualAmount = pricePerUser * 12 * userCount;
-        const formatted = `$${annualAmount.toLocaleString()}/yr`;
-        if (subtotalEl) subtotalEl.textContent = formatted;
-        if (totalEl) totalEl.textContent = formatted;
-        if (finePrintAmountEl) finePrintAmountEl.textContent = formatted;
-      } else {
-        const monthlyAmount = pricePerUser * userCount;
-        const formatted = `$${monthlyAmount.toLocaleString()}/mo`;
-        if (subtotalEl) subtotalEl.textContent = formatted;
-        if (totalEl) totalEl.textContent = formatted;
-        if (finePrintAmountEl) finePrintAmountEl.textContent = formatted;
+    const finixSharedStyles = {
+      default: {
+        // Zero out the form's default 4px padding so the rendered
+        // form is flush with our card's content box.
+        form: { default: { padding: '0', margin: '0' } },
+        input: {
+          default: {
+            color: '#0f172a',
+            fontSize: '14px',
+            fontFamily: 'system-ui, sans-serif',
+            border: '1px solid #d1d5db',
+            borderRadius: '8px',
+            // Use explicit height + zero vertical padding so the browser
+            // vertically centers text in both <input> and <select> via the
+            // element's natural baseline. With `padding: 8px 12px` Finix's
+            // internal `.o select` rule was clipping the bottom of the
+            // text in the ACH `account_type` dropdown.
+            height: '40px',
+            padding: '0 12px',
+            boxSizing: 'border-box',
+          },
+          focused: { border: '1px solid #2563eb' },
+          error: { border: '1px solid #ef4444' },
+        },
+      },
+    };
+
+    function buildFinixOptions(method) {
+      const base = {
+        paymentMethods: [method],
+        showAddress: false,
+        showLabels: true,
+        styles: finixSharedStyles,
+      };
+      // `showAddress: false` hides the broader address block, but the Finix
+      // form still renders `address_country` (and `address_postal_code` for
+      // card AVS) by default. We collect both in the Billing Address section
+      // below and forward them to Finix when we create the Identity, so AVS
+      // still runs — explicit hide here just avoids the duplicate UI (and
+      // dodges a global `.o select` rule from finix.js that breaks the
+      // country dropdown's vertical alignment).
+      if (method === 'card') {
+        base.hideFields = ['address_country', 'address_postal_code'];
+      } else if (method === 'bank') {
+        base.hideFields = ['address_country'];
       }
+      return base;
     }
 
-    // Limit user select options based on plan
-    if (usersSelect) {
-      Array.from(usersSelect.options).forEach(opt => {
-        if (parseInt(opt.value) > plan.maxUsers) {
-          opt.disabled = true;
-          opt.textContent += ' (upgrade required)';
+    function mountFinix(method) {
+      if (typeof Finix === 'undefined') {
+        setTimeout(() => mountFinix(method), 100);
+        return;
+      }
+      // Initialize Finix.Auth fraud detection once, before the PaymentForm, so
+      // the session has time to establish before the buyer submits. Skipped if
+      // the merchant id isn't configured (logs a warning rather than breaking
+      // checkout).
+      if (!finixAuth) {
+        if (FINIX_MERCHANT_ID) {
+          finixAuth = Finix.Auth(FINIX_ENVIRONMENT, FINIX_MERCHANT_ID);
+        } else {
+          console.warn('[checkout] PUBLIC_FINIX_MERCHANT_ID not set — fraud_session_id will be omitted');
         }
+      }
+      // Clear any prior instance — Finix doesn't expose a destroy() in v2,
+      // so we remove the rendered iframes by emptying the mount.
+      const mount = document.getElementById('finix-form-mount');
+      if (mount) mount.innerHTML = '';
+      finixForm = Finix.PaymentForm(
+        'finix-form-mount',
+        FINIX_ENVIRONMENT,
+        FINIX_APPLICATION_ID,
+        buildFinixOptions(method),
+      );
+    }
+    mountFinix(paymentMethod);
+
+    // ---- Payment method tab switcher ------------------------------
+    function applyPaymentMethodUi(method) {
+      paymentMethod = method;
+      const tabBank = document.getElementById('payTab-bank');
+      const tabCard = document.getElementById('payTab-card');
+      const activeClasses = ['border-blue-600', 'bg-blue-50'];
+      const inactiveClasses = ['border-gray-200', 'bg-white', 'hover:border-gray-300'];
+
+      function setTab(tabEl, active) {
+        if (!tabEl) return;
+        tabEl.setAttribute('aria-selected', active ? 'true' : 'false');
+        const icon = tabEl.querySelector('svg');
+        if (active) {
+          tabEl.classList.add(...activeClasses);
+          tabEl.classList.remove(...inactiveClasses);
+          icon?.classList.add('text-blue-600');
+          icon?.classList.remove('text-gray-500');
+        } else {
+          tabEl.classList.remove(...activeClasses);
+          tabEl.classList.add(...inactiveClasses);
+          icon?.classList.remove('text-blue-600');
+          icon?.classList.add('text-gray-500');
+        }
+      }
+      setTab(tabBank, method === 'bank');
+      setTab(tabCard, method === 'card');
+
+      // Security note + fine print copy.
+      setText(
+        'paymentSecurityNote',
+        method === 'card'
+          ? 'Powered by Finix — your card data is encrypted in transit and never touches our servers'
+          : 'Powered by Finix — your bank details are encrypted in transit and never touch our servers',
+      );
+
+      const finePrintChargeEl = document.getElementById('finePrintCharge');
+      if (finePrintChargeEl) {
+        finePrintChargeEl.innerHTML =
+          method === 'card'
+            ? `Your card will be charged <span id="finePrintAmount" class="font-semibold text-gray-700">${finePrintAmount}</span> today, and the same amount on each renewal until you cancel.`
+            : `Your bank account will be debited <span id="finePrintAmount" class="font-semibold text-gray-700">${finePrintAmount}</span> today, and the same amount on each renewal until you cancel.`;
+      }
+
+      // ACH-only authorization disclosure.
+      const achAuthEl = document.getElementById('achAuthorization');
+      if (achAuthEl) achAuthEl.classList.toggle('hidden', method !== 'bank');
+    }
+
+    document.querySelectorAll('.payment-method-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const method = tab.getAttribute('data-method');
+        if (!method || method === paymentMethod) return;
+        applyPaymentMethodUi(method);
+        mountFinix(method);
+      });
+    });
+
+    // ---- Phone number formatter ----------------------------------
+    // Formats a US-style 10-digit number as "(123) 456-7890" while typing.
+    function formatPhone(digits) {
+      const d = digits.slice(0, 10);
+      if (d.length === 0) return '';
+      if (d.length < 4) return '(' + d;
+      if (d.length < 7) return '(' + d.slice(0, 3) + ') ' + d.slice(3);
+      return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
+    }
+    const phoneInput = document.getElementById('phone');
+    phoneInput?.addEventListener('input', (e) => {
+      const target = e.target;
+      const digits = target.value.replace(/\D/g, '');
+      target.value = formatPhone(digits);
+    });
+
+    // Initialise the UI to match the default (`bank`) so the security note
+    // and authorization disclosure are correct on first paint.
+    applyPaymentMethodUi(paymentMethod);
+
+    // ---- hCaptcha helper ------------------------------------------
+    // With `?render=explicit`, hCaptcha will not auto-render the widget.
+    // We render it on script load and stash the returned widget ID — that's
+    // what `execute()` expects, NOT the DOM element id.
+    let hcaptchaWidgetId = null;
+    window.__onHCaptchaLoad = function () {
+      if (!HCAPTCHA_SITE_KEY) return;
+      try {
+        hcaptchaWidgetId = hcaptcha.render('hcaptcha-widget', {
+          sitekey: HCAPTCHA_SITE_KEY,
+          size: 'invisible',
+        });
+      } catch (e) {
+        console.error('[checkout] hCaptcha render failed:', e);
+      }
+    };
+    // Cover the race where the script finished loading before this inline
+    // script registered the callback.
+    if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId === null) {
+      window.__onHCaptchaLoad();
+    }
+
+    function getHCaptchaToken() {
+      return new Promise((resolve, reject) => {
+        if (typeof hcaptcha === 'undefined' || !HCAPTCHA_SITE_KEY) {
+          // No captcha configured — backend's verifyHCaptcha returns true in dev.
+          resolve('dev-no-captcha');
+          return;
+        }
+        if (hcaptchaWidgetId === null) {
+          reject(new Error('hCaptcha widget not initialised yet'));
+          return;
+        }
+        try {
+          hcaptcha.execute(hcaptchaWidgetId, { async: true })
+            .then((r) => resolve(r.response))
+            .catch(reject);
+        } catch (e) { reject(e); }
       });
     }
 
-    usersSelect?.addEventListener('change', updateTotals);
-    updateTotals();
-
-    // Form submission placeholder
+    // ---- Form submit ----------------------------------------------
     const form = document.getElementById('checkoutForm');
-    form?.addEventListener('submit', (e) => {
+    const submitBtn = document.getElementById('submitBtn');
+    const errorEl = document.getElementById('formError');
+
+    function showError(message) {
+      if (!errorEl) return;
+      errorEl.textContent = message;
+      errorEl.classList.remove('hidden');
+    }
+    function hideError() {
+      errorEl?.classList.add('hidden');
+    }
+
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // TODO: integrate Stripe or Finix payment processing here
-      alert('Payment integration coming soon! Your selection: ' + plan.name + ' (' + billing + ')');
+      hideError();
+      submitBtn?.setAttribute('disabled', 'true');
+
+      try {
+        const passwordEl = document.getElementById('password');
+        const confirmEl = document.getElementById('passwordConfirm');
+        if (passwordEl?.value !== confirmEl?.value) {
+          throw new Error("Passwords don't match");
+        }
+
+        // 1. Tokenize the payment method (card or bank account) via Finix
+        //    Hosted Fields. The token shape is the same either way — the
+        //    backend uses `payment_method` to decide how to apply it.
+        if (!finixForm) throw new Error('Payment form not ready yet — please wait a moment');
+        const tokenResp = await new Promise((resolve, reject) => {
+          finixForm.submit((err, response) => {
+            if (err) {
+              console.error('[checkout] Finix tokenization error:', err);
+              const msg = err?.message || err?._embedded?.errors?.[0]?.message || 'Tokenization failed';
+              reject(new Error(msg));
+            } else {
+              resolve(response);
+            }
+          });
+        });
+        console.log('[checkout] Finix tokenization response:', tokenResp);
+        const finixPaymentToken = tokenResp?.data?.id || tokenResp?.id;
+        if (!finixPaymentToken) {
+          throw new Error(paymentMethod === 'card' ? 'Could not tokenize card' : 'Could not tokenize bank account');
+        }
+
+        // 2. hCaptcha.
+        const hcaptchaToken = await getHCaptchaToken();
+
+        // 3. POST to backend signup endpoint.
+        const payload = {
+          account: {
+            first_name: document.getElementById('firstName').value.trim(),
+            last_name: document.getElementById('lastName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            password: passwordEl.value,
+            phone: document.getElementById('phone').value.trim() || undefined,
+            company_name: document.getElementById('company').value.trim(),
+          },
+          address: {
+            line1: document.getElementById('address').value.trim(),
+            line2: document.getElementById('address2').value.trim() || undefined,
+            city: document.getElementById('city').value.trim(),
+            state: document.getElementById('state').value.trim().toUpperCase(),
+            zip: document.getElementById('zip').value.trim(),
+            country: 'US',
+          },
+          plan: { tier: planKey, cadence: isAnnual ? 'annual' : 'monthly' },
+          payment_method: paymentMethod,
+          finix_payment_token: finixPaymentToken,
+          hcaptcha_token: hcaptchaToken,
+          // Finix fraud-detection session key (omitted if Finix.Auth didn't init).
+          fraud_session_id: finixAuth ? finixAuth.getSessionKey() : undefined,
+        };
+
+        let res;
+        try {
+          res = await fetch(`${BACKEND_URL}/api/auth/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        } catch (netErr) {
+          console.error('[checkout] Network error contacting signup endpoint:', netErr);
+          throw new Error(`Could not reach signup endpoint (${BACKEND_URL}). Check that the backend is running and BACKEND_URL is correct.`);
+        }
+
+        let json;
+        try {
+          json = await res.json();
+        } catch (parseErr) {
+          console.error('[checkout] Failed to parse signup response as JSON. status:', res.status, parseErr);
+          throw new Error(`Signup endpoint returned a non-JSON response (status ${res.status}).`);
+        }
+        console.log('[checkout] Signup response:', { status: res.status, json });
+        if (!res.ok || json.error) {
+          throw new Error(json?.error?.message || `Signup failed (status ${res.status}).`);
+        }
+
+        if (json.data?.magic_link_url) {
+          window.location.href = json.data.magic_link_url;
+        } else {
+          window.location.href = 'https://app.constructwise.ai/login?signup=1';
+        }
+      } catch (err) {
+        console.error('[checkout] Submit failed:', err);
+        let msg;
+        if (err instanceof Error) {
+          msg = err.message;
+        } else if (typeof err === 'string') {
+          msg = err;
+        } else {
+          try { msg = JSON.stringify(err); } catch { msg = String(err); }
+        }
+        showError(msg || 'Unexpected error');
+        submitBtn?.removeAttribute('disabled');
+      }
     });
   </script>
 </BaseLayout>
