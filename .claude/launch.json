@@ -4,14 +4,16 @@
     {
       "name": "dev",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "source ~/.nvm/nvm.sh && nvm use 22 && npm run dev"],
-      "port": 4000
+      "runtimeArgs": ["-c", "source ~/.nvm/nvm.sh && nvm use 22 && ./node_modules/.bin/astro dev"],
+      "port": 4000,
+      "autoPort": true
     },
     {
       "name": "preview",
-      "runtimeExecutable": "/Users/jchavez/.nvm/versions/node/v22.22.2/bin/npm",
-      "runtimeArgs": ["run", "preview", "--", "--port", "4001"],
-      "port": 4001
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "source ~/.nvm/nvm.sh && nvm use 22 && ./node_modules/.bin/astro preview"],
+      "port": 4001,
+      "autoPort": true
     }
   ]
 }
