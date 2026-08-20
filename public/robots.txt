@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+
+Sitemap: https://www.constructwise.ai/sitemap-index.xml
