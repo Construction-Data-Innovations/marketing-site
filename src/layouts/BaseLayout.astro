@@ -7,6 +7,10 @@ interface Props {
 }
 
 const { title = 'ConstructWise', description = 'AI-powered construction planning and cost estimation platform.' } = Astro.props;
+
+const path = Astro.url.pathname;
+const canonicalPath = path === '/' || path.endsWith('/') ? path : `${path}/`;
+const canonicalURL = new URL(canonicalPath, Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -23,6 +27,7 @@ const { title = 'ConstructWise', description = 'AI-powered construction planning
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
