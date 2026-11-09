@@ -1,0 +1,221 @@
+/* ConstructWise Blog – typography & layout tokens
+   Imported by the blog [slug] page only. Tailwind handles the rest. */
+
+:root {
+  --cw-ink: #0f1b2d;
+  --cw-text: #334155;
+  --cw-muted: #64748b;
+  --cw-line: #e2e8f0;
+  --cw-wash: #f8fafc;
+  --cw-blue: #2563eb;
+  --cw-blue-ink: #1e40af;
+  --cw-blue-wash: #eff6ff;
+  --cw-green: #16a34a;
+  --cw-green-wash: #f0fdf4;
+  --cw-amber: #b45309;
+  --cw-amber-wash: #fffbeb;
+  --cw-radius: 16px;
+  --cw-shadow: 0 8px 32px rgba(15, 27, 45, 0.06);
+}
+
+/* ── Article body prose ───────────────────────────────────────── */
+.cw-article {
+  color: var(--cw-text);
+  font-size: 17px;
+  line-height: 1.72;
+}
+.cw-article > * + * { margin-top: 1.25em; }
+.cw-article p { margin: 0 0 1.25em; }
+.cw-article h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  color: var(--cw-ink);
+  margin: 2.4em 0 .7em;
+  scroll-margin-top: 90px;
+  text-wrap: balance;
+}
+.cw-article h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cw-ink);
+  margin: 1.8em 0 .5em;
+}
+.cw-article ul, .cw-article ol {
+  margin: 0 0 1.4em;
+  padding-left: 1.4em;
+}
+.cw-article li { margin: .4em 0; }
+.cw-article strong { color: var(--cw-ink); font-weight: 600; }
+.cw-article a { color: var(--cw-blue); text-underline-offset: 3px; }
+.cw-article blockquote {
+  margin: 2em 0;
+  padding: 0 0 0 20px;
+  border-left: 3px solid var(--cw-blue);
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--cw-ink);
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+.cw-article pre {
+  background: var(--cw-wash);
+  border: 1px solid var(--cw-line);
+  border-radius: 10px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-size: .9rem;
+  line-height: 1.6;
+  margin: 1.6em 0;
+}
+.cw-article code {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .88em;
+  background: var(--cw-wash);
+  border: 1px solid var(--cw-line);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+.cw-article pre code { background: none; border: none; padding: 0; }
+.cw-article hr {
+  border: none;
+  border-top: 1px solid var(--cw-line);
+  margin: 2.5em 0;
+}
+.cw-article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .93rem;
+  margin: 1.8em 0;
+}
+.cw-article table th {
+  background: var(--cw-wash);
+  font-weight: 600;
+  color: var(--cw-ink);
+  text-align: left;
+  padding: 10px 14px;
+  border: 1px solid var(--cw-line);
+}
+.cw-article table td {
+  padding: 10px 14px;
+  border: 1px solid var(--cw-line);
+  vertical-align: top;
+}
+
+/* ── Category badge ────────────────────────────────────────────── */
+.cw-lane {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.cw-lane--inside-track    { background: var(--cw-blue-wash); color: var(--cw-blue-ink); }
+.cw-lane--product-updates { background: #f3e8ff; color: #6b21a8; }
+.cw-lane--industry-insights { background: var(--cw-green-wash); color: #166534; }
+.cw-lane--co-authored     { background: var(--cw-amber-wash); color: var(--cw-amber); }
+
+/* ── Sidebar CTA card ──────────────────────────────────────────── */
+.cw-session {
+  background: var(--cw-ink);
+  color: #e2e8f0;
+  border-radius: var(--cw-radius);
+  padding: 22px;
+}
+.cw-session-label {
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 10px;
+}
+.cw-session p { font-size: .95rem; line-height: 1.55; margin: 0 0 16px; }
+.cw-session .cw-btn { width: 100%; text-align: center; }
+
+/* ── Layout: editorial (article + sticky sidebar) ─────────────── */
+.cw-layout-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .cw-layout-editorial { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .cw-layout-editorial .cw-rail { order: -1; }
+}
+.cw-rail-inner { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 20px; }
+@media (max-width: 980px) { .cw-rail-inner { position: static; } }
+
+/* ── TOC ───────────────────────────────────────────────────────── */
+.cw-toc { border-left: 2px solid var(--cw-line); padding-left: 16px; }
+.cw-toc-label {
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cw-muted);
+  margin-bottom: 10px;
+}
+.cw-toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cw-toc a { color: #475569; text-decoration: none; font-size: .9rem; line-height: 1.4; }
+.cw-toc a:hover { color: var(--cw-blue); }
+
+/* ── Layout: spotlight (full-width, large hero, no sidebar) ───── */
+.cw-layout-spotlight { max-width: 72ch; margin: 0 auto; }
+
+/* ── Layout: minimal (narrow centered, no sidebar, serene) ───── */
+.cw-layout-minimal { max-width: 60ch; margin: 0 auto; }
+
+/* ── Layout: magazine (editorial but flipped, image-first) ────── */
+.cw-layout-magazine { max-width: 80ch; margin: 0 auto; }
+
+/* ── Hero image ────────────────────────────────────────────────── */
+.cw-hero {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--cw-line);
+  box-shadow: 0 14px 48px rgba(15, 27, 45, .09);
+  aspect-ratio: 16 / 9;
+  background: var(--cw-wash);
+}
+.cw-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Byline ────────────────────────────────────────────────────── */
+.cw-byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-block: 18px;
+  border-top: 1px solid var(--cw-line);
+}
+.cw-avatar-initials {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--cw-ink);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cw-meta {
+  margin-left: auto;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: .78rem;
+  color: var(--cw-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}

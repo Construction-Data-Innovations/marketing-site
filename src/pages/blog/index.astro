@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LandingNav from '../../components/landing/LandingNav.astro';
+import LandingFooter from '../../components/landing/LandingFooter.astro';
+import BlogIndex from '../../components/blog/BlogIndex';
+import type { BlogPost } from '../../components/blog/BlogIndex';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const posts: BlogPost[] = allPosts.map(post => ({
+  slug: post.id.replace(/\.md$/, ''),
+  title: post.data.title,
+  excerpt: post.data.excerpt,
+  category: post.data.category,
+  author: post.data.author,
+  authorTitle: post.data.authorTitle,
+  publishDate: post.data.publishDate.toISOString(),
+  readTime: post.data.readTime,
+  heroImage: post.data.heroImage,
+}));
+---
+<BaseLayout
+  title="Blog — ConstructWise"
+  description="Insights and practical guides for preconstruction teams — estimating, bid strategy, and construction intelligence."
+>
+  <div class="min-h-screen bg-gray-50 pt-16">
+    <LandingNav />
+
+    <!-- Hero -->
+    <section class="pt-16 pb-10 bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4">
+        <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-3">ConstructWise Blog</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Insights for the Preconstruction Team</h1>
+        <p class="text-lg text-gray-500 max-w-2xl">
+          Practical guides, industry analysis, and inside looks at how modern estimating teams are winning more work at better margins.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog index (React island handles filter + view toggle) -->
+    <section class="py-12">
+      <div class="container mx-auto px-4">
+        <BlogIndex client:load posts={posts} />
+      </div>
+    </section>
+
+    <LandingFooter />
+  </div>
+</BaseLayout>
