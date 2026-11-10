@@ -51,9 +51,7 @@ Your budget makes those gaps visible.
 
 ## The ConstructWise Up-Level
 
-ConstructWise automatically reads your drawings, identifies the trades involved, breaks down the job into coherent scope items, and generates a detailed apples-to-apples bid sheet, ready-made with your own historical price comps informing the budget — so you walk into bid day like this person:
-
-![A GC walking into bid day with confidence](/blog/gc-budget-meme.png)
+ConstructWise automatically reads your drawings, identifies the trades involved, breaks down the job into coherent scope items, and generates a detailed apples-to-apples bid sheet, ready-made with your own historical price comps informing the budget — so you walk into bid day with a game plan.
 
 The sub quotes still matter, but the future state could be less about the last-minute price updates and more about confirming and scenario-playing your proposal from a position of confidence. More than anything, though, you free up time to build relationships with your subs and get quality, inclusive bids, rather than sweating whether you missed a few rows in the SUM: on Tab 22.
 
