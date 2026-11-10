@@ -22,12 +22,12 @@ When you build your own budget first — trade by trade, before a single quote l
 
 Sub quotes arrive at the last minute — it's going to happen. Hopefully, with all our technological progress estimators can dedicate more time to the professional relationship stuff that builds trust over time, and subs give you early pricing, because you as the GC were organized and prepared.
 
-Nonetheless, adrenaline starts to rush, especially when multiple subs who promised to have their best-and-final prices in 3 hours ago, and the deadline's in 20 minutes.
+Nonetheless, adrenaline starts to rush, especially when you're still waiting on multiple subs who promised to have their best-and-final prices in 3 hours ago, and the deadline's in 20 minutes.
 
 The process of assembling your final price in the estimating room doesn't have to be a fire drill, though. The GCs who develop their own budget numbers, take-off their own estimated quantities, and engage with subs about the nitty-gritty of their quote long before the bid due date are asking themselves these questions under calm conditions:
 
 1. **Is this quote in scope?** A number that's 15% below your budget might be a better price — or a scope gap that becomes a change order after award.
-2. **Is this quote competitive?** Without your own benchmark, you have no way to know whether you got good pricing or just the lowest of three bad quotes.
+2. **Is this quote competitive?** Without your own benchmark, you are dependent on the first early budgets you received to set the market. Create your own independent range for each major item of work before comparing the quotes to avoid confusion in the leveling process.
 
 ## Building the Budget Trade by Trade
 
