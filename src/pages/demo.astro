@@ -142,7 +142,7 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
             </div>
 
             <ol class="track" aria-label="Your progress">
-              <li class="is-done"><span class="dot">✓</span><span><b>Request sent</b>We have your details.</span></li>
+              <li class="is-done"><span class="dot">✓</span><span><b>Details ready</b>We'll carry them into the calendar for you.</span></li>
               <li class="is-now"><span class="dot">2</span><span><b>Request a time</b>Choose from the open windows on our calendar.</span></li>
               <li><span class="dot">3</span><span><b>We confirm by email</b>With the session link and what to bring.</span></li>
             </ol>
@@ -438,6 +438,26 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
   (document.getElementById('source') as HTMLInputElement).value =
     new URLSearchParams(location.search).get('from') || document.referrer || 'direct';
 
+  // HubSpot Meetings scheduler. Booking creates the contact in HubSpot (and associates the
+  // company by email domain). We prefill what the visitor already typed so they don't retype it,
+  // and tag the booking with UTMs so HubSpot records which button sent them.
+  const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo-lead-from-marketing-website';
+
+  function calendarLink(): string {
+    const u = new URL(CALENDAR_URL);
+    u.searchParams.set('firstName', val('first'));
+    u.searchParams.set('lastName', val('last'));
+    u.searchParams.set('email', val('email'));
+    u.searchParams.set('company', val('company'));
+    u.searchParams.set('utm_source', 'constructwise.ai');
+    u.searchParams.set('utm_medium', val('source') || 'direct');
+    u.searchParams.set('utm_campaign', 'working-session');
+    const team = (form.querySelector('input[name="team"]:checked') as HTMLInputElement | null)?.value;
+    if (team) u.searchParams.set('utm_term', `estimators-${team}`);
+    if (val('goal')) u.searchParams.set('utm_content', val('goal'));
+    return u.toString();
+  }
+
   const val = (name: string) => ((form.elements.namedItem(name) as HTMLInputElement)?.value || '').trim();
 
   function setErr(name: string, msg: string) {
@@ -480,20 +500,13 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
       (form.querySelector('.has-error input') as HTMLElement | null)?.focus();
       return;
     }
-    submit.disabled = true;
-    label.textContent = 'Sending…';
-
-    // TODO: send submission to the chosen destination (HubSpot or Supabase) before go-live.
-    // Payload: Object.fromEntries(new FormData(form))
-    await new Promise((r) => setTimeout(r, 500));
-
+    const calBtn = document.getElementById('cal-btn') as HTMLAnchorElement;
+    calBtn.href = calendarLink();
     (document.getElementById('done-email') as HTMLElement).textContent = val('email');
     (document.getElementById('done-h') as HTMLElement).textContent = `Thanks, ${val('first')}. Now request a time.`;
     formView.hidden = true;
     doneView.hidden = false;
-    (document.getElementById('cal-btn') as HTMLElement).focus();
-    submit.disabled = false;
-    label.textContent = 'Schedule My Working Session';
+    calBtn.focus();
   });
 
   document.getElementById('reset')?.addEventListener('click', () => {
