@@ -1,0 +1,506 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingNav from '../components/landing/LandingNav.astro';
+import LandingFooter from '../components/landing/LandingFooter.astro';
+
+const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo-lead-from-marketing-website';
+---
+<BaseLayout
+  title="Request a Working Session - ConstructWise"
+  description="Bring a plan set from a recent bid. In 30 minutes we'll build a first-draft estimate from your drawings, scope, and quantities, priced from your own history."
+>
+  <div class="min-h-screen bg-gray-50 pt-16">
+    <LandingNav />
+
+    <main class="page">
+      <div class="shell">
+
+        <!-- The case for the session -->
+        <section class="pitch" aria-labelledby="pitch-h">
+          <div>
+            <span class="eyebrow"><span class="pulse"></span>Live working session · 30 min</span>
+            <h1 id="pitch-h">Bid more work, with a number you can defend.</h1>
+            <p class="lead">Bring a plan set from a recent bid. We'll build a first-draft estimate from your drawings, scope, and quantities, priced from <strong>your own history</strong>, and you judge it against a job you know cold.</p>
+          </div>
+
+          <ol class="steps" aria-label="How the session runs">
+            <li class="step">
+              <span class="step-n">01</span>
+              <div>
+                <h3>You pick the project</h3>
+                <p>A recent bid your team knows well. Plan sets and specs as PDF, <span class="spec">up to 500 MB</span>.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">02</span>
+              <div>
+                <h3>We build the draft live</h3>
+                <p>Scope, quantities, and pricing on screen, with every number traced back to where it came from.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">03</span>
+              <div>
+                <h3>You make the call</h3>
+                <p>Hold it up against what you actually bid. Keep what holds up, question what doesn't.</p>
+              </div>
+            </li>
+          </ol>
+
+          <figure class="quote">
+            <blockquote>&ldquo;ConstructWise offloads so much of the painstaking manual processes anyone could do. It allows us to spend more time to think critically about bidding decisions and quantify how they'll impact the holistic project.&rdquo;</blockquote>
+            <figcaption><span>&mdash; <b>Professional Estimator</b></span></figcaption>
+          </figure>
+
+          <div class="builtby">
+            <span>Built by <b>leading estimators and precon executives</b>.</span>
+          </div>
+        </section>
+
+        <!-- The request -->
+        <section class="formside" aria-live="polite">
+          <div id="form-view">
+            <div class="form-head">
+              <h2>Request your working session</h2>
+              <p>About a minute to fill out. Then you'll request a time from our calendar.</p>
+              <div class="meta">
+                <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.25 1.5" stroke-linecap="round"/></svg>30 minutes</span>
+                <span class="chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.5" y="2" width="11" height="12" rx="1.5"/><path d="M5 5.5h6M5 8h6M5 10.5h3.5" stroke-linecap="round"/></svg>On a real construction plan set</span>
+              </div>
+            </div>
+
+            <form id="ws-form" novalidate>
+              <input type="hidden" name="source" id="source" value="">
+
+              <div class="field" data-f="email">
+                <label for="email">Work email</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourcompany.com" required>
+                <span class="err" id="email-err"></span>
+              </div>
+
+              <div class="row">
+                <div class="field" data-f="first">
+                  <label for="first">First name</label>
+                  <input id="first" name="first" autocomplete="given-name" required>
+                  <span class="err" id="first-err"></span>
+                </div>
+                <div class="field" data-f="last">
+                  <label for="last">Last name</label>
+                  <input id="last" name="last" autocomplete="family-name" required>
+                  <span class="err" id="last-err"></span>
+                </div>
+              </div>
+
+              <div class="field" data-f="company">
+                <label for="company">Company</label>
+                <input id="company" name="company" autocomplete="organization" placeholder="e.g. Summit Builders" required>
+                <span class="err" id="company-err"></span>
+              </div>
+
+              <div class="field" data-f="team" role="group" aria-labelledby="team-l">
+                <span class="lbl" id="team-l">How many estimators on your team?</span>
+                <div class="seg">
+                  <input type="radio" name="team" id="t1" value="1"><label for="t1">Just me</label>
+                  <input type="radio" name="team" id="t2" value="2-3"><label for="t2">2–3</label>
+                  <input type="radio" name="team" id="t3" value="4-8"><label for="t3">4–8</label>
+                  <input type="radio" name="team" id="t4" value="9-15"><label for="t4">9–15</label>
+                  <input type="radio" name="team" id="t5" value="16+"><label for="t5">16+</label>
+                </div>
+                <span class="err" id="team-err"></span>
+              </div>
+
+              <div class="field">
+                <label for="goal">What would you most like to see? <span class="opt">(optional)</span></label>
+                <select id="goal" name="goal">
+                  <option value="" selected>Choose one</option>
+                  <option>Bidding more work with the same team</option>
+                  <option>Leveling sub quotes and catching scope gaps</option>
+                  <option>Comparing plan revisions and pricing the changes</option>
+                  <option>Pricing from our own cost history</option>
+                  <option>Just exploring for now</option>
+                </select>
+              </div>
+
+              <button class="submit" type="submit" id="submit">
+                <span id="submit-label">Schedule My Working Session</span>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+              </button>
+              <p class="fine">By submitting, you agree to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms</a>.</p>
+            </form>
+
+            <div class="next">
+              <span class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2.5v3M13 2.5v3" stroke-linecap="round"/></svg></span>
+              <span><b>What happens next.</b> You'll request a time that works from our calendar. We confirm every request by email before it's booked.</span>
+            </div>
+          </div>
+
+          <div id="done-view" class="done" hidden>
+            <div class="done-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <div>
+              <h2 id="done-h">Got it. Now request a time.</h2>
+              <p class="done-sub">Pick a time that works from our calendar. It's a request, not a booking. We'll confirm by email at <b id="done-email"></b>.</p>
+            </div>
+
+            <ol class="track" aria-label="Your progress">
+              <li class="is-done"><span class="dot">✓</span><span><b>Request sent</b>We have your details.</span></li>
+              <li class="is-now"><span class="dot">2</span><span><b>Request a time</b>Choose from the open windows on our calendar.</span></li>
+              <li><span class="dot">3</span><span><b>We confirm by email</b>With the session link and what to bring.</span></li>
+            </ol>
+
+            <a class="cal-btn" href={CALENDAR_URL} target="_blank" rel="noopener" id="cal-btn">
+              Request a Time
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+            </a>
+
+            <div class="tip"><b>While you wait:</b> pick the plan set. A recent bid you know cold works best, so you can judge the draft against the number you actually submitted.</div>
+
+            <button class="link-btn" type="button" id="reset">Start over</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <LandingFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    --navy: #111a2e;
+    --blue: #2563eb;
+    --blue-hover: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --fg: #0f172a;
+    --muted: #475569;
+    --faint: #94a3b8;
+    --line: #e2e8f0;
+    --field: #f8fafc;
+    --bg-alt: #f8fafc;
+    --ok: #16a34a;
+    --err: #dc2626;
+    --on-dark: #e2e8f0;
+    --on-dark-muted: #94a3b8;
+    --grid: rgba(148, 163, 184, 0.07);
+    --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    color: var(--fg);
+    line-height: 1.55;
+    padding: 40px 16px 72px;
+  }
+  .page a { color: inherit; }
+  .page :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 24px 48px -24px rgba(15, 23, 42, 0.18);
+    background: #fff;
+  }
+
+  /* Left: the case */
+  .pitch {
+    min-width: 0;
+    background-color: var(--navy);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      radial-gradient(120% 80% at 0% 0%, rgba(37, 99, 235, 0.22), transparent 60%);
+    background-size: 28px 28px, 28px 28px, 100% 100%;
+    color: var(--on-dark);
+    padding: 56px 56px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #93c5fd;
+  }
+  .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: #60a5fa; box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18); }
+  .pitch h1 {
+    margin: 14px 0 0;
+    font-size: clamp(32px, 3.6vw, 46px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: #fff;
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .lead { margin: 18px 0 0; font-size: 17px; line-height: 1.65; color: var(--on-dark); max-width: 52ch; }
+  .lead strong { color: #fff; font-weight: 600; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid rgba(148, 163, 184, 0.18); }
+  .step {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    padding-block: 18px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+  .step-n {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #93c5fd;
+    border: 1px solid rgba(147, 197, 253, 0.35);
+    border-radius: 6px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .step h3 { margin: 2px 0 4px; font-size: 16px; font-weight: 600; color: #fff; }
+  .step p { margin: 0; font-size: 14.5px; color: var(--on-dark-muted); line-height: 1.55; }
+  .step .spec { font-family: var(--mono); font-size: 12.5px; color: #cbd5e1; background: rgba(148, 163, 184, 0.12); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  .quote { margin: 0; padding: 22px 24px; background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 12px; }
+  .quote blockquote { margin: 0; font-size: 15.5px; line-height: 1.6; color: #f1f5f9; }
+  .quote figcaption { margin-top: 14px; font-size: 13.5px; color: var(--on-dark-muted); }
+  .quote figcaption b { color: #fff; font-weight: 600; }
+
+  .builtby { font-size: 14px; color: var(--on-dark-muted); margin-top: auto; }
+  .builtby b { color: #fff; font-weight: 600; }
+
+  /* Right: the form */
+  .formside { min-width: 0; padding: 56px 52px 44px; display: flex; flex-direction: column; }
+  .form-head h2 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.015em; }
+  .form-head p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); background: var(--bg-alt); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; }
+  .chip svg { width: 14px; height: 14px; color: var(--blue); }
+
+  form { margin-top: 28px; display: grid; gap: 18px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: grid; gap: 6px; min-width: 0; }
+  .field > label, .lbl { font-size: 14px; font-weight: 500; color: var(--fg); }
+  .opt { color: var(--faint); font-weight: 400; }
+  input:not([type="radio"]):not([type="hidden"]), select {
+    width: 100%;
+    font: inherit;
+    font-size: 15px;
+    color: var(--fg);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    height: 46px;
+    padding: 0 14px;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  select {
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2364748b' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+  input::placeholder { color: var(--faint); }
+  input:hover, select:hover { border-color: #cbd5e1; }
+  input:focus, select:focus { outline: none; background: #fff; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); }
+  .field.has-error input, .field.has-error select { border-color: var(--err); background: #fff; }
+  .err { font-size: 13px; color: var(--err); }
+  .err:empty { display: none; }
+
+  .seg { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label {
+    display: grid;
+    place-items: center;
+    height: 44px;
+    border: 1px solid var(--line);
+    background: var(--field);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    font-variant-numeric: tabular-nums;
+    transition: all 0.15s;
+  }
+  .seg label:hover { border-color: #cbd5e1; color: var(--fg); }
+  .seg input:checked + label { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+  .seg input:focus-visible + label { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .field.has-error .seg label { border-color: #fca5a5; }
+
+  .submit, .cal-btn {
+    height: 52px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--blue);
+    color: #fff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.15s, transform 0.05s;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.3), 0 8px 20px -8px rgba(37, 99, 235, 0.55);
+  }
+  .submit { margin-top: 6px; }
+  .page .cal-btn { color: #fff; }
+  .submit:hover, .cal-btn:hover { background: var(--blue-hover); }
+  .submit:active { transform: translateY(1px); }
+  .submit svg, .cal-btn svg { width: 18px; height: 18px; transition: transform 0.15s; }
+  .submit:hover svg { transform: translateX(2px); }
+  .submit[disabled] { opacity: 0.7; cursor: progress; }
+  .fine { font-size: 12.5px; color: var(--faint); text-align: center; margin: 2px 0 0; }
+  .fine a { color: var(--muted); text-decoration: underline; }
+
+  .next {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--line);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .next .ico { width: 34px; height: 34px; border-radius: 8px; background: var(--blue-soft); color: var(--blue); display: grid; place-items: center; }
+  .next .ico svg { width: 18px; height: 18px; }
+  .next b { color: var(--fg); font-weight: 600; }
+
+  /* Success state */
+  .done { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
+  .done[hidden] { display: none; }
+  .done-badge { width: 52px; height: 52px; border-radius: 50%; background: #dcfce7; color: var(--ok); display: grid; place-items: center; }
+  .done-badge svg { width: 26px; height: 26px; }
+  .done h2 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.015em; }
+  .done-sub { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; max-width: 46ch; }
+  .done-sub b { color: var(--fg); }
+  .track { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }
+  .track li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding-bottom: 18px; position: relative; font-size: 14.5px; color: var(--muted); }
+  .track li::before { content: ""; position: absolute; left: 13px; top: 28px; bottom: 0; width: 2px; background: var(--line); }
+  .track li:last-child::before { display: none; }
+  .track .dot { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; border: 2px solid var(--line); background: #fff; color: var(--faint); }
+  .track .is-done .dot { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .track .is-now .dot { border-color: var(--blue); color: var(--blue); }
+  .track b { display: block; color: var(--fg); font-weight: 600; margin-top: 3px; }
+  .tip { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 14px; color: var(--muted); }
+  .tip b { color: var(--fg); }
+  .link-btn { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; color: var(--muted); text-decoration: underline; cursor: pointer; align-self: flex-start; }
+
+  @media (max-width: 960px) {
+    .shell { grid-template-columns: minmax(0, 1fr); }
+    .formside { order: -1; padding: 36px 28px 32px; }
+    .pitch { padding: 40px 28px 36px; }
+  }
+  @media (max-width: 520px) {
+    .page { padding: 0; }
+    .shell { border-radius: 0; border-left: 0; border-right: 0; box-shadow: none; }
+    .pitch { padding: 36px 20px 32px; }
+    .formside { padding: 28px 20px; }
+    .row { grid-template-columns: 1fr; }
+    .seg { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page * { transition: none !important; }
+  }
+</style>
+
+<script>
+  // Always open at the top of the page (the heading and first field), never a restored scroll position.
+  if (!location.hash) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const toTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollIntoView({ block: 'start' });
+    };
+    toTop();
+    window.addEventListener('load', toTop, { once: true });
+  }
+
+  const form =document.getElementById('ws-form') as HTMLFormElement;
+  const formView = document.getElementById('form-view') as HTMLElement;
+  const doneView = document.getElementById('done-view') as HTMLElement;
+  const submit = document.getElementById('submit') as HTMLButtonElement;
+  const label = document.getElementById('submit-label') as HTMLElement;
+  const PERSONAL = ['gmail.com','yahoo.com','hotmail.com','outlook.com','aol.com','icloud.com','me.com','live.com','msn.com','proton.me','protonmail.com','ymail.com','comcast.net','att.net','sbcglobal.net','verizon.net'];
+  const REQUIRED = ['email', 'first', 'last', 'company', 'team'];
+
+  // Where the visitor came from (e.g. /demo?from=pricing-summit), kept for lead attribution.
+  (document.getElementById('source') as HTMLInputElement).value =
+    new URLSearchParams(location.search).get('from') || document.referrer || 'direct';
+
+  const val = (name: string) => ((form.elements.namedItem(name) as HTMLInputElement)?.value || '').trim();
+
+  function setErr(name: string, msg: string) {
+    const f = form.querySelector(`[data-f="${name}"]`);
+    const e = document.getElementById(`${name}-err`);
+    if (!f || !e) return;
+    f.classList.toggle('has-error', !!msg);
+    e.textContent = msg;
+  }
+
+  function check(name: string): boolean {
+    let msg = '';
+    if (name === 'email') {
+      const v = val('email');
+      if (!v) msg = 'Enter your work email.';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) msg = 'That email doesn’t look complete. Check for a typo.';
+      else if (PERSONAL.includes(v.split('@')[1].toLowerCase())) msg = 'Use your company email so we can prep for your team.';
+    }
+    if (name === 'first' && !val('first')) msg = 'Enter your first name.';
+    if (name === 'last' && !val('last')) msg = 'Enter your last name.';
+    if (name === 'company' && !val('company')) msg = 'Enter your company name.';
+    if (name === 'team' && !form.querySelector('input[name="team"]:checked')) msg = 'Choose your team size.';
+    setErr(name, msg);
+    return !msg;
+  }
+
+  ['email', 'first', 'last', 'company'].forEach((n) => {
+    const el = form.elements.namedItem(n) as HTMLInputElement;
+    el.addEventListener('blur', () => { if (el.value) check(n); });
+    el.addEventListener('input', () => {
+      if (form.querySelector(`[data-f="${n}"]`)?.classList.contains('has-error')) check(n);
+    });
+  });
+  form.querySelectorAll('input[name="team"]').forEach((r) => r.addEventListener('change', () => check('team')));
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const ok = REQUIRED.map(check).every(Boolean);
+    if (!ok) {
+      (form.querySelector('.has-error input') as HTMLElement | null)?.focus();
+      return;
+    }
+    submit.disabled = true;
+    label.textContent = 'Sending…';
+
+    // TODO: send submission to the chosen destination (HubSpot or Supabase) before go-live.
+    // Payload: Object.fromEntries(new FormData(form))
+    await new Promise((r) => setTimeout(r, 500));
+
+    (document.getElementById('done-email') as HTMLElement).textContent = val('email');
+    (document.getElementById('done-h') as HTMLElement).textContent = `Thanks, ${val('first')}. Now request a time.`;
+    formView.hidden = true;
+    doneView.hidden = false;
+    (document.getElementById('cal-btn') as HTMLElement).focus();
+    submit.disabled = false;
+    label.textContent = 'Schedule My Working Session';
+  });
+
+  document.getElementById('reset')?.addEventListener('click', () => {
+    form.reset();
+    REQUIRED.forEach((n) => setErr(n, ''));
+    doneView.hidden = true;
+    formView.hidden = false;
+    (form.elements.namedItem('email') as HTMLInputElement).focus();
+  });
+</script>
