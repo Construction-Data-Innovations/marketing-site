@@ -2,56 +2,166 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
+
+const quantities = [
+  { csi: '03 30 00', item: 'Cast-in-place concrete', qty: '412 CY', src: 'S-101' },
+  { csi: '09 21 16', item: 'Gypsum board assemblies', qty: '18,640 SF', src: 'A-201' },
+  { csi: '08 11 13', item: 'HM doors & frames', qty: '46 EA', src: 'A-501' },
+  { csi: '26 51 00', item: 'Interior lighting', qty: '212 EA', src: 'E-201' },
+];
+
+const audiences = [
+  {
+    label: 'General Contractors',
+    title: 'Bids you can defend to ownership.',
+    body: "Multi-trade bids built from what's buried in your file folders, document clouds, and email. Sub quotes leveled, scope gaps caught, priced to your risk tolerance.",
+    tags: 'sub quotes · scope gaps · bid day',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>',
+  },
+  {
+    label: 'Specialty Trade Contractors',
+    title: 'Labor is the risk. Price it from your own crews.',
+    body: 'Repetitive estimates checked for accuracy and pesky Excel errors, benchmarked against your own unit costs, production rates, and history.',
+    tags: 'unit rates · production · crews',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>',
+  },
+];
+
+const roles = ['Precon Executives', 'Chief Estimators', 'Senior Estimators', 'Project Managers'];
+
+const credentials = [
+  { big: 'Three generations', small: 'of a Southern California construction family' },
+  { big: 'Thousands', small: 'of competitive bids estimated' },
+  { big: 'Project P&L', small: 'carried on our own jobs, not just estimated' },
+  { big: 'GC & self-perform', small: 'commercial, industrial, and federal work' },
+];
 ---
-<BaseLayout title="About - ConstructWise">
+<BaseLayout
+  title="About - ConstructWise"
+  description="ConstructWise is built by builders. Three generations of them. Software for estimators, PMs, and project execs, from people who have estimated thousands of competitive bids."
+>
   <div class="min-h-screen bg-white pt-16">
     <LandingNav />
 
-    <!-- Hero Section -->
-    <section class="pt-20 pb-12 bg-gradient-to-br from-blue-50 to-white">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-20 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-          The Construction Platform to Plan Smarter
-        </h1>
-        <div class="text-[22px] text-gray-600 max-w-4xl mx-auto space-y-5 text-center leading-relaxed">
-          <p>
-            ConstructWise is software for construction professionals &mdash; built by people who have estimated thousands of competitive bids and been responsible for project P&amp;L. Estimators, PMs, and project execs burn dozens of hours a week analyzing files, building Excel models, and keying in activities one at a time.
-          </p>
-          <p class="font-bold text-gray-900">
-            We know &mdash; because we're builders ourselves. Three generations of them.
-          </p>
-          <p>
-            That work matters. But when it eats the week, it costs you wins and it costs you margin. ConstructWise is how that time comes back.
-          </p>
+    <!-- 1. Hero: the drafting table -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow eyebrow-dark">About ConstructWise</span>
+          <h1>Built by builders. Three generations of them.</h1>
+          <p class="lede">Software for estimators, PMs, and project execs, from people who have estimated <b>thousands of competitive bids</b> and owned the project P&amp;L.</p>
+          <div class="cta-row">
+            <a href="/demo?from=about-hero" class="btn btn-primary">Request a Working Session &rarr;</a>
+            <a href="/pricing" class="btn btn-ghost-dark">See pricing</a>
+          </div>
+          <div class="proof">
+            <div><b>2–3x</b>more bids per month with the same team size</div>
+            <div><b>Your history</b>every price traced to your own past bids</div>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="pt-12 pb-20 text-center bg-gray-50">
-      <div class="mx-auto px-4">
-        <div class="order-2 md:order-1">
-          <h2 class="text-3xl font-semibold mb-8">Purpose built for the Construction Industry</h2>
-          <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <div class="text-xl font-semibold my-2">General Contractors</div>
-                <p class="text-gray-600">Automatically generate multi-trade, comprehensive bids and then customize to your risk tolerance. Easily retrieve all the information that's living in file folders, document clouds, and emails so you submit proposals with confidence.</p>
-              </div>
-              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <div class="text-xl font-semibold my-2">Trade Contractors</div>
-                <p class="text-gray-600">If you generate repetitive bid estimates or have a detailed menu of items, use ConstructWise to review for accuracy, pesky Excel errors, or benchmarking against your own data.</p>
-              </div>
-              <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <div class="text-xl font-semibold my-2">Developers</div>
-                <p class="text-gray-600">When you're developing conceptual budgets for a new development, or you're in the thick of construction, ConstructWise will help you manage your cost basis, track draws with confidence, and deliver projects the way you underwrote them.</p>
-              </div>
-            </div>
+        <div class="art" aria-hidden="true">
+          <svg class="sheet" viewBox="0 0 400 330">
+            <rect x="0" y="0" width="400" height="330" fill="#f8fafc"/>
+            <g stroke="#cbd5e1" stroke-width="1"><path d="M40 20v290M140 20v290M240 20v290M340 20v290M20 60h360M20 160h360M20 260h360"/></g>
+            <g fill="#64748b" font-family="Geist Mono, monospace" font-size="9"><text x="36" y="14">1</text><text x="136" y="14">2</text><text x="236" y="14">3</text><text x="336" y="14">4</text><text x="8" y="63">A</text><text x="8" y="163">B</text><text x="8" y="263">C</text></g>
+            <rect x="40" y="60" width="300" height="200" fill="none" stroke="#0f172a" stroke-width="4"/>
+            <path d="M150 60v90M150 190v70M240 60v200M40 150h110M240 160h100" stroke="#0f172a" stroke-width="2.5"/>
+            <path d="M150 150a40 40 0 0 1 40 40" fill="none" stroke="#94a3b8" stroke-width="1"/>
+            <g font-family="Geist, sans-serif" font-size="10" font-weight="600" fill="#334155"><text x="70" y="108">OFFICE 101</text><text x="70" y="210">OFFICE 102</text><text x="170" y="165">CORRIDOR</text><text x="262" y="110">CONF 103</text><text x="270" y="215">MECH</text></g>
+            <path d="M40 285h300" stroke="#2563eb" stroke-width="1"/><path d="M40 280v10M340 280v10" stroke="#2563eb"/>
+            <text x="170" y="300" font-family="Geist Mono, monospace" font-size="9" fill="#2563eb">72'-0"</text>
+            <rect x="300" y="300" width="96" height="26" fill="#fff" stroke="#cbd5e1"/><text x="308" y="317" font-family="Geist Mono, monospace" font-size="10" fill="#0f172a">A-201 · L2</text>
+          </svg>
+          <span class="pin" style="left:42%; top:16%">A-201</span>
+          <span class="pin" style="left:72%; top:48%">A-501</span>
+          <div class="qt qt-float">
+            <div class="qt-h">Quantities <span class="ok">✓ 6 sheets read</span></div>
+            <table>
+              <thead><tr><th>CSI</th><th>Item</th><th class="r">Qty</th><th>Src</th></tr></thead>
+              <tbody>
+                {quantities.map((q) => (
+                  <tr><td class="mono">{q.csi}</td><td>{q.item}</td><td class="n">{q.qty}</td><td><span class="src">{q.src}</span></td></tr>
+                ))}
+              </tbody>
+            </table>
+            <div class="qt-f"><span class="xl">X</span> Export to Excel · live formulas</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Visual storytelling: what the platform actually does -->
+    <!-- 2. Who we are: credentials -->
+    <section class="creds" aria-label="Who we are">
+      <div class="wrap creds-row">
+        {credentials.map((c) => (
+          <div class="cred"><b>{c.big}</b><span>{c.small}</span></div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3. Why it matters: the week, back -->
+    <section class="week-sec">
+      <div class="wrap week-grid">
+        <div>
+          <span class="eyebrow">Why we built it</span>
+          <h2>Give your estimators <span class="blue">their week back.</span></h2>
+          <p class="body">Estimators, PMs, and project execs burn dozens of hours a week analyzing files, building Excel models, and keying in activities one at a time. That work matters. When it eats the week, it costs you wins and margin.</p>
+          <p class="body strong">We do the reading, the math, and the double-checking. Your team makes the calls.</p>
+        </div>
+
+        <div class="cal">
+          <div class="cal-h">
+            <b>An estimator's bid week</b>
+            <span class="seg2" role="group" aria-label="Compare weeks">
+              <button type="button" data-w="before" aria-pressed="true">Today</button>
+              <button type="button" data-w="after" aria-pressed="false">With ConstructWise</button>
+            </span>
+          </div>
+          <div class="cal-scroll"><div class="cal-grid" id="weekgrid" aria-live="polite"></div></div>
+          <div class="legend">
+            <span><i class="k-read"></i>Reading files</span>
+            <span><i class="k-xl"></i>Excel models</span>
+            <span><i class="k-key"></i>Keying activities</span>
+            <span><i class="k-judge"></i>Reviewing the draft</span>
+            <span><i class="k-bid"></i>Bid decisions</span>
+          </div>
+          <div class="note">Illustrative week, not measured data</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 4. Who we build for -->
+    <section class="bento-sec">
+      <div class="wrap">
+        <span class="eyebrow">Who we build for</span>
+        <h2>Purpose-built for the people who price the work.</h2>
+
+        <div class="roles" aria-label="Built for these roles">
+          <span class="roles-lab">Built for</span>
+          {roles.map((r) => <span class="role">{r}</span>)}
+        </div>
+
+        <div class="bento">
+          {audiences.map((a) => (
+            <div class="tile tile-aud">
+              <span class="aud-ico" aria-hidden="true" set:html={a.icon} />
+              <h3 class="aud-name">{a.label}</h3>
+              <p class="aud-title">{a.title}</p>
+              <p class="muted">{a.body}</p>
+              <span class="tags">{a.tags}</span>
+            </div>
+          ))}
+          <div class="tile tile-navy tile-wide">
+            <span class="lab">Why we exist</span>
+            <p class="mission">We help construction firms make sense of their unstructured numeric data, so teams make sounder decisions and tackle uncertainty.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. The product: what the platform actually does (original artwork) -->
     <section class="py-24 bg-white">
       <div class="container mx-auto px-4 max-w-6xl">
 
@@ -252,24 +362,210 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
       </div>
     </section>
 
-    <section class="py-20 bg-gradient-to-br from-blue-50 to-white">
-      <div class="container mx-auto px-4 text-center">
-        <p class="text-3xl font-semibold text-gray-600 max-w-3xl mx-auto mb-8">
-          We help make sense of all the unstructured numeric data in AEC firms, so that their teams can make sounder decisions and tackle uncertainties.
-        </p>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 px-4 bg-blue-600">
-      <div class="container mx-auto text-center">
-        <h2 class="text-4xl font-bold text-white mb-6">Elevate Your Construction Planning Today</h2>
-        <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-          Join other innovative construction companies who are leveraging ConstructWise's vertical AI to generate better cost estimates and construction schedules.
-        </p>
+    <!-- Closing ask -->
+    <section class="close">
+      <div class="wrap close-row">
+        <div>
+          <h2>Build better bids.</h2>
+          <p>See it on your own project. 30 minutes, on a real construction plan set.</p>
+        </div>
+        <a href="/demo?from=about" class="btn btn-white">Request a Working Session &rarr;</a>
       </div>
     </section>
 
     <LandingFooter />
   </div>
 </BaseLayout>
+
+<style>
+  .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+  .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  h1, h2, h3 { text-wrap: balance; }
+  .eyebrow { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #2563eb; }
+  .eyebrow-dark { color: #93c5fd; }
+  .blue { color: #2563eb; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 8px; font-weight: 600; font-size: 15px; white-space: nowrap; transition: background .15s, border-color .15s; }
+  .btn-primary { background: #2563eb; color: #fff; box-shadow: 0 8px 20px -10px rgba(37,99,235,.7); }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-ghost-dark { border: 1px solid rgba(255,255,255,.25); color: #fff; }
+  .btn-ghost-dark:hover { border-color: rgba(255,255,255,.5); }
+  .btn-white { background: #fff; color: #1d4ed8; }
+  .btn-white:hover { background: #eff6ff; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background-color: #0d1526;
+    color: #e2e8f0;
+    background-image:
+      linear-gradient(rgba(148,163,184,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.07) 1px, transparent 1px),
+      radial-gradient(90% 70% at 85% 30%, rgba(37,99,235,.28), transparent 60%);
+    background-size: 28px 28px, 28px 28px, 100% 100%;
+    overflow: hidden;
+  }
+  .hero-grid { min-height: min(calc(100vh - 64px), 760px); padding-top: 56px; padding-bottom: 56px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; align-items: center; }
+  .hero h1 { margin-top: 16px; font-size: clamp(38px, 5vw, 58px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 700; color: #fff; max-width: 12ch; }
+  .lede { margin-top: 20px; font-size: 18px; line-height: 1.6; color: #b9c4d6; max-width: 44ch; }
+  .lede b { color: #fff; font-weight: 600; }
+  .cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .proof { margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(148,163,184,.2); display: flex; flex-wrap: wrap; gap: 28px; }
+  .proof div { font-size: 13px; color: #94a3b8; max-width: 22ch; }
+  .proof b { display: block; font-size: 22px; color: #fff; font-weight: 700; letter-spacing: -0.01em; }
+
+  .art { position: relative; height: 500px; min-width: 0; }
+  .sheet { position: absolute; left: 0; top: 10px; width: 78%; max-width: 400px; height: auto; border-radius: 6px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); transform: rotate(-3deg); }
+  .pin { position: absolute; font: 500 10.5px 'Geist Mono', monospace; color: #fff; background: #2563eb; border-radius: 4px; padding: 2px 6px; box-shadow: 0 4px 10px rgba(37,99,235,.5); }
+
+  /* Quantities table */
+  .qt { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; font-size: 13px; color: #1f2937; }
+  .qt-float { position: absolute; right: 0; bottom: 0; width: 72%; max-width: 380px; transform: rotate(1.5deg); box-shadow: 0 24px 48px -20px rgba(0,0,0,.55); }
+  .qt-h { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #eef0f3; font-weight: 600; color: #0f172a; }
+  .ok { font: 500 11px 'Geist Mono', monospace; color: #16a34a; background: #f0fdf4; border-radius: 4px; padding: 2px 6px; }
+  .qt table { width: 100%; border-collapse: collapse; }
+  .qt th { text-align: left; font: 500 10.5px 'Geist Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: #6b7280; padding: 8px 12px; background: #f9fafb; }
+  .qt th.r { text-align: right; }
+  .qt td { padding: 8px 12px; border-top: 1px solid #f1f3f6; }
+  .qt td.mono { font-size: 12px; color: #475569; white-space: nowrap; }
+  .qt td.n { text-align: right; font: 500 12.5px 'Geist Mono', monospace; white-space: nowrap; }
+  .src { font: 500 10.5px 'Geist Mono', monospace; color: #2563eb; background: #eff6ff; border-radius: 4px; padding: 1px 5px; }
+  .qt-f { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-top: 1px solid #eef0f3; font: 500 11.5px 'Geist Mono', monospace; color: #374151; background: #f9fafb; }
+  .xl { width: 18px; height: 18px; border-radius: 4px; background: #107c41; color: #fff; display: grid; place-items: center; font: 700 10px 'Geist', sans-serif; }
+
+  /* ---------- Week ---------- */
+  .week-sec { padding: 96px 0 88px; background: linear-gradient(180deg, #f5f8ff, #fff 60%); }
+  .week-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
+  .week-sec h2, .bento-sec h2 { margin-top: 10px; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 700; color: #0f172a; }
+  .body { margin-top: 16px; font-size: 17px; line-height: 1.65; color: #4b5563; max-width: 46ch; }
+  .body.strong { color: #0f172a; font-weight: 600; }
+
+  .cal { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 18px; box-shadow: 0 30px 60px -30px rgba(15,23,42,.35); min-width: 0; }
+  .cal-h { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .cal-h b { font-size: 15px; color: #0f172a; }
+  .seg2 { display: inline-flex; background: #f1f5f9; border-radius: 8px; padding: 3px; gap: 2px; }
+  .seg2 button { border: 0; background: transparent; font: 500 13px 'Geist', sans-serif; padding: 6px 12px; border-radius: 6px; color: #475569; cursor: pointer; }
+  .seg2 button[aria-pressed="true"] { background: #fff; color: #0f172a; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
+  .seg2 button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+  .cal-scroll { overflow-x: auto; }
+  .cal-grid { display: grid; grid-template-columns: 40px repeat(5, minmax(84px, 1fr)); gap: 6px; font-size: 12px; min-width: 470px; }
+  .cal-grid :global(.d) { font: 500 11px 'Geist Mono', monospace; color: #64748b; text-align: center; padding-bottom: 4px; }
+  .cal-grid :global(.t) { font: 500 10.5px 'Geist Mono', monospace; color: #94a3b8; text-align: right; padding-right: 6px; padding-top: 6px; }
+  .cal-grid :global(.cell) { height: 46px; border-radius: 6px; padding: 5px 7px; font-size: 11px; font-weight: 600; line-height: 1.2; transition: background .35s, color .35s; }
+  :global(.k-read) { background: #fee2e2; color: #991b1b; }
+  :global(.k-xl) { background: #fef3c7; color: #92400e; }
+  :global(.k-key) { background: #ede9fe; color: #5b21b6; }
+  :global(.k-judge) { background: #dbeafe; color: #1e40af; }
+  :global(.k-bid) { background: #dcfce7; color: #166534; }
+  :global(.k-free) { background: #f8fafc; color: #94a3b8; border: 1px dashed #e2e8f0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 12px; color: #475569; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .note { display: block; font: 500 10.5px 'Geist Mono', monospace; color: #94a3b8; margin-top: 8px; }
+
+
+  /* ---------- Credentials ---------- */
+  .creds { background: #fff; border-bottom: 1px solid #eef0f3; }
+  .creds-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cred { padding: 28px 24px; border-left: 1px solid #eef0f3; display: grid; gap: 4px; }
+  .cred:first-child { border-left: 0; padding-left: 0; }
+  .cred b { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: #0f172a; }
+  .cred span { font-size: 14px; color: #64748b; line-height: 1.45; }
+
+  /* ---------- Bento ---------- */
+  .bento-sec { padding: 88px 0 96px; background: #f6f7f9; }
+  .bento { margin-top: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .roles { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .roles-lab { font: 500 12px 'Geist Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #64748b; margin-right: 4px; }
+  .role { font-size: 16px; font-weight: 600; color: #0f172a; background: #fff; border: 1px solid #dbe3ef; border-radius: 999px; padding: 9px 18px; box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+  .tile-aud { padding: 32px; gap: 12px; border-top: 4px solid #2563eb; }
+  .aud-ico { width: 48px; height: 48px; border-radius: 12px; background: #eff6ff; color: #2563eb; display: grid; place-items: center; }
+  .tile .aud-name { font-size: clamp(26px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: #0f172a; }
+  .aud-title { font-size: 18px; font-weight: 600; color: #2563eb; line-height: 1.35; }
+  .tile-wide { grid-column: 1 / -1; }
+  .tile { background: #fff; border: 1px solid #e7e9ee; border-radius: 16px; padding: 22px; display: grid; align-content: start; gap: 10px; min-width: 0; }
+  .tile .lab { font: 500 11px 'Geist Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #64748b; }
+  .tile h3 { font-size: 19px; letter-spacing: -0.01em; font-weight: 600; color: #0f172a; line-height: 1.3; }
+  .muted { font-size: 14.5px; color: #4b5563; line-height: 1.6; }
+  .tags { font: 500 11px 'Geist Mono', monospace; color: #94a3b8; margin-top: 2px; }
+  .tile-navy { background: #0d1526; border-color: #0d1526; }
+  .tile-navy .lab { color: #93c5fd; }
+  .mission { font-size: 19px; line-height: 1.4; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+
+  /* ---------- Close ---------- */
+  .close { background: #2563eb; color: #fff; padding: 56px 0; }
+  .close-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+  .close h2 { font-size: 32px; letter-spacing: -0.02em; font-weight: 700; }
+  .close p { color: #dbeafe; margin-top: 6px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 56px; gap: 40px; }
+    .art { height: 440px; max-width: 560px; }
+    .week-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  }
+  @media (max-width: 900px) {
+    .creds-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cred:nth-child(3) { border-left: 0; padding-left: 0; }
+    .cred:nth-child(n+3) { border-top: 1px solid #eef0f3; }
+  }
+  @media (max-width: 768px) {
+    .bento { grid-template-columns: minmax(0, 1fr); }
+    .week-sec { padding: 72px 0 64px; }
+    .bento-sec { padding: 64px 0 72px; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding-left: 16px; padding-right: 16px; }
+    .art { height: 360px; }
+    .sheet { width: 82%; }
+    .qt-float { width: 88%; }
+    .qt td:nth-child(2), .qt th:nth-child(2) { display: none; }
+    .cta-row .btn { flex: 1 1 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cal-grid :global(.cell) { transition: none; }
+  }
+</style>
+
+<script>
+  // An estimator's bid week, toggled between today and with ConstructWise.
+  const rows = ['8a', '10a', '1p', '3p'];
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  const weeks: Record<string, string[][]> = {
+    before: [
+      ['read', 'read', 'xl', 'xl', 'key'],
+      ['read', 'xl', 'xl', 'key', 'key'],
+      ['read', 'read', 'key', 'xl', 'bid'],
+      ['xl', 'read', 'key', 'key', 'bid'],
+    ],
+    after: [
+      ['judge', 'bid', 'bid', 'free', 'judge'],
+      ['judge', 'bid', 'judge', 'bid', 'free'],
+      ['bid', 'free', 'judge', 'bid', 'bid'],
+      ['free', 'judge', 'bid', 'free', 'bid'],
+    ],
+  };
+  const labels: Record<string, string> = {
+    read: 'Reading drawings & specs',
+    xl: 'Rebuilding Excel model',
+    key: 'Keying activities',
+    judge: 'Reviewing the draft',
+    bid: 'Bid decisions',
+    free: 'Next bid',
+  };
+  const weekGrid = document.getElementById('weekgrid');
+  function renderWeek(w: string) {
+    if (!weekGrid) return;
+    let html = '<span></span>' + days.map((d) => `<span class="d">${d}</span>`).join('');
+    rows.forEach((t, r) => {
+      html += `<span class="t">${t}</span>`;
+      weeks[w][r].forEach((k) => { html += `<span class="cell k-${k}">${labels[k]}</span>`; });
+    });
+    weekGrid.innerHTML = html;
+  }
+  renderWeek('before');
+  document.querySelectorAll<HTMLButtonElement>('.seg2 button').forEach((b) => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.seg2 button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      renderWeek(b.dataset.w || 'before');
+    });
+  });
+</script>
