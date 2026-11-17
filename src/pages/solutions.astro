@@ -2,113 +2,103 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
+import { features, tm } from '../data/solutions';
+import UseCases from '../components/solutions/UseCases.astro';
 ---
-<BaseLayout title="Solutions - ConstructWise">
+<BaseLayout
+  title="Solutions - ConstructWise"
+  description="Built for commercial estimators and precon teams. Go from drawings and takeoffs to a detailed cost estimate in minutes, priced from your own history."
+>
   <div class="min-h-screen bg-white pt-16">
     <LandingNav />
 
-    <!-- Hero Section -->
-    <section class="py-20 bg-gradient-to-br from-blue-50 to-white">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-          Created for Every Builder by Builders
-        </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto m-4">
-          Go from unstructured files and takeoffs to comprehensive, detailed cost estimates and Gantt chart schedules in minutes
-        </p>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto m-4">
-          When a firm joins ConstructWise, we ingest their historical cost proposals, P&amp;Ls, CPM schedules, and unit rates. The AI adapts to their methods &ndash; not the other way around.
-        </p>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto m-4">
-          So when they upload their data, the system doesn't spit out generic analysis. It generates a 70%-complete, detailed cost estimate with matching baseline schedule, as if their seasoned estimators had created the draft. Construction teams can then refine it with AI-powered queries, but the baseline already fits their process.
-        </p>
-      </div>
-    </section>
-
-    <!-- Cost Estimators Section -->
-    <section class="py-20 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="order-2 md:order-1">
-            <div class="inline-flex items-center justify-center p-3 bg-blue-100 rounded-lg mb-4">
-              <!-- Calculator icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-blue-600"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16" y1="14" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
-            </div>
-            <h2 class="text-3xl font-bold mb-4">Cost Estimating</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              Build detailed cost estimates with intelligent forecasts and real-time collaboration
-            </p>
-            <ul class="space-y-3 mb-6">
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>AI-powered cost proposal where you always remain in the driver's seat</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Not just automation &ndash; customization that preserves your company's secret sauce while making your team exponentially faster</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Simulate real-world scenarios, then choose your plans according to your risk level</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Historical data integration for more accurate forecasting</span>
-              </li>
-            </ul>
+    <!-- Hero: who it's for, and the flow from your history to a first draft -->
+    <section class="sol-hero">
+      <div class="sol-wrap sol-hero-grid">
+        <div class="min-w-0">
+          <span class="sol-eyebrow">Solutions</span>
+          <h1 class="sol-h1">Built for commercial estimators and <span>precon teams.</span></h1>
+          <p class="sol-lede">Go from drawings and takeoffs to a detailed cost estimate in minutes, priced from your own history and built in your methods, your codes, and your format.</p>
+          <div class="sol-cta">
+            <a href="/demo?from=solutions-hero" class="sol-btn sol-btn-p">Request a Working Session &rarr;</a>
+            <a href="/pricing" class="sol-btn sol-btn-g">See pricing</a>
           </div>
-          <div class="order-1 md:order-2 bg-white rounded-xl p-6 shadow-lg">
-            <div class="aspect-video bg-white rounded-lg overflow-hidden">
-              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                <rect width="560" height="315" fill="white"/>
-                <!-- Header -->
-                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
-                <rect x="32" y="26" width="90" height="16" rx="4" fill="#2563eb"/>
-                <rect x="138" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
-                <rect x="214" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
-                <!-- Upload area with document icon -->
-                <rect x="20" y="64" width="260" height="100" rx="8" fill="#fafbfd" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6 3"/>
-                <text x="100" y="100" font-family="system-ui" font-size="10" fill="#94a3b8">SOW Document</text>
-                <rect x="80" y="108" width="120" height="6" rx="3" fill="#2563eb"/>
-                <rect x="80" y="118" width="120" height="6" rx="3" fill="#e2e8f0"/>
-                <rect x="80" y="118" width="96" height="6" rx="3" fill="#60a5fa"/>
-                <text x="90" y="142" font-family="system-ui" font-size="9" fill="#22c55e">Uploaded &amp; Analyzed</text>
-                <!-- Arrow -->
-                <text x="294" y="114" font-family="system-ui" font-size="20" fill="#2563eb">&rarr;</text>
-                <!-- Generated estimate preview -->
-                <rect x="320" y="64" width="220" height="100" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
-                <text x="336" y="84" font-family="system-ui" font-size="10" font-weight="600" fill="#1e40af">Generated Estimate</text>
-                <rect x="336" y="92" width="140" height="5" rx="2" fill="#bfdbfe"/>
-                <rect x="336" y="102" width="188" height="5" rx="2" fill="#dbeafe"/>
-                <rect x="336" y="112" width="160" height="5" rx="2" fill="#dbeafe"/>
-                <rect x="336" y="126" width="80" height="16" rx="4" fill="#2563eb"/>
-                <text x="348" y="138" font-family="system-ui" font-size="8" fill="white">70% Complete</text>
-                <text x="336" y="156" font-family="system-ui" font-size="8" fill="#64748b">Ready for your review</text>
-                <!-- Three summary cards -->
-                <rect x="20" y="178" width="168" height="68" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
-                <text x="32" y="198" font-family="system-ui" font-size="9" fill="#94a3b8">Direct Costs</text>
-                <text x="32" y="218" font-family="system-ui" font-size="16" font-weight="700" fill="#1e3a5f">$1.84M</text>
-                <text x="32" y="234" font-family="system-ui" font-size="8" fill="#22c55e">-8% vs. avg</text>
-                <rect x="196" y="178" width="168" height="68" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
-                <text x="208" y="198" font-family="system-ui" font-size="9" fill="#94a3b8">Risk Score</text>
-                <text x="208" y="218" font-family="system-ui" font-size="16" font-weight="700" fill="#f59e0b">Medium</text>
-                <text x="208" y="234" font-family="system-ui" font-size="8" fill="#78716c">3 items flagged</text>
-                <rect x="372" y="178" width="168" height="68" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
-                <text x="384" y="198" font-family="system-ui" font-size="9" fill="#94a3b8">Confidence</text>
-                <text x="384" y="218" font-family="system-ui" font-size="16" font-weight="700" fill="#22c55e">94%</text>
-                <text x="384" y="234" font-family="system-ui" font-size="8" fill="#78716c">12 similar projects</text>
-                <!-- Bottom bar -->
-                <rect x="20" y="260" width="520" height="36" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
-                <text x="36" y="282" font-family="system-ui" font-size="10" fill="#166534">Your historical pricing applied &mdash; estimates match your company's cost structure</text>
-              </svg>
+          <p class="sol-cred"><span aria-hidden="true">●</span> Built by estimators who have priced thousands of competitive bids.</p>
+        </div>
+
+        <!-- Flow artifact: your history + this project → a first draft that fits your process -->
+        <div class="flow" aria-label="How a first draft is built">
+          <div class="flow-in">
+            <div class="fcard">
+              <div class="fcard-h"><span class="fnum">1</span>Your history <span class="fcard-tag" set:html={tm('Data Hub')} /></div>
+              <div class="chips">
+                <span>Cost proposals</span><span>P&amp;Ls</span><span>CPM schedules</span><span>Unit rates</span>
+              </div>
+              <p class="fnote">Ingested once. Learns your methods and codes.</p>
+            </div>
+            <div class="fcard">
+              <div class="fcard-h"><span class="fnum">2</span>This project</div>
+              <ul class="files">
+                <li><span class="fi">PDF</span>Architectural set<em>212 MB</em></li>
+                <li><span class="fi">PDF</span>Specs, Div 01–33<em>48 MB</em></li>
+                <li><span class="fi fi-x">XLS</span>Takeoff quantities<em>1 MB</em></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="flow-arrow" aria-hidden="true">
+            <svg width="22" height="40" viewBox="0 0 22 40" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v34M3 28l8 8 8-8"/></svg>
+          </div>
+
+          <div class="fdraft">
+            <div class="fdraft-top">
+              <div>
+                <div class="fdraft-lab"><span class="fnum fnum-d">3</span>Your first draft</div>
+                <div class="fdraft-title">As if your seasoned estimators started it</div>
+              </div>
+              <div class="ring" style="--p: 70">
+                <span>70%</span>
+                <small>complete</small>
+              </div>
+            </div>
+            <table class="dtable">
+              <tbody>
+                <tr><td class="mono">03 30 00</td><td>Cast-in-place concrete</td><td class="n">$1,204,860</td><td><span class="src">your rate</span></td></tr>
+                <tr><td class="mono">09 21 16</td><td>Gypsum board assemblies</td><td class="n">$930,450</td><td><span class="src">A-201</span></td></tr>
+                <tr><td class="mono">26 05 00</td><td>Electrical</td><td class="n">$1,560,000</td><td><span class="src">sub quote</span></td></tr>
+              </tbody>
+            </table>
+            <div class="fdraft-foot">
+              <span>Refine it in plain English with <b>AI Chat</b></span>
+              <span class="fit">✓ Fits your process</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Key features (anchors for the Solutions mega menu) -->
+    <section class="pillars">
+      <div class="sol-wrap">
+        <span class="sol-eyebrow">Key features</span>
+        <h2 class="sol-h2">Less manual work on every bid.</h2>
+        <p class="sol-sub">So your estimators spend their hours on the calls that decide the job.</p>
+        <div class="pgrid">
+          {features.map((f) => (
+            <div class="pcard" id={f.id}>
+              <span class="pico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} /></span>
+              <h3><span set:html={tm(f.name)} />{f.badge && <span class="pbadge">{f.badge}</span>}</h3>
+              <p class="pdesc">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <UseCases />
+
     <!-- Schedule Building Section -->
-    <section class="py-20">
+    <section id="scheduling" class="py-20">
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
@@ -205,75 +195,6 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
       </div>
     </section>
 
-    <!-- AI Assistant Section -->
-    <section class="py-20 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="order-2 md:order-1">
-            <div class="inline-flex items-center justify-center p-3 bg-blue-100 rounded-lg mb-4">
-              <!-- Brain icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-blue-600"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg>
-            </div>
-            <h2 class="text-3xl font-bold mb-4">AI Assistant</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              Get intelligent insights and recommendations from our construction-specialized AI assistant
-            </p>
-            <ul class="space-y-3 mb-6">
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Construction-specific knowledge base for accurate answers</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Automated cost and schedule optimization suggestions</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Risk identification based on historical project data</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Query in natural language and visualize your data dynamically</span>
-              </li>
-            </ul>
-          </div>
-          <div class="order-1 md:order-2 bg-white rounded-xl p-6 shadow-lg">
-            <div class="aspect-video bg-white rounded-lg overflow-hidden">
-              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                <rect width="560" height="315" fill="white"/>
-                <!-- Header -->
-                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
-                <rect x="32" y="26" width="12" height="12" rx="6" fill="#22c55e"/>
-                <text x="50" y="35" font-family="system-ui" font-size="11" font-weight="600" fill="#1e3a5f">AI Assistant</text>
-                <!-- User question -->
-                <rect x="240" y="68" width="300" height="30" rx="12" fill="#2563eb"/>
-                <text x="256" y="87" font-family="system-ui" font-size="10" fill="white">What's the risk on the MEP scope?</text>
-                <!-- AI response with risk analysis -->
-                <rect x="20" y="110" width="420" height="160" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
-                <text x="36" y="132" font-family="system-ui" font-size="10" font-weight="600" fill="#1e3a5f">Risk Analysis: MEP Scope</text>
-                <!-- Risk items -->
-                <rect x="36" y="142" width="388" height="28" rx="6" fill="#fef2f2"/>
-                <rect x="44" y="150" width="8" height="8" rx="4" fill="#ef4444"/>
-                <text x="60" y="160" font-family="system-ui" font-size="9" font-weight="500" fill="#991b1b">High: Electrical subcontractor pricing 18% above market</text>
-                <rect x="36" y="176" width="388" height="28" rx="6" fill="#fefce8"/>
-                <rect x="44" y="184" width="8" height="8" rx="4" fill="#f59e0b"/>
-                <text x="60" y="194" font-family="system-ui" font-size="9" font-weight="500" fill="#92400e">Medium: HVAC lead times extended to 14 weeks</text>
-                <rect x="36" y="210" width="388" height="28" rx="6" fill="#f0fdf4"/>
-                <rect x="44" y="218" width="8" height="8" rx="4" fill="#22c55e"/>
-                <text x="60" y="228" font-family="system-ui" font-size="9" font-weight="500" fill="#166534">Low: Plumbing scope well-defined, 3 competitive bids</text>
-                <!-- Suggestion -->
-                <text x="36" y="256" font-family="system-ui" font-size="9" fill="#475569">Based on 8 similar projects, consider allocating 5%</text>
-                <text x="36" y="268" font-family="system-ui" font-size="9" fill="#475569">contingency to electrical scope.</text>
-                <!-- Input bar -->
-                <rect x="20" y="280" width="520" height="24" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1"/>
-                <text x="36" y="296" font-family="system-ui" font-size="9" fill="#94a3b8">Follow up: &quot;Show me the electrical sub breakdown...&quot;</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Testimonial Section -->
     <section class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 max-w-4xl">
@@ -324,3 +245,95 @@ import LandingFooter from '../components/landing/LandingFooter.astro';
     <LandingFooter />
   </div>
 </BaseLayout>
+
+<style>
+  .sol-wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+  .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .sol-eyebrow { font: 500 12px 'Geist Mono', ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: #2563eb; }
+
+  /* ---------- Hero ---------- */
+  .sol-hero {
+    background:
+      radial-gradient(60% 70% at 85% 20%, rgba(37,99,235,.12), transparent 60%),
+      linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
+      linear-gradient(180deg, #f5f8ff, #fff);
+    background-size: 100% 100%, 28px 28px, 28px 28px, 100% 100%;
+    border-bottom: 1px solid #eef0f3;
+  }
+  .sol-hero-grid { padding-top: 72px; padding-bottom: 80px; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+  .sol-h1 { margin-top: 14px; font-size: clamp(36px, 4.2vw, 50px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 700; color: #0f172a; text-wrap: balance; }
+  .sol-h1 span { color: #2563eb; }
+  .sol-lede { margin-top: 20px; font-size: 18px; line-height: 1.6; color: #475569; max-width: 44ch; }
+  .sol-cred { margin-top: 22px; font-size: 14px; color: #64748b; display: flex; align-items: center; gap: 8px; }
+  .sol-cred span { color: #2563eb; font-size: 9px; }
+  .sol-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .sol-btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 22px; border-radius: 8px; font-weight: 600; font-size: 15px; white-space: nowrap; transition: background .15s, border-color .15s; }
+  .sol-btn-p { background: #2563eb; color: #fff; box-shadow: 0 8px 20px -10px rgba(37,99,235,.7); }
+  .sol-btn-p:hover { background: #1d4ed8; }
+  .sol-btn-g { border: 1px solid #d1d5db; color: #111827; background: #fff; }
+  .sol-btn-g:hover { border-color: #9ca3af; }
+
+  /* Flow artifact */
+  .flow { display: grid; gap: 10px; min-width: 0; }
+  .flow-in { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .fcard { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; box-shadow: 0 12px 30px -20px rgba(15,23,42,.3); display: grid; gap: 10px; align-content: start; min-width: 0; }
+  .fcard-h { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: #0f172a; flex-wrap: wrap; }
+  .fcard-tag { margin-left: auto; font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #1e40af; background: #dbeafe; border-radius: 5px; padding: 2px 7px; }
+  .fnum { width: 20px; height: 20px; border-radius: 50%; background: #eff6ff; color: #2563eb; display: inline-grid; place-items: center; font: 600 11px 'Geist Mono', ui-monospace, monospace; flex: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips span { font-size: 12.5px; font-weight: 500; color: #334155; background: #f1f5f9; border-radius: 6px; padding: 4px 8px; }
+  .fnote { font-size: 12.5px; color: #64748b; }
+  .files { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .files li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #1f2937; min-width: 0; }
+  .files em { margin-left: auto; font: 500 11px 'Geist Mono', ui-monospace, monospace; color: #94a3b8; font-style: normal; white-space: nowrap; }
+  .fi { font: 700 9px 'Geist Mono', ui-monospace, monospace; color: #b91c1c; background: #fee2e2; border-radius: 4px; padding: 3px 4px; flex: none; }
+  .fi-x { color: #166534; background: #dcfce7; }
+  .flow-arrow { display: grid; place-items: center; }
+
+  .fdraft { background: #0d1526; color: #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 30px 60px -24px rgba(13,21,38,.6); display: grid; gap: 14px; min-width: 0;
+    background-image: linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px); background-size: 24px 24px; }
+  .fdraft-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .fdraft-lab { display: flex; align-items: center; gap: 8px; font: 600 11.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: #93c5fd; }
+  .fnum-d { background: #2563eb; color: #fff; }
+  .fdraft-title { margin-top: 6px; font-size: 18px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .ring { --p: 70; flex: none; width: 78px; height: 78px; border-radius: 50%; display: grid; place-content: center; text-align: center;
+    background: radial-gradient(closest-side, #0d1526 78%, transparent 80% 100%), conic-gradient(#3b82f6 calc(var(--p) * 1%), rgba(148,163,184,.25) 0); }
+  .ring span { font-size: 19px; font-weight: 700; color: #fff; line-height: 1; }
+  .ring small { font: 500 9px 'Geist Mono', ui-monospace, monospace; color: #94a3b8; text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+  .dtable { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; color: #1f2937; border-radius: 10px; overflow: hidden; }
+  .dtable td { padding: 9px 12px; border-top: 1px solid #f1f3f6; }
+  .dtable tr:first-child td { border-top: 0; }
+  .dtable td.mono { font-size: 12px; color: #475569; white-space: nowrap; }
+  .dtable td.n { text-align: right; font: 500 12.5px 'Geist Mono', ui-monospace, monospace; white-space: nowrap; }
+  .src { font: 500 10.5px 'Geist Mono', ui-monospace, monospace; color: #2563eb; background: #eff6ff; border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
+  .fdraft-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; color: #b9c4d6; }
+  .fdraft-foot b { color: #fff; font-weight: 600; }
+  .fit { font: 600 11.5px 'Geist Mono', ui-monospace, monospace; color: #86efac; }
+
+  /* ---------- Pillars ---------- */
+  .pillars { padding: 88px 0 96px; background: #fff; }
+  .sol-h2 { margin-top: 10px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 700; color: #0f172a; text-wrap: balance; max-width: 24ch; }
+  .pgrid { margin-top: 36px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .sol-sub { margin-top: 12px; font-size: 17px; color: #475569; }
+  .pcard { border: 1px solid #e7e9ee; border-radius: 16px; padding: 22px; display: grid; gap: 10px; align-content: start; background: #fbfcfe; scroll-margin-top: 96px; min-width: 0; transition: border-color .15s, box-shadow .15s; }
+  .pcard:hover { border-color: #bfdbfe; box-shadow: 0 12px 30px -20px rgba(37,99,235,.4); }
+  .pcard:target { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.18); }
+  .pico { width: 40px; height: 40px; border-radius: 10px; background: #eff6ff; color: #2563eb; display: grid; place-items: center; }
+  .pcard h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: #0f172a; line-height: 1.3; }
+  .pbadge { font: 600 9.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: 0; color: #1e40af; background: #dbeafe; border-radius: 4px; padding: 2px 5px; }
+  .pdesc { font-size: 14.5px; color: #475569; line-height: 1.55; }
+
+  @media (max-width: 1024px) {
+    .sol-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; padding-top: 56px; padding-bottom: 64px; }
+    .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .sol-wrap { padding-left: 16px; padding-right: 16px; }
+    .flow-in { grid-template-columns: minmax(0, 1fr); }
+    .pgrid { grid-template-columns: minmax(0, 1fr); }
+    .dtable td:nth-child(2) { display: none; }
+    .sol-cta .sol-btn { flex: 1 1 100%; }
+    .pillars { padding: 64px 0 72px; }
+  }
+</style>

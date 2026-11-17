@@ -1,4 +1,5 @@
 ---
+import { features, tm } from '../../data/solutions';
 ---
 <header class="fixed top-0 border-b bg-white/80 backdrop-blur-sm w-full z-50">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -6,8 +7,45 @@
       <img src="/logo.svg" alt="" class="h-8 w-8" aria-hidden="true" />
       <span class="text-2xl font-bold text-gray-900">ConstructWise</span>
     </a>
-    <nav class="hidden md:flex items-center space-x-8">
-      <a href="/solutions" class="text-gray-600 hover:text-gray-900">Solutions</a>
+    <nav class="hidden md:flex items-center space-x-8" aria-label="Main">
+      <!-- Solutions with mega menu. The wrapper stretches to the header's edges so the pointer
+           can travel from the link into the panel without the menu closing. -->
+      <div class="mega-wrap" data-mega>
+        <div class="flex items-center gap-1">
+          <a href="/solutions" class="mega-trigger text-gray-600 hover:text-gray-900">Solutions</a>
+          <button type="button" class="mega-toggle" aria-expanded="false" aria-controls="mega-panel" aria-label="Show solutions menu">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <div id="mega-panel" class="mega-panel" role="region" aria-label="Solutions">
+          <div class="container mx-auto px-4">
+            <div class="mega-card">
+              <div class="mega-grid">
+                {features.map((f) => (
+                  <a href={`/solutions#${f.id}`} class="mega-item">
+                    <span class="mega-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} /></span>
+                    <span class="min-w-0">
+                      <span class="mega-name"><span set:html={tm(f.name)} />{f.badge && <span class="mega-badge">{f.badge}</span>}</span>
+                      <span class="mega-desc">{f.desc}</span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+              <div class="mega-foot">
+                <div>
+                  <span class="mega-foot-title">Build better bids.</span>
+                  <span class="mega-foot-sub">Custom-built for commercial estimators. See it on your own project.</span>
+                </div>
+                <div class="flex items-center gap-5">
+                  <a href="/solutions" class="mega-foot-link">All solutions &rarr;</a>
+                  <a href="/demo?from=nav-solutions" class="mega-foot-btn">Request a Working Session</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="/pricing" class="text-gray-600 hover:text-gray-900">Pricing</a>
       <a href="/blog" class="text-gray-600 hover:text-gray-900">Blog</a>
       <a href="/about" class="text-gray-600 hover:text-gray-900">About</a>
@@ -37,10 +75,15 @@
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden border-t border-gray-100 bg-white/95 backdrop-blur-sm"
+    class="md:hidden hidden border-t border-gray-100 bg-white/95 backdrop-blur-sm max-h-[calc(100vh-72px)] overflow-y-auto"
   >
-    <nav class="container mx-auto px-4 py-4 flex flex-col gap-1">
+    <nav class="container mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
       <a href="/solutions" class="px-3 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors">Solutions</a>
+      <div class="grid grid-cols-2 gap-x-3 gap-y-1 pl-3 pb-2">
+        {features.map((f) => (
+          <a href={`/solutions#${f.id}`} class="px-3 py-2 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-md" set:html={tm(f.name)} />
+        ))}
+      </div>
       <a href="/pricing" class="px-3 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors">Pricing</a>
       <a href="/blog" class="px-3 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors">Blog</a>
       <a href="/about" class="px-3 py-2.5 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md font-medium transition-colors">About</a>
@@ -48,18 +91,98 @@
   </div>
 </header>
 
+<style>
+  .mega-wrap { display: flex; align-items: center; align-self: stretch; margin-block: -16px; padding-block: 16px; }
+  .mega-trigger { line-height: 1.5; }
+  .mega-toggle { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; color: #6b7280; transition: transform .2s, color .15s; }
+  .mega-toggle:hover { color: #111827; }
+  .mega-wrap:hover .mega-toggle, .mega-wrap.open .mega-toggle { transform: rotate(180deg); color: #111827; }
+
+  /* Panel spans the header width; it is positioned against the fixed header. */
+  .mega-panel {
+    position: absolute; left: 0; right: 0; top: 100%;
+    padding-top: 8px;
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
+  }
+  .mega-wrap:hover .mega-panel, .mega-wrap:focus-within .mega-panel, .mega-wrap.open .mega-panel {
+    opacity: 1; visibility: visible; transform: none;
+    transition: opacity .16s ease, transform .16s ease, visibility 0s;
+  }
+  .mega-wrap.closed .mega-panel { opacity: 0; visibility: hidden; }
+
+  .mega-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 24px 60px -20px rgba(15,23,42,.28); overflow: hidden; }
+  .mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px 8px; padding: 20px 20px 16px; }
+  .mega-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px; border-radius: 10px; transition: background .12s; }
+  .mega-item:hover, .mega-item:focus-visible { background: #f5f8ff; }
+  .mega-ico { flex: none; width: 34px; height: 34px; border-radius: 9px; background: #eff6ff; color: #2563eb; display: grid; place-items: center; }
+  .mega-item:hover .mega-ico { background: #2563eb; color: #fff; }
+  .mega-name { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; font-size: 15px; font-weight: 600; color: #0f172a; line-height: 1.3; }
+  .mega-name > span:first-child { white-space: nowrap; }
+  .mega-badge { font: 600 9.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .04em; color: #1e40af; background: #dbeafe; border-radius: 4px; padding: 2px 5px; }
+  .mega-desc { display: block; margin-top: 2px; font-size: 13px; color: #64748b; line-height: 1.45; }
+  .mega-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 16px 34px; background: #0d1526; color: #e2e8f0; }
+  .mega-foot-title { font-weight: 700; color: #fff; margin-right: 10px; }
+  .mega-foot-sub { font-size: 14px; color: #94a3b8; }
+  .mega-foot-link { font-size: 14px; font-weight: 500; color: #cbd5e1; }
+  .mega-foot-link:hover { color: #fff; }
+  .mega-foot-btn { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 8px; background: #2563eb; color: #fff; font-size: 14px; font-weight: 600; }
+  .mega-foot-btn:hover { background: #1d4ed8; }
+
+  @media (max-width: 1100px) {
+    .mega-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mega-panel, .mega-toggle { transition: none; }
+  }
+</style>
+
 <script>
+  // Mobile menu
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => {
     const open = menu?.classList.toggle('hidden') === false;
     btn.setAttribute('aria-expanded', String(open));
   });
-  // Close menu on nav link click
   menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.add('hidden');
       btn?.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // Solutions mega menu: hover and focus open it via CSS; the chevron button
+  // toggles it for touch and keyboard, and Escape or an outside click closes it.
+  const wrap = document.querySelector<HTMLElement>('[data-mega]');
+  const toggle = wrap?.querySelector<HTMLButtonElement>('.mega-toggle');
+  function setOpen(open: boolean) {
+    if (!wrap || !toggle) return;
+    wrap.classList.toggle('open', open);
+    // "closed" suppresses the hover/focus reveal until the pointer leaves and re-enters.
+    wrap.classList.toggle('closed', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!wrap?.classList.contains('open'));
+  });
+  wrap?.addEventListener('mouseenter', () => { wrap.classList.remove('closed'); toggle?.setAttribute('aria-expanded', 'true'); });
+  wrap?.addEventListener('mouseleave', () => { if (!wrap.classList.contains('open')) toggle?.setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || !wrap) return;
+    wrap.classList.remove('open');
+    wrap.classList.add('closed');
+    toggle?.setAttribute('aria-expanded', 'false');
+    (document.activeElement as HTMLElement | null)?.blur();
+  });
+  document.addEventListener('click', (e) => {
+    if (wrap?.classList.contains('open') && !wrap.contains(e.target as Node)) setOpen(false);
+  });
+  // Clicking a link inside the panel (including same-page anchors) closes it.
+  wrap?.querySelectorAll('.mega-panel a').forEach((a) => a.addEventListener('click', () => {
+    wrap.classList.remove('open');
+    wrap.classList.add('closed');
+    (document.activeElement as HTMLElement | null)?.blur();
+  }));
 </script>

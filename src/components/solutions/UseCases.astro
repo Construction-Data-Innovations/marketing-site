@@ -1,0 +1,245 @@
+---
+// Outcome-led feature rows for the Solutions page: a short promise on one side,
+// an estimator-native product artifact on the other (all figures are sample data).
+import { tm } from '../../data/solutions';
+---
+<section class="uc-sec" aria-labelledby="uc-h">
+  <div class="uc-wrap">
+    <span class="uc-eyebrow">In practice</span>
+    <h2 id="uc-h" class="uc-h2">Where precon teams win and lose the job.</h2>
+
+    <!-- 1. Scope gaps -->
+    <div class="uc-row">
+      <div class="uc-copy">
+        <span class="uc-tag">Protect margin</span>
+        <h3>Catch scope gaps before they become change orders.</h3>
+        <ul>
+          <li>Your own budget, trade by trade, before the sub quotes land.</li>
+          <li>Quotes lined up side by side against your scope.</li>
+          <li>Exclusions flagged with the spec section they miss.</li>
+        </ul>
+        <a href="/demo?from=solutions-scope" class="uc-link">See it on your own bid &rarr;</a>
+      </div>
+      <div class="uc-stage" aria-hidden="true">
+        <div class="uc-card">
+          <div class="uc-card-h"><b>26 05 00 · Electrical</b><span class="uc-pill">3 quotes leveled</span></div>
+          <table class="uc-table">
+            <thead><tr><th>Bidder</th><th class="r">Base</th><th>Scope</th></tr></thead>
+            <tbody>
+              <tr class="mine"><td>Your budget</td><td class="r">$1,512,000</td><td><span class="ok">Complete</span></td></tr>
+              <tr><td>Sub A</td><td class="r">$1,560,000</td><td><span class="ok">Complete</span></td></tr>
+              <tr class="flag"><td>Sub B</td><td class="r">$1,418,500</td><td><span class="gap">Gap · 28 31 00</span></td></tr>
+              <tr><td>Sub C</td><td class="r">$1,602,300</td><td><span class="ok">Complete</span></td></tr>
+            </tbody>
+          </table>
+          <div class="uc-note"><span class="dot"></span>Sub B excludes fire alarm (Spec 28 31 00, sheet E-601). Low by scope, not by price.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Revisions -->
+    <div class="uc-row uc-flip">
+      <div class="uc-copy">
+        <span class="uc-tag">Addenda</span>
+        <h3>Every revision compared and priced.</h3>
+        <ul>
+          <li>Upload the addendum or the new set.</li>
+          <li>See what changed, sheet by sheet.</li>
+          <li>The difference priced on your own rates, before the number goes out.</li>
+        </ul>
+        <a href="/demo?from=solutions-addenda" class="uc-link">See it on your own bid &rarr;</a>
+      </div>
+      <div class="uc-stage" aria-hidden="true">
+        <div class="uc-card">
+          <div class="uc-card-h"><b>Addendum 03 vs. bid set</b><span class="uc-pill">4 changes</span></div>
+          <ul class="uc-diff">
+            <li><span class="sh">A-201</span><span>Corridor wall type changed to 1-hr rated</span><b class="up">+$48,200</b></li>
+            <li><span class="sh">A-501</span><span>Door 214 added, HM frame</span><b class="up">+$3,850</b></li>
+            <li><span class="sh">M-301</span><span>RTU-2 relocated, curb deleted</span><b class="down">−$6,400</b></li>
+            <li><span class="sh">S-101</span><span>Slab thickened at grid C, 5" to 6"</span><b class="up">+$11,960</b></li>
+          </ul>
+          <div class="uc-total"><span>Net change</span><b>+$57,610</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Your history -->
+    <div class="uc-row">
+      <div class="uc-copy">
+        <span class="uc-tag">Your history</span>
+        <h3>Priced from your own past bids, not a national price book.</h3>
+        <ul>
+          <li>Comparable jobs pulled from <span set:html={tm('Data Hub')} />, by size, location, and type.</li>
+          <li>Your rates and your ranges, line by line.</li>
+          <li>Every number traced back to where it came from.</li>
+        </ul>
+        <a href="/demo?from=solutions-history" class="uc-link">See it on your own bid &rarr;</a>
+      </div>
+      <div class="uc-stage" aria-hidden="true">
+        <div class="uc-card">
+          <div class="uc-card-h"><b>09 21 16 · Gypsum board assemblies</b><span class="uc-pill">$/SF</span></div>
+          <div class="uc-range">
+            <div class="uc-axis"><span>$4.40</span><span>$5.60</span></div>
+            <div class="uc-bar"><i style="left:12%;width:70%"></i><b style="left:47%"></b></div>
+            <div class="uc-jobs">
+              <span style="left:14%">Office TI '24</span>
+              <span style="left:38%">Medical '25</span>
+              <span style="left:58%">Lab '23</span>
+              <span style="left:78%">School '25</span>
+            </div>
+          </div>
+          <div class="uc-pick"><span>Carried rate</span><b>$4.96 / SF</b><em>Median of 4 comparable jobs</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. AI Chat -->
+    <div class="uc-row uc-flip">
+      <div class="uc-copy">
+        <span class="uc-tag">AI Chat</span>
+        <h3>Ask the bid anything. Then change it.</h3>
+        <ul>
+          <li>Edit the estimate in plain English.</li>
+          <li>Build custom reports for the owner or the executive team.</li>
+          <li>Dig into your bids, drawings, and costs without leaving the estimate.</li>
+        </ul>
+        <a href="/demo?from=solutions-chat" class="uc-link">See it on your own bid &rarr;</a>
+      </div>
+      <div class="uc-stage" aria-hidden="true">
+        <div class="uc-card uc-chat">
+          <div class="msg me">Show electrical by floor, and carry 4% contingency on Level 3 only.</div>
+          <div class="msg ai">
+            <span>Done. Electrical regrouped by floor, contingency applied to Level 3.</span>
+            <table class="uc-table sm">
+              <tbody>
+                <tr><td>Level 1</td><td class="r">$548,200</td></tr>
+                <tr><td>Level 2</td><td class="r">$512,900</td></tr>
+                <tr><td>Level 3 <em>+4%</em></td><td class="r">$468,930</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="uc-input">Ask about this bid…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why ConstructWise: the specialty generic tools don't have -->
+<section class="cmp-sec" aria-labelledby="cmp-h">
+  <div class="uc-wrap">
+    <span class="uc-eyebrow">Why ConstructWise</span>
+    <h2 id="cmp-h" class="uc-h2">Built by estimators. Not adapted for them.</h2>
+    <div class="cmp-scroll">
+      <table class="cmp">
+        <thead>
+          <tr><th></th><th>Generic AI tools</th><th class="cw">ConstructWise</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Prices from your own past bids and job costs</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+          <tr><td>Traces every quantity to the sheet it came from</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+          <tr><td>Works in your cost codes, mapped to CSI and Uniformat</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+          <tr><td>Levels sub quotes and flags scope gaps</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+          <tr><td>Hands back Excel with live formulas, in your template</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+          <tr><td>Designed by people who have run the estimate</td><td><span class="no">—</span></td><td class="cw"><span class="yes">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .uc-wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+  .uc-eyebrow { font: 500 12px 'Geist Mono', ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: #2563eb; }
+  .uc-h2 { margin-top: 10px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 700; color: #0f172a; text-wrap: balance; max-width: 24ch; }
+
+  .uc-sec { padding: 88px 0 40px; background: #f6f7f9; }
+  .uc-row { margin-top: 56px; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 56px; align-items: center; }
+  .uc-flip .uc-copy { order: 2; }
+  .uc-copy { min-width: 0; }
+  .uc-tag { font: 600 11.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: #64748b; }
+  .uc-copy h3 { margin-top: 10px; font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; color: #0f172a; text-wrap: balance; }
+  .uc-copy ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .uc-copy li { position: relative; padding-left: 22px; font-size: 16px; color: #475569; line-height: 1.55; }
+  .uc-copy li::before { content: ""; position: absolute; left: 0; top: 9px; width: 10px; height: 2px; background: #2563eb; }
+  .uc-link { display: inline-block; margin-top: 22px; font-weight: 600; font-size: 15px; color: #2563eb; }
+  .uc-link:hover { color: #1d4ed8; }
+
+  /* Stage: product card over faint drawing linework */
+  .uc-stage {
+    min-width: 0; border-radius: 18px; padding: 40px 36px; border: 1px solid #e2e8f0;
+    background-color: #eef2f8;
+    background-image:
+      linear-gradient(rgba(37,99,235,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,.07) 1px, transparent 1px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260' fill='none' stroke='%2394a3b8' stroke-opacity='.35' stroke-width='1.5'%3E%3Crect x='30' y='30' width='360' height='200'/%3E%3Cpath d='M150 30v110M150 180v50M270 30v200M30 130h120M270 120h120'/%3E%3Cpath d='M150 140a40 40 0 0 1 40 40'/%3E%3C/svg%3E");
+    background-size: 28px 28px, 28px 28px, 420px 260px;
+    background-position: 0 0, 0 0, center;
+    background-repeat: repeat, repeat, no-repeat;
+  }
+  .uc-card { background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 24px 50px -24px rgba(15,23,42,.35); padding: 18px; display: grid; gap: 14px; min-width: 0; }
+  .uc-card-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; color: #0f172a; }
+  .uc-pill { font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #1e40af; background: #dbeafe; border-radius: 5px; padding: 3px 8px; }
+  .uc-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .uc-table th { text-align: left; font: 500 10.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: #6b7280; padding: 8px 10px; background: #f9fafb; }
+  .uc-table td { padding: 9px 10px; border-top: 1px solid #f1f3f6; color: #1f2937; }
+  .uc-table .r { text-align: right; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
+  .uc-table tr.mine td { background: #eff6ff; font-weight: 600; color: #1e3a8a; }
+  .uc-table tr.flag td { background: #fffbeb; }
+  .ok { font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #15803d; }
+  .gap { font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #b45309; background: #fef3c7; border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
+  .uc-note { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 10px 12px; line-height: 1.45; }
+  .uc-note .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; margin-top: 5px; }
+
+  .uc-diff { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .uc-diff li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 13.5px; color: #1f2937; padding: 9px 10px; border-radius: 8px; background: #f8fafc; }
+  .sh { font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #2563eb; background: #eff6ff; border-radius: 4px; padding: 2px 6px; }
+  .uc-diff b { font: 600 12.5px 'Geist Mono', ui-monospace, monospace; white-space: nowrap; }
+  .up { color: #b91c1c; } .down { color: #15803d; }
+  .uc-total { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 10px; background: #0d1526; color: #cbd5e1; font-size: 13.5px; }
+  .uc-total b { font: 600 15px 'Geist Mono', ui-monospace, monospace; color: #fff; }
+
+  .uc-range { padding: 8px 4px 4px; }
+  .uc-axis { display: flex; justify-content: space-between; font: 500 11px 'Geist Mono', ui-monospace, monospace; color: #94a3b8; }
+  .uc-bar { position: relative; height: 10px; margin-top: 8px; border-radius: 5px; background: #f1f5f9; }
+  .uc-bar i { position: absolute; top: 0; bottom: 0; border-radius: 5px; background: #bfdbfe; }
+  .uc-bar b { position: absolute; top: -5px; width: 4px; height: 20px; margin-left: -2px; border-radius: 2px; background: #2563eb; }
+  .uc-jobs { position: relative; height: 40px; margin-top: 10px; }
+  .uc-jobs span { position: absolute; transform: translateX(-50%); font-size: 11.5px; color: #475569; white-space: nowrap; padding-top: 12px; }
+  .uc-jobs span::before { content: ""; position: absolute; left: 50%; top: 0; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: #64748b; }
+  .uc-pick { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: baseline; padding: 12px; border-radius: 10px; background: #eff6ff; }
+  .uc-pick span { font-size: 13px; color: #1e3a8a; }
+  .uc-pick b { font: 700 18px 'Geist Mono', ui-monospace, monospace; color: #1e3a8a; text-align: right; }
+  .uc-pick em { grid-column: 1 / -1; font-style: normal; font-size: 12px; color: #64748b; }
+
+  .uc-chat { gap: 12px; }
+  .msg { font-size: 14px; line-height: 1.5; border-radius: 12px; padding: 10px 12px; max-width: 92%; }
+  .msg.me { justify-self: end; background: #2563eb; color: #fff; border-bottom-right-radius: 4px; }
+  .msg.ai { background: #f8fafc; border: 1px solid #eef0f3; color: #1f2937; display: grid; gap: 10px; border-bottom-left-radius: 4px; }
+  .uc-table.sm td { padding: 7px 10px; background: #fff; }
+  .uc-table.sm em { font-style: normal; font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #2563eb; margin-left: 6px; }
+  .uc-input { font-size: 13.5px; color: #94a3b8; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 12px; }
+
+  /* Comparison */
+  .cmp-sec { padding: 72px 0 88px; background: #f6f7f9; }
+  .cmp-scroll { margin-top: 28px; overflow-x: auto; border-radius: 16px; border: 1px solid #e2e8f0; background: #fff; }
+  .cmp { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
+  .cmp th { padding: 16px 20px; text-align: center; font-size: 14px; font-weight: 600; color: #475569; border-bottom: 1px solid #e2e8f0; }
+  .cmp th:first-child { text-align: left; }
+  .cmp th.cw { color: #fff; background: #0d1526; }
+  .cmp td { padding: 14px 20px; border-top: 1px solid #f1f3f6; color: #1f2937; text-align: center; }
+  .cmp td:first-child { text-align: left; font-weight: 500; }
+  .cmp td.cw { background: #f5f8ff; }
+  .yes { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #2563eb; color: #fff; font-size: 13px; font-weight: 700; }
+  .no { color: #cbd5e1; font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .uc-row { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 48px; }
+    .uc-flip .uc-copy { order: 0; }
+    .uc-stage { padding: 24px 16px; }
+  }
+  @media (max-width: 640px) {
+    .uc-wrap { padding-left: 16px; padding-right: 16px; }
+    .uc-sec { padding-top: 64px; }
+  }
+</style>
