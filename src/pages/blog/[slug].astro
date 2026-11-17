@@ -25,13 +25,15 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   }).toUpperCase();
 }
 
-const { title, excerpt, category, author, authorTitle, publishDate, readTime, heroImage } = entry.data;
+const { title, excerpt, category, author, authorTitle, publishDate, readTime, heroImage, sidebarText } = entry.data;
+const sidebarCopy = sidebarText ?? 'Bid with a number you can defend, priced from your own cost history.';
 const categoryLabel = CATEGORY_LABELS[category] ?? category;
 
 const tocHeadings = headings.filter(h => h.depth === 2);
@@ -115,7 +117,7 @@ function getInitials(name: string) {
 
               <div class="cw-session">
                 <span class="cw-session-label">Try ConstructWise</span>
-                <p>Build your own GC budget before sub quotes land — from your own cost history.</p>
+                <p>{sidebarCopy}</p>
                 <a
                   href="/pricing"
                   class="inline-flex items-center justify-center h-10 w-full rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors"

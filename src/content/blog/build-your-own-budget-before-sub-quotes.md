@@ -7,6 +7,7 @@ authorTitle: "Founder and CEO, ConstructWise"
 publishDate: 2026-11-09
 readTime: 3
 heroImage: /blog/gc-budget-before-sub-quotes-hero.png
+sidebarText: "Build your own GC budget before sub quotes land — from your own cost history."
 draft: false
 ---
 

@@ -37,6 +37,7 @@ export type BlogPost = {
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
