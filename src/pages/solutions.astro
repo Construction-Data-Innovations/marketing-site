@@ -97,104 +97,6 @@ import UseCases from '../components/solutions/UseCases.astro';
 
     <UseCases />
 
-    <!-- Schedule Building Section -->
-    <section id="scheduling" class="py-20">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
-            <div class="aspect-video bg-white rounded-lg shadow-lg overflow-hidden">
-              <svg viewBox="0 0 560 315" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                <rect width="560" height="315" fill="white"/>
-                <!-- Header -->
-                <rect x="20" y="16" width="520" height="36" rx="6" fill="#f8fafc"/>
-                <rect x="32" y="26" width="100" height="16" rx="4" fill="#2563eb"/>
-                <rect x="148" y="26" width="60" height="16" rx="4" fill="#e2e8f0"/>
-                <!-- WBS Column -->
-                <rect x="20" y="64" width="30" height="24" rx="4" fill="#eff6ff"/>
-                <text x="28" y="80" font-family="system-ui" font-size="8" font-weight="600" fill="#1e40af">WBS</text>
-                <rect x="54" y="64" width="116" height="24" rx="4" fill="#eff6ff"/>
-                <text x="62" y="80" font-family="system-ui" font-size="9" font-weight="600" fill="#1e40af">Activity Name</text>
-                <!-- Timeline -->
-                <text x="190" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 1</text>
-                <text x="238" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 2</text>
-                <text x="286" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 3</text>
-                <text x="334" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 4</text>
-                <text x="382" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 5</text>
-                <text x="430" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 6</text>
-                <text x="478" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 7</text>
-                <text x="526" y="80" font-family="system-ui" font-size="8" fill="#94a3b8">Wk 8</text>
-                <!-- Grid -->
-                <line x1="180" y1="64" x2="180" y2="250" stroke="#f1f5f9" stroke-width="1"/>
-                <line x1="228" y1="88" x2="228" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <line x1="276" y1="88" x2="276" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <line x1="324" y1="88" x2="324" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <line x1="372" y1="88" x2="372" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <line x1="420" y1="88" x2="420" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <line x1="468" y1="88" x2="468" y2="250" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3 3"/>
-                <!-- Activities with WBS -->
-                <text x="28" y="106" font-family="system-ui" font-size="8" fill="#94a3b8">1.1</text>
-                <text x="62" y="106" font-family="system-ui" font-size="9" fill="#475569">Mobilization</text>
-                <rect x="190" y="96" width="48" height="14" rx="3" fill="#ef4444"/>
-                <text x="28" y="128" font-family="system-ui" font-size="8" fill="#94a3b8">1.2</text>
-                <text x="62" y="128" font-family="system-ui" font-size="9" fill="#475569">Excavation</text>
-                <rect x="232" y="118" width="60" height="14" rx="3" fill="#ef4444"/>
-                <text x="28" y="150" font-family="system-ui" font-size="8" fill="#94a3b8">2.1</text>
-                <text x="62" y="150" font-family="system-ui" font-size="9" fill="#475569">Foundations</text>
-                <rect x="286" y="140" width="72" height="14" rx="3" fill="#ef4444"/>
-                <text x="28" y="172" font-family="system-ui" font-size="8" fill="#94a3b8">2.2</text>
-                <text x="62" y="172" font-family="system-ui" font-size="9" fill="#475569">Underground MEP</text>
-                <rect x="310" y="162" width="60" height="14" rx="3" fill="#93c5fd"/>
-                <text x="28" y="194" font-family="system-ui" font-size="8" fill="#94a3b8">3.1</text>
-                <text x="62" y="194" font-family="system-ui" font-size="9" fill="#475569">Steel Erection</text>
-                <rect x="358" y="184" width="96" height="14" rx="3" fill="#ef4444"/>
-                <text x="28" y="216" font-family="system-ui" font-size="8" fill="#94a3b8">3.2</text>
-                <text x="62" y="216" font-family="system-ui" font-size="9" fill="#475569">Metal Decking</text>
-                <rect x="420" y="206" width="60" height="14" rx="3" fill="#93c5fd"/>
-                <text x="28" y="238" font-family="system-ui" font-size="8" fill="#94a3b8">4.1</text>
-                <text x="62" y="238" font-family="system-ui" font-size="9" fill="#475569">Roofing</text>
-                <rect x="468" y="228" width="72" height="14" rx="3" fill="#93c5fd"/>
-                <!-- Critical path legend -->
-                <rect x="20" y="260" width="520" height="40" rx="8" fill="#f8fafc"/>
-                <rect x="36" y="274" width="12" height="12" rx="2" fill="#ef4444"/>
-                <text x="54" y="284" font-family="system-ui" font-size="9" fill="#475569">Critical Path</text>
-                <rect x="140" y="274" width="12" height="12" rx="2" fill="#93c5fd"/>
-                <text x="158" y="284" font-family="system-ui" font-size="9" fill="#475569">Has Float</text>
-                <text x="340" y="284" font-family="system-ui" font-size="9" font-weight="600" fill="#1e40af">Auto-generated from AI analysis</text>
-              </svg>
-            </div>
-          </div>
-          <div>
-            <div class="inline-flex items-center justify-center p-3 bg-blue-100 rounded-lg mb-4">
-              <!-- HardHat icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-blue-600"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"></path><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"></path><path d="M4 15v-3a6 6 0 0 1 6-6h0"></path><path d="M14 6h0a6 6 0 0 1 6 6v3"></path></svg>
-            </div>
-            <h2 class="text-3xl font-bold mb-4">Schedule Building</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              Create dynamic project schedules with intelligent dependency management and resource allocation
-            </p>
-            <ul class="space-y-3 mb-6">
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Interactive Gantt chart with drag-and-drop functionality</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Automatic critical path calculation and visualization</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Schedule risk analysis with simulations</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-600 mr-2">&bull;</span>
-                <span>Schedules for any stage of the project lifecycle</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Testimonial Section -->
     <section class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 max-w-4xl">
@@ -237,7 +139,7 @@ import UseCases from '../components/solutions/UseCases.astro';
       <div class="container mx-auto text-center">
         <h2 class="text-4xl font-bold text-white mb-6">Elevate Your Construction Planning Today</h2>
         <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-          Join other innovative construction companies who are leveraging ConstructWise's vertical AI to generate better cost estimates and construction schedules.
+          Join the commercial estimators and precon teams bidding more work with a number they can defend.
         </p>
       </div>
     </section>

@@ -8,8 +8,41 @@ import { tm } from '../../data/solutions';
     <span class="uc-eyebrow">In practice</span>
     <h2 id="uc-h" class="uc-h2">Where precon teams win and lose the job.</h2>
 
-    <!-- 1. Scope gaps -->
+    <!-- 0. Takeoff -->
     <div class="uc-row">
+      <div class="uc-copy">
+        <span class="uc-tag">Takeoff</span>
+        <h3>Upload the drawings. Get the scope, the quantities, and the price.</h3>
+        <ul>
+          <li>Scope packages and items of work, pulled from the plan set.</li>
+          <li>Quantities for every item, traced to the sheet.</li>
+          <li>Priced on the production rates your own crews actually hit.</li>
+        </ul>
+        <a href="/demo?from=solutions-takeoff" class="uc-link">See it on your own bid &rarr;</a>
+      </div>
+      <div class="uc-stage" aria-hidden="true">
+        <div class="uc-card">
+          <div class="uc-card-h"><b>Plan set · Medical office, 3 levels</b><span class="uc-pill">186 sheets read</span></div>
+          <table class="uc-table to-table">
+            <thead><tr><th>Item of work</th><th class="r">Qty</th><th>Sheet</th><th class="r">Priced</th></tr></thead>
+            <tbody>
+              <tr class="pkg"><td colspan="4">Framing &amp; drywall · 09 21 16</td></tr>
+              <tr><td>Metal stud framing, 3-5/8" 20 ga</td><td class="r">18,640 SF</td><td><span class="sh">A-201</span></td><td class="r">$4.12/SF</td></tr>
+              <tr><td>Gypsum board, 5/8" Type X</td><td class="r">37,280 SF</td><td><span class="sh">A-201</span></td><td class="r">$2.38/SF</td></tr>
+              <tr class="pkg"><td colspan="4">Doors &amp; frames · 08 11 13</td></tr>
+              <tr><td>HM frames, welded</td><td class="r">46 EA</td><td><span class="sh">A-501</span></td><td class="r">$612/EA</td></tr>
+            </tbody>
+          </table>
+          <div class="to-effort">
+            <span class="lab">Your production</span>
+            <span>Framing crew of 4 · 1,150 SF/day · <b>16.2 crew days</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Scope gaps -->
+    <div class="uc-row uc-flip">
       <div class="uc-copy">
         <span class="uc-tag">Protect margin</span>
         <h3>Catch scope gaps before they become change orders.</h3>
@@ -17,6 +50,7 @@ import { tm } from '../../data/solutions';
           <li>Your own budget, trade by trade, before the sub quotes land.</li>
           <li>Quotes lined up side by side against your scope.</li>
           <li>Exclusions flagged with the spec section they miss.</li>
+          <li>Then have AI Chat draft the RFI, write the email to the sub, or price the gap.</li>
         </ul>
         <a href="/demo?from=solutions-scope" class="uc-link">See it on your own bid &rarr;</a>
       </div>
@@ -33,12 +67,18 @@ import { tm } from '../../data/solutions';
             </tbody>
           </table>
           <div class="uc-note"><span class="dot"></span>Sub B excludes fire alarm (Spec 28 31 00, sheet E-601). Low by scope, not by price.</div>
+          <div class="uc-actions">
+            <span class="lab">Ask AI Chat to</span>
+            <span class="act"><i>✎</i>Draft RFI</span>
+            <span class="act"><i>✉</i>Email Sub B</span>
+            <span class="act"><i>$</i>Price the gap</span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 2. Revisions -->
-    <div class="uc-row uc-flip">
+    <div class="uc-row">
       <div class="uc-copy">
         <span class="uc-tag">Addenda</span>
         <h3>Every revision compared and priced.</h3>
@@ -64,22 +104,23 @@ import { tm } from '../../data/solutions';
     </div>
 
     <!-- 3. Your history -->
-    <div class="uc-row">
+    <div class="uc-row uc-flip">
       <div class="uc-copy">
         <span class="uc-tag">Your history</span>
         <h3>Priced from your own past bids, not a national price book.</h3>
         <ul>
           <li>Comparable jobs pulled from <span set:html={tm('Data Hub')} />, by size, location, and type.</li>
           <li>Your rates and your ranges, line by line.</li>
+          <li>Labor priced on real production rates and durations, not plugs.</li>
           <li>Every number traced back to where it came from.</li>
         </ul>
         <a href="/demo?from=solutions-history" class="uc-link">See it on your own bid &rarr;</a>
       </div>
       <div class="uc-stage" aria-hidden="true">
         <div class="uc-card">
-          <div class="uc-card-h"><b>09 21 16 · Gypsum board assemblies</b><span class="uc-pill">$/SF</span></div>
+          <div class="uc-card-h"><b>09 21 16 · Gypsum board, 5/8" Type X</b><span class="uc-pill">$/SF</span></div>
           <div class="uc-range">
-            <div class="uc-axis"><span>$4.40</span><span>$5.60</span></div>
+            <div class="uc-axis"><span>$2.10</span><span>$2.70</span></div>
             <div class="uc-bar"><i style="left:12%;width:70%"></i><b style="left:47%"></b></div>
             <div class="uc-jobs">
               <span style="left:14%">Office TI '24</span>
@@ -88,13 +129,13 @@ import { tm } from '../../data/solutions';
               <span style="left:78%">School '25</span>
             </div>
           </div>
-          <div class="uc-pick"><span>Carried rate</span><b>$4.96 / SF</b><em>Median of 4 comparable jobs</em></div>
+          <div class="uc-pick"><span>Carried rate</span><b>$2.38 / SF</b><em>Median of 4 comparable jobs</em></div>
         </div>
       </div>
     </div>
 
     <!-- 4. AI Chat -->
-    <div class="uc-row uc-flip">
+    <div class="uc-row">
       <div class="uc-copy">
         <span class="uc-tag">AI Chat</span>
         <h3>Ask the bid anything. Then change it.</h3>
@@ -190,6 +231,16 @@ import { tm } from '../../data/solutions';
   .gap { font: 600 11px 'Geist Mono', ui-monospace, monospace; color: #b45309; background: #fef3c7; border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
   .uc-note { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 10px 12px; line-height: 1.45; }
   .uc-note .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; margin-top: 5px; }
+
+  .to-table tr.pkg td { background: #f1f5f9; font: 600 11.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .04em; color: #334155; padding: 7px 10px; }
+  .to-effort { display: grid; gap: 4px; padding: 12px; border-radius: 10px; background: #0d1526; color: #cbd5e1; font-size: 13.5px; }
+  .to-effort .lab { font: 600 10.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: #93c5fd; }
+  .to-effort b { color: #fff; font-weight: 600; }
+
+  .uc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .uc-actions .lab { flex-basis: 100%; font: 600 10.5px 'Geist Mono', ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: #64748b; }
+  .uc-actions .act { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #1e40af; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 6px 10px; }
+  .uc-actions .act i { font-style: normal; font-size: 12px; }
 
   .uc-diff { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .uc-diff li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 13.5px; color: #1f2937; padding: 9px 10px; border-radius: 8px; background: #f8fafc; }
