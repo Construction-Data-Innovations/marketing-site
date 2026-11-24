@@ -289,3 +289,22 @@
 .cw-product { margin: 2.4em 0; padding: 22px 24px; border-radius: var(--cw-radius); background: var(--cw-ink); color: #cdd9ee; }
 .cw-product .cw-label { color: #7fa8f0; }
 .cw-article .cw-product p { margin: 0; font-size: 1rem; line-height: 1.6; }
+
+/* Go/no-go post components */
+.cw-beat--today { background: var(--cw-wash); }
+.cw-beat--back { background: var(--cw-blue-wash); border-color: #bfdbfe; }
+.cw-beat--back .cw-label { color: var(--cw-blue-ink); }
+.cw-article .cw-beat--back p { color: var(--cw-ink); font-weight: 600; }
+.cw-article .cw-beat ul { margin: 0; padding-left: 1.1em; font-size: .95rem; line-height: 1.55; }
+.cw-note { margin: 1.8em 0; padding: 16px 20px; border-radius: 14px; background: var(--cw-amber-wash); border: 1px solid #fde68a; }
+.cw-note .cw-label { color: var(--cw-amber); margin-bottom: 6px; }
+.cw-article .cw-note p { margin: 0; font-size: .97rem; }
+.cw-table-wrap { margin: 1.8em 0; border: 1px solid var(--cw-line); border-radius: 14px; overflow-x: auto; }
+.cw-article .cw-table-wrap table { width: 100%; min-width: 520px; margin: 0; border: 0; }
+.cw-faq { margin: 2em 0; border-top: 1px solid var(--cw-line); }
+.cw-faq-item { padding: 18px 0; border-bottom: 1px solid var(--cw-line); }
+.cw-article .cw-faq-item h3 { margin: 0 0 .4em; font-size: 1.05rem; }
+.cw-article .cw-faq-item p { margin: 0; }
+.cw-sources { margin: 3em 0 0; padding-top: 20px; border-top: 1px solid var(--cw-line); font-size: .9rem; color: var(--cw-muted); }
+.cw-sources ol { margin: 0; padding-left: 1.3em; }
+.cw-sources li { margin: .5em 0; }
