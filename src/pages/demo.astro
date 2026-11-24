@@ -463,8 +463,8 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
     u.searchParams.set('email', val('email'));
     u.searchParams.set('company', val('company'));
     if (val('phone')) u.searchParams.set('phone', val('phone'));
-    // Consent answer, recorded on the HubSpot contact via the custom property cw_marketing_consent.
-    u.searchParams.set('cw_marketing_consent', (form.elements.namedItem('consent') as HTMLInputElement).checked ? 'Yes' : 'No');
+    // Consent answer, recorded on the HubSpot contact via the custom property marketing_consent_website.
+    u.searchParams.set('marketing_consent_website', (form.elements.namedItem('consent') as HTMLInputElement).checked ? 'Yes' : 'No');
     u.searchParams.set('utm_source', 'constructwise.ai');
     u.searchParams.set('utm_medium', val('source') || 'direct');
     u.searchParams.set('utm_campaign', 'working-session');
