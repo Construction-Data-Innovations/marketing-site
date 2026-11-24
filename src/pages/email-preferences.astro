@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingNav from '../components/landing/LandingNav.astro';
+import LandingFooter from '../components/landing/LandingFooter.astro';
+
+const categories = [
+  { id: 'product', label: 'Product announcements', desc: 'News and updates about ConstructWise.' },
+  { id: 'blog', label: 'Blog and insights', desc: 'New articles for estimators and precon teams.' },
+  { id: 'newsletter', label: 'Monthly newsletter', desc: 'Tips for bidding more work and getting the most from ConstructWise.' },
+  { id: 'promotions', label: 'Promotions', desc: 'Limited-time offers and other promotional messages.' },
+  { id: 'followups', label: 'Working session follow-ups', desc: 'Follow-up after you request a working session.' },
+  { id: 'events', label: 'Events and webinars', desc: 'Invitations to webinars and in-person events.' },
+];
+---
+<BaseLayout
+  title="Email Preferences - ConstructWise"
+  description="Choose which ConstructWise marketing emails you'd like to receive."
+  noindex
+>
+  <div class="min-h-screen bg-gray-50 pt-16">
+    <LandingNav />
+
+    <main class="prefs">
+      <div class="card">
+        <div id="form-view">
+          <h1>Choose what messages you'd like to receive</h1>
+          <p class="sub">We'll send you only the content you're interested in.</p>
+
+          <form id="prefs-form" novalidate>
+            <div class="field" id="email-field" hidden>
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourcompany.com">
+              <span class="err" id="email-err"></span>
+            </div>
+
+            <ul class="opts">
+              {categories.map((c) => (
+                <li>
+                  <label class="opt" for={`c-${c.id}`}>
+                    <input type="checkbox" id={`c-${c.id}`} name="category" value={c.label} checked>
+                    <span><b>{c.label}</b><small>{c.desc}</small></span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+
+            <p class="err" id="form-err" role="alert"></p>
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="save">Save preferences</button>
+              <button type="button" class="btn" id="unsub-all">Unsubscribe from all</button>
+            </div>
+            <p class="fine">This applies to marketing emails only. You may still receive messages about your account, demo requests, and scheduled meetings.</p>
+          </form>
+        </div>
+
+        <div id="done-view" hidden>
+          <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+          <h1 id="done-h">Request received</h1>
+          <p class="sub" id="done-p"></p>
+          <p class="fine"><a href="/">Back to constructwise.ai</a></p>
+        </div>
+      </div>
+    </main>
+
+    <LandingFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  .prefs { padding: 56px 16px 80px; display: flex; justify-content: center; }
+  .card { width: 100%; max-width: 560px; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 36px; box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 24px 48px -28px rgba(15,23,42,.18); color: #0f172a; }
+  h1 { margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -0.015em; }
+  .sub { margin: 8px 0 0; color: #475569; font-size: 15.5px; }
+  form { margin-top: 28px; }
+  .field { display: grid; gap: 6px; margin-bottom: 22px; }
+  .field[hidden] { display: none; }
+  .field label { font-size: 14px; font-weight: 500; }
+  input[type="email"] { height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font: inherit; font-size: 15px; width: 100%; }
+  input[type="email"]:focus { outline: none; border-color: #2563eb; background: #fff; box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
+  .opts { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .opt { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; cursor: pointer; }
+  .opt input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: #0f172a; cursor: pointer; }
+  .opt b { display: block; font-weight: 500; font-size: 15.5px; }
+  .opt small { display: block; margin-top: 2px; color: #64748b; font-size: 14px; line-height: 1.5; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .btn { height: 44px; padding: 0 18px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font: inherit; font-size: 15px; font-weight: 600; color: #0f172a; cursor: pointer; }
+  .btn:hover { background: #f1f5f9; }
+  .btn.primary { background: #0f172a; border-color: #0f172a; color: #fff; }
+  .btn.primary:hover { background: #1e293b; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .err { color: #dc2626; font-size: 13.5px; margin: 14px 0 0; }
+  .err:empty { display: none; }
+  .fine { margin: 18px 0 0; font-size: 13px; color: #94a3b8; line-height: 1.55; }
+  .fine a { color: #475569; text-decoration: underline; }
+  .badge { width: 52px; height: 52px; border-radius: 50%; background: #dcfce7; color: #16a34a; display: grid; place-items: center; margin-bottom: 18px; }
+  .badge svg { width: 26px; height: 26px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 520px) { .card { padding: 28px 20px; } .btn { flex: 1 1 100%; } }
+</style>
+
+<script>
+  const HS_PORTAL_ID = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID || '244285324';
+  // HubSpot form used only as a submission endpoint. A workflow turns these answers into real
+  // subscription changes. Fields on that form: email, email_preference_categories, email_unsubscribe_all.
+  const HS_FORM_GUID = import.meta.env.PUBLIC_HUBSPOT_PREFS_FORM_GUID || 'c4266b3f-5263-45b8-80a1-60bf3e08810c';
+
+  const form = document.getElementById('prefs-form') as HTMLFormElement;
+  const emailField = document.getElementById('email-field') as HTMLElement;
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const emailErr = document.getElementById('email-err') as HTMLElement;
+  const formErr = document.getElementById('form-err') as HTMLElement;
+  const formView = document.getElementById('form-view') as HTMLElement;
+  const doneView = document.getElementById('done-view') as HTMLElement;
+  const save = document.getElementById('save') as HTMLButtonElement;
+  const unsubAll = document.getElementById('unsub-all') as HTMLButtonElement;
+
+  // Email links carry ?email=... so the visitor doesn't have to type it.
+  const fromLink = new URLSearchParams(location.search).get('email') || '';
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fromLink)) emailInput.value = fromLink;
+  else emailField.hidden = false;
+
+  async function submit(all: boolean) {
+    emailErr.textContent = '';
+    formErr.textContent = '';
+    const email = emailInput.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailField.hidden = false;
+      emailErr.textContent = 'Enter the email address you receive our messages at.';
+      emailInput.focus();
+      return;
+    }
+    const checked = Array.from(form.querySelectorAll('input[name="category"]:checked')).map((i) => (i as HTMLInputElement).value);
+    const none = !all && checked.length === 0;
+    const unsubscribeAll = all || none;
+
+    save.disabled = unsubAll.disabled = true;
+    try {
+      if (!HS_FORM_GUID) throw new Error('not configured');
+      const res = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_GUID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          submittedAt: Date.now(),
+          fields: [
+            { name: 'email', value: email },
+            { name: 'email_preference_categories', value: unsubscribeAll ? '' : checked.join(';') },
+            { name: 'email_unsubscribe_all', value: unsubscribeAll ? 'true' : 'false' },
+          ],
+          context: { pageUri: location.origin + location.pathname, pageName: document.title },
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      (document.getElementById('done-h') as HTMLElement).textContent = 'Request received';
+      (document.getElementById('done-p') as HTMLElement).textContent =
+        "We'll update your preferences within a few business days.";
+      formView.hidden = true;
+      doneView.hidden = false;
+      window.scrollTo(0, 0);
+    } catch {
+      formErr.textContent = "We couldn't save your choices just now. Please try again, or email sales@constructwise.ai and we'll update them for you.";
+      save.disabled = unsubAll.disabled = false;
+    }
+  }
+
+  form.addEventListener('submit', (e) => { e.preventDefault(); submit(false); });
+  unsubAll.addEventListener('click', () => submit(true));
+</script>

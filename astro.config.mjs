@@ -7,7 +7,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/checkout'),
+      filter: (page) => !page.includes('/checkout') && !page.includes('/email-preferences'),
     }),
   ],
   redirects: {

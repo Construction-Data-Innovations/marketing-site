@@ -4,9 +4,10 @@ import '../styles/globals.css';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title = 'ConstructWise', description = 'AI-powered construction planning and cost estimation platform.' } = Astro.props;
+const { title = 'ConstructWise', description = 'AI-powered construction planning and cost estimation platform.', noindex = false } = Astro.props;
 
 const path = Astro.url.pathname;
 const canonicalPath = path === '/' || path.endsWith('/') ? path : `${path}/`;
@@ -27,6 +28,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
