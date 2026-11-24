@@ -6,7 +6,7 @@ author: "Jimmy Chavez"
 authorTitle: "Founder and CEO, ConstructWise"
 publishDate: 2026-11-23
 readTime: 5
-heroImage: /blog/go-no-go-bid-decision-checklist-hero.webp
+heroImage: /blog/go-no-go-bid-decision-checklist-hero.png
 sidebarText: "Screen the bid before the estimating hours get spent."
 draft: false
 ---
