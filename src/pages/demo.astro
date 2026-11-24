@@ -97,6 +97,12 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
                 <span class="err" id="company-err"></span>
               </div>
 
+              <div class="field" data-f="phone">
+                <label for="phone">Phone <span class="opt">(optional)</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555">
+                <span class="err" id="phone-err"></span>
+              </div>
+
               <div class="field" data-f="team" role="group" aria-labelledby="team-l">
                 <span class="lbl" id="team-l">How many estimators on your team?</span>
                 <div class="seg">
@@ -120,6 +126,11 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
                   <option>Just exploring for now</option>
                 </select>
               </div>
+
+              <label class="consent" for="consent">
+                <input id="consent" name="consent" type="checkbox">
+                <span>I agree to receive communications from ConstructWise. You can unsubscribe anytime.</span>
+              </label>
 
               <button class="submit" type="submit" id="submit">
                 <span id="submit-label">Schedule My Working Session</span>
@@ -285,7 +296,7 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
   .field { display: grid; gap: 6px; min-width: 0; }
   .field > label, .lbl { font-size: 14px; font-weight: 500; color: var(--fg); }
   .opt { color: var(--faint); font-weight: 400; }
-  input:not([type="radio"]):not([type="hidden"]), select {
+  input:not([type="radio"]):not([type="hidden"]):not([type="checkbox"]), select {
     width: 100%;
     font: inherit;
     font-size: 15px;
@@ -313,6 +324,8 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
   .err { font-size: 13px; color: var(--err); }
   .err:empty { display: none; }
 
+  .consent { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 13.5px; line-height: 1.5; color: var(--muted); cursor: pointer; }
+  .consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); cursor: pointer; }
   .seg { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
   .seg input { position: absolute; opacity: 0; pointer-events: none; }
   .seg label {
@@ -426,7 +439,7 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
     window.addEventListener('load', toTop, { once: true });
   }
 
-  const form =document.getElementById('ws-form') as HTMLFormElement;
+  const form = document.getElementById('ws-form') as HTMLFormElement;
   const formView = document.getElementById('form-view') as HTMLElement;
   const doneView = document.getElementById('done-view') as HTMLElement;
   const submit = document.getElementById('submit') as HTMLButtonElement;
@@ -449,6 +462,7 @@ const CALENDAR_URL = 'https://meetings-na2.hubspot.com/jimmy2/constructwise-demo
     u.searchParams.set('lastName', val('last'));
     u.searchParams.set('email', val('email'));
     u.searchParams.set('company', val('company'));
+    if (val('phone')) u.searchParams.set('phone', val('phone'));
     u.searchParams.set('utm_source', 'constructwise.ai');
     u.searchParams.set('utm_medium', val('source') || 'direct');
     u.searchParams.set('utm_campaign', 'working-session');
