@@ -2,10 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LandingNav from '../components/landing/LandingNav.astro';
 import LandingFooter from '../components/landing/LandingFooter.astro';
+import PromoBanner from '../components/landing/PromoBanner.astro';
 ---
 <BaseLayout>
-  <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-20">
-    <LandingNav />
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white promo-offset">
+    <LandingNav>
+      <PromoBanner slot="promo" />
+    </LandingNav>
 
     <section class="pt-12 md:pt-16 pb-16 px-4">
       <div class="container mx-auto max-w-7xl">
